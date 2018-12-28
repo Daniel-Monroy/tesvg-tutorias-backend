@@ -9,7 +9,7 @@ $(document).on("click", ".btnEditarActividad", function(){
 
 	datos.append("idActividad", idActividad);
 	$.ajax({
-		url : "ajax/actividades.ajax.php",
+		url : rutaOcultaServidor+"ajax/actividades.ajax.php",
 		data: datos, 
 		type: "POST",
 		cache: false,
@@ -47,7 +47,7 @@ $(document).on("click", ".btnEliminarActividad", function(){
 		confirmButtonText: 'Si, borrar categoria!'
 	}).then((result)=>{
 		if (result.value) {
-			window.location = "index.php?ruta=actividades&borrarActividad="+idActividad;
+			window.location = rutaOcultaServidor+"index.php?ruta=actividades&borrarActividad="+idActividad;
 		}
 	})
 
@@ -68,7 +68,7 @@ $(document).on("change", "#nuevaActividad", function(){
 	datos.append("actividadValidar", actividad);
 
 	$.ajax({
-		url : "ajax/actividades.ajax.php",
+		url : rutaOcultaServidor+"ajax/actividades.ajax.php",
 		data: datos, 
 		type: "POST",
 		cache: false,

@@ -12,7 +12,7 @@ $(document).on("change", "#nuevaSubActividad", function(){
 	datos.append("subactividadValidar", subactividad);
 
 	$.ajax({
-		url : "ajax/subactividades.ajax.php",
+		url : rutaOcultaServidor+"ajax/subactividades.ajax.php",
 		data: datos, 
 		type: "POST",
 		cache: false,

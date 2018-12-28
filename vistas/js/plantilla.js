@@ -1,4 +1,9 @@
 /*===========================
+= RUTA OCULTA =
+============================*/
+var rutaOcultaServidor = $("#rutaOcultaServidor").val();
+
+/*===========================
 = SIDEBAR MENU =
 ============================*/
 $('.sidebar-menu').tree();

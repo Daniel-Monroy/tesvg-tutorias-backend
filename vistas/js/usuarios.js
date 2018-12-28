@@ -102,7 +102,7 @@ $(document).on("click", ".btnActivar", function(){
 	datos.append("estadoUsuarioActivar", estadoUsuario);
 
 	$.ajax({
-		url: "ajax/usuarios.ajax.php",
+		url: rutaOcultaServidor+"ajax/usuarios.ajax.php",
 		method: "POST",
 		data: datos,
 		cache: false,
@@ -163,7 +163,7 @@ $(document).on("change", "#nuevoUsuario", function(){
 	datos.append("validarUsuario", usuario);
 
 	$.ajax({
-		url: "ajax/usuarios.ajax.php",
+		url: rutaOcultaServidor+"ajax/usuarios.ajax.php",
 		method: "POST",
 		data: datos,
 		cache: false,
@@ -205,7 +205,7 @@ $(document).on("click", ".btnEliminarUsuario", function(){
 
 		if (result.value) {
 
-      		window.location = "index.php?ruta=usuarios&idUsuario="+idUsuario+"&usuario="+usuario+"&fotoUsuario="+fotoUsuario;
+      		window.location = rutaOcultaServidor+"index.php?ruta=usuarios&idUsuario="+idUsuario+"&usuario="+usuario+"&fotoUsuario="+fotoUsuario;
 		
 		}
 
