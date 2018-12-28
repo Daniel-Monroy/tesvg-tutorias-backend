@@ -224,7 +224,7 @@
                     
                       <div class="col-xs-12 col-sm-2">
 
-                         <button class="btn btn-warning btnEditarActividad" data-toggle="modal" data-target="#modalEditarSubActividad" idSubActividad="<?php echo $value["id"]?>"><i class="fa fa-edit"></i> Editar Sub-Actividad</button>
+                         <button class="btn btn-warning btnEditarSubActividad" data-toggle="modal" data-target="#modalEditarSubActividad" idSubActividad="<?php echo $value["id"]?>"><i class="fa fa-edit"></i> Editar Sub-Actividad</button>
 
                       </div>
 
@@ -475,7 +475,7 @@
                 
                 <span class="input-group-addon"> <i class="fa fa-th"></i> </span>
                    
-                <select name="editarActividad" style="width: 100%" required class="form-control input-lg select2">
+                <select name="editarActividad" style="width: 100%" required class="form-control input-lg">
                   
                   <option value="" id="editarActividad">Seleccionar Categoria</option>
 
@@ -560,7 +560,7 @@
               
               <p class="help-block">Peso máximo de la foto 2MB</p>
                 
-              <img src="vistas/img/productos/default/anonymous.png" class="img-thumbnail previsualizarImagen" id="previzualizarImagen" width="100px"> 
+              <img src="vistas/img/productos/default/anonymous.png" class="img-thumbnail previzualizarImagen previsualizarImagen" width="100px"> 
 
             </div>
 
@@ -579,9 +579,11 @@
 
               <div class="panel text-uppercase">Subir Archivo</div>
 
-              <input type="file" id="nuevoArchivo" class="nuevoArchivo" name="nuevoArchivo">
+              <input type="file" class="nuevoArchivo" name="nuevoArchivo">
               
               <p class="help-block">Peso máximo del archivo 2MB, Formato PDF o DOCX</p>
+
+              <input type="text" class="editarArchivo form-control" readonly name="editarArchivo">
                 
             </div> 
 

@@ -26,6 +26,23 @@ class AjaxSubActividades
 	 	echo json_encode($respuesta);
 
 	}
+
+	# ========================================
+	# =  MOSTRAR SUB-ACTIVIDAD      =
+	# ========================================	
+	public  $idSubActividad;
+
+	public function mostrarSubActividad(){
+
+		$item = "id";
+
+		$valor = $this->idSubActividad;
+
+		$respuesta = ControladorSubActividades::ctrMostrarSubActividades($item, $valor);
+
+	 	echo json_encode($respuesta);
+
+	}
 	
 }
 
@@ -39,4 +56,16 @@ if (isset($_POST["subactividadValidar"])) {
 	$subactividadValidar -> subactividadValidar = $_POST["subactividadValidar"];
 
 	$subactividadValidar -> validarSubActividad();
+}
+
+# ========================================
+# =  VALIDAR ACTIVIDAD REPEDITIDA        =
+# ========================================	
+if (isset($_POST["idSubActividad"])) {
+	
+	$idSubActividad = new AjaxSubActividades();
+
+	$idSubActividad -> idSubActividad = $_POST["idSubActividad"];
+
+	$idSubActividad -> mostrarSubActividad();
 }

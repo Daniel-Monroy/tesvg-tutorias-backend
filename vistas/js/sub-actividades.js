@@ -91,7 +91,6 @@ $(document).on("change", ".nuevaImagen", function(){
 $(document).on("change", ".nuevoArchivo", function(){
 
   var archivo = this.files[0];
-  console.log("archivo", archivo);
   /*===========================
   =  VALIDAR FORMATO           =
   ============================*/
@@ -110,3 +109,72 @@ $(document).on("change", ".nuevoArchivo", function(){
 
 });
 
+
+/*==================================
+=       EDITAR SUB-ACTIVIDAD       =
+==================================*/
+$(document).on("click", ".btnEditarSubActividad", function(){
+	
+	var idSubActividad = $(this).attr("idSubActividad");
+
+	var datos = new FormData();
+
+	datos.append("idSubActividad", idSubActividad);
+	$.ajax({
+		url : rutaOcultaServidor+"ajax/subactividades.ajax.php",
+		data: datos, 
+		type: "POST",
+		cache: false,
+		contentType: false,
+		processData: false,
+		dataType: 'json',
+		success: function(respuesta){
+
+
+
+			/*============================================
+			=            OBTENER LA ACTIVIDAD            =
+			============================================*/
+			var datos1 = new FormData();
+
+			var idActividad = respuesta["id_actividad"];
+
+			datos1.append("idActividad", idActividad);
+
+			$.ajax({
+				url : rutaOcultaServidor+"ajax/actividades.ajax.php",
+				data: datos1, 
+				type: "POST",
+				cache: false,
+				contentType: false,
+				processData: false,
+				dataType: 'json',
+				success: function(respuesta1){
+					$("#editarActividad").html(respuesta1["categoria"]);
+					$("#editarActividad").val(respuesta1["id"]);
+				}
+			 });	
+
+			$("#editarSubActividad").val(respuesta["nombre"]);
+			$("#editarRuta").val(respuesta["ruta"]);
+			$("#editarObjetivo").val(respuesta["objetivo"]);
+			$("#editarTextoAyuda").val(respuesta["textoAyuda"]);
+			$("#editarActividades").val(respuesta["actividades"]);
+
+			if (respuesta["imagen"] != "") {
+	
+				$(".previzualizarImagen").attr("src", respuesta["imagen"]);
+
+			}
+
+			if (respuesta["ruta_archivo"] != "") {
+	
+				$(".editarArchivo").val(respuesta["ruta_archivo"]);
+
+			}
+	
+		}
+
+	})
+	
+})
