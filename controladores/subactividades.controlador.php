@@ -18,6 +18,19 @@ class ControladorSubActividades
 		return $respuesta;
 	}
 
+
+	# ============================
+	# = MOSTRAR SUB-ACTIVIDADES POR CATEGORIA =
+	# ============================
+	static public function ctrMostrarSubActividadesCategoria($item, $valor){
+
+		$tabla = "sub_actividades";
+
+		$respuesta = ModeloSubActividades::mdlMostrarSubActividadesCategoria($tabla, $item, $valor);
+
+		return $respuesta;
+	}
+
 	# ============================
 	# = INGRESAR SUB-ACTIVIDADES =
 	# ============================

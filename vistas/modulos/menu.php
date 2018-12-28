@@ -41,7 +41,7 @@
 
         <a href="sub-actividades">
 
-          <i class="fa fa-product-hunt"></i>
+          <i class="fa fa-home"></i>
           <span>Sub-Actividades</span>
 
         </a>
@@ -50,10 +50,10 @@
 
       <li class="">
 
-        <a href="clientes">
+        <a href="tutorados">
 
           <i class="fa fa-users"></i>
-          <span>Clientes</span>
+          <span>Tutorados</span>
 
         </a>
 

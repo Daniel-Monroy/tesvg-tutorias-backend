@@ -1,10 +1,19 @@
+<?php 
+
+  $servidor = Ruta::ctrRutaServidor();
+  $url = Ruta::ctrRuta();
+
+ ?>
+
 <div class="content-wrapper">
   
   <section class="content-header">
     
     <h1>
       
-      Administrar Actividades
+      Administrar Sub-Actividades
+
+      <h2><span class="subActividades text-primary"></span></h2>
     
       <small>Panel de Control</small>
     
@@ -41,10 +50,12 @@
          
           <div class="form-group">
          
-            <label>Filtrar Actividad</label>
+            <label style="font-size: 20px">Filtrar Actividad</label>
             
-            <select class="select2 form-control" style="width:100%;">
-
+            <select class="select2 form-control filtroActividad" style="width:100%;">
+                
+              <option value="" id="busquedaActividad">Selecciona una Actividad</option>  
+              
               <?php 
 
                 $item = null;
@@ -61,8 +72,11 @@
                ?>
           
             </select>
-          
+
           </div>
+
+          <button  class="btn btn-danger hidden cancelarBusqueda"><i class="fa fa-times"></i> Cancelar</button>
+          
       
         </div>      
 
@@ -74,16 +88,26 @@
         
 
         <?php 
+
+            if (isset($_GET["idActividad"])) {
+              
+              $item = "id_actividad";
+             
+              $valor = $_GET["idActividad"]; 
+
+            } else {
         
-            $item = null;
+              $item = null;
+             
+              $valor = null;
 
-            $valor = null;
+            }
 
-            $subactividades = ControladorSubActividades::ctrMostrarSubActividades($item, $valor);
+            $subactividades = ControladorSubActividades::ctrMostrarSubActividadesCategoria($item, $valor); 
         
           ?>
 
-          <?php foreach ($subactividades as $key => $value): ?>
+          <?php foreach($subactividades as $key => $value): ?>
 
           <div class="row">
 
@@ -107,7 +131,6 @@
                 <li class="pull-left header"><i class="fa fa-th"></i>
                 
                   <?php echo $value["nombre"]; ?>
-
 
                   <?php 
 
@@ -152,7 +175,7 @@
         
                         <div class="col-xs-12 col-sm-2">
                           
-                          <img src="http://localhost/tutorias2/vistas/img/actividades/linea-vida/1.jpg" class="img-thumbnail" width="100%">
+                          <img src="<?php echo $servidor.$value["imagen"];?>" class="img-thumbnail" width="100%">
 
                         </div>
 
@@ -194,7 +217,7 @@
 
                          <div class="form-group">
                           
-                           <a href="">
+                           <a target="_blank" href="<?php echo $servidor.$value["ruta_archivo"];?>">
                             
                             <button class="btn btn-primary">Descargar</button>
 

@@ -1,3 +1,63 @@
+/*=============================================
+= VARIABLES LOCAL STORAGE            =
+=============================================*/
+if (localStorage.getItem("filtroActividad") != null) {
+
+	$(".cancelarBusqueda").removeClass("hidden");
+	/*============================================
+	=            OBTENER LA ACTIVIDAD            =
+	============================================*/
+	var datos = new FormData();
+
+	var idActividad = localStorage.getItem("filtroActividad");
+
+	datos.append("idActividad", idActividad);
+
+	$.ajax({
+		url : rutaOcultaServidor+"ajax/actividades.ajax.php",
+		data: datos, 
+		type: "POST",
+		cache: false,
+		contentType: false,
+		processData: false,
+		dataType: 'json',
+		success: function(respuesta){
+	
+			$(".subActividades").html(respuesta["categoria"]);
+	
+		}
+	 
+	 });
+
+	$("#busquedaActividad").val(localStorage.getItem("filtroActividad"));
+
+} else {
+
+	$("#busquedaActividad").html('Seleccionar Actividad');
+}
+
+
+$(document).on("change", ".filtroActividad", function(){
+
+    var idFiltroBusqueda = $(".filtroActividad").val();
+
+    localStorage.setItem("filtroActividad", idFiltroBusqueda);
+
+    window.location = "index.php?ruta=sub-actividades&idActividad="+idFiltroBusqueda;
+
+})
+
+
+$(document).on("click", ".cancelarBusqueda", function(){
+
+    localStorage.removeItem("filtroActividad");
+
+	localStorage.clear();
+
+	window.location = "sub-actividades";
+
+})
+
 /*========================================
 = VALIDAR SUB-ACTIVIDAD REPETIDA           =
 ========================================*/
