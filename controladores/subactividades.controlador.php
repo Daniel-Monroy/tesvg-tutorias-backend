@@ -1,11 +1,11 @@
-<?php 
+<?php
 
 /**
  * Controlador Sub-Actividades
  */
 class ControladorSubActividades
 {
-	
+
 	# ============================
 	# = MOSTRAR SUB-ACTIVIDADES  =
 	# ============================
@@ -24,11 +24,11 @@ class ControladorSubActividades
 	static public function ctrCrearSubActividades(){
 
 		if (isset($_POST["nuevaSubActividad"])) {
-		
+
 			if (preg_match('/^[,\\.\\a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ?¿! ]+$/', $_POST["nuevaSubActividad"]) &&
 				preg_match('/^[,\\.\\a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ?¿! ]+$/', $_POST["nuevoObjetivo"]) &&
 				preg_match('/^[,\\.\\a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ?¿! ]+$/', $_POST["nuevoTextoAyuda"]) &&
-				preg_match('/^[,\\.\\a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ?¿! ]+$/', $_POST["nuevasActividades"]) 
+				preg_match('/^[,\\.\\a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ?¿! ]+$/', $_POST["nuevasActividades"])
 				){
 
 						$ruta = "";
@@ -36,7 +36,7 @@ class ControladorSubActividades
 						# = VALIDAR IMAGEN SUB-ACTIVIDAD=
 						# =======================
 						if (isset($_FILES["nuevaImagen"]["tmp_name"])) {
-							
+
 							list($ancho, $alto) = getimagesize($_FILES["nuevaImagen"]["tmp_name"]);
 
 							$nuevoAncho = 500;
@@ -54,7 +54,7 @@ class ControladorSubActividades
 							# = DE ACUERDO EL TIPO DE ARCHIVO USAMOS EL MÉTODO CORRESPONDIENTE           =
 							# ======================================================================================
 							if ($_FILES["nuevaImagen"]["type"] == "image/jpeg") {
-							
+
 								# =======================
 								# = Guardo la imagen en el directorio      =
 								# =======================
@@ -71,10 +71,10 @@ class ControladorSubActividades
 
 								imagejpeg($destino, $rutaImagen);
 
-							}	
+							}
 
 							if ($_FILES["nuevaImagen"]["type"] == "image/png") {
-							
+
 								# =======================
 								# = Guardo la imagen en el directorio      =
 								# =======================
@@ -93,7 +93,7 @@ class ControladorSubActividades
 
 								imagepng($destino, $rutaImagen);
 
-							}						
+							}
 						}
 
 						$directorio = "";
@@ -101,39 +101,39 @@ class ControladorSubActividades
 						# = VALIDAR DOCUEMENTO SUB-ACTIVIDAD=
 						# =======================
 					 	if (isset($_FILES["nuevoArchivo"])) {
-  
+
 				        $directorio = "vistas/actividades/archivos/".$_POST["nuevaRuta"];
 
 				        mkdir($directorio, 0755);
 
 				        $documento = $directorio.'/'.$_POST["nuevaRuta"].'.pdf';
-				  
+
 				        move_uploaded_file($_FILES['nuevoArchivo']['tmp_name'], $documento);
-				        
-				        }   
-					
+
+				        }
+
 						$tabla = "sub_actividades";
 
 						$datos = array(
-						'id_actividad' => $_POST["nuevaActividad"], 
-						'ruta' => $_POST["nuevaRuta"], 
-						'ruta_archivo' => $directorio, 
+						'id_actividad' => $_POST["nuevaActividad"],
+						'ruta' => $_POST["nuevaRuta"],
+						'ruta_archivo' => $directorio,
 						'nombre' => $_POST["nuevaSubActividad"],
-						'objetivo' => $_POST["nuevoObjetivo"],  
-						'imagen' => $rutaImagen, 
+						'objetivo' => $_POST["nuevoObjetivo"],
+						'imagen' => $rutaImagen,
 						'textoAyuda' => $_POST["nuevoTextoAyuda"],
-						'actividades' => $_POST["nuevasActividades"] 
+						'actividades' => $_POST["nuevasActividades"]
 						);
 
 						$respuesta = ModeloSubActividades::mdlCrearSubActividades($tabla, $datos);
 
 						if ($respuesta == "ok") {
-							echo ' 
-							<script> 
+							echo '
+							<script>
 								swal({
 									type: "success",
 									title: "!Genial!",
-									text: "Sub-Actividad Almacenado con exito",	
+									text: "Sub-Actividad Almacenado con exito",
 									showConfirmButton: true,
 									confirmButtonText: "Cerrar",
 									closeConfirmButton: false
@@ -149,12 +149,12 @@ class ControladorSubActividades
 
 				} else {
 
-				 echo ' 
-					<script> 
+				 echo '
+					<script>
 						swal({
 							type: "error",
 							title: "!Error!",
-							text: "Todos los campos son Obligatorios y no se permiten caracteres especiales",	
+							text: "Todos los campos son Obligatorios y no se permiten caracteres especiales",
 							showConfirmButton: true,
 							confirmButtonText: "Cerrar",
 							closeConfirmButton: false
@@ -170,5 +170,5 @@ class ControladorSubActividades
 		}
 
 	}
-	
+
 }
