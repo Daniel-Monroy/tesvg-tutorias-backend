@@ -98,6 +98,7 @@
                
                 <li><a href="#rutas<?php echo ($key+1);?>" data-toggle="tab">Ruta y Archivo</a></li>
                
+                <li><a href="#acciones<?php echo ($key+1);?>" data-toggle="tab">Acciónes</a></li>
                
                 <li class="pull-left header"><i class="fa fa-th"></i>
                 
@@ -216,7 +217,31 @@
                     </div>
 
                 </div>
-               
+
+                <div class="tab-pane" id="acciones<?php echo ($key+1);?>">
+                
+                  <div class="row">
+                    
+                      <div class="col-xs-12 col-sm-2">
+
+                         <button class="btn btn-warning btnEditarActividad" data-toggle="modal" data-target="#modalEditarSubActividad" idSubActividad="<?php echo $value["id"]?>"><i class="fa fa-edit"></i> Editar Sub-Actividad</button>
+
+                      </div>
+
+                      <div class="col-xs-12 col-sm-2">
+
+                         <button class="btn btn-danger"><i class="fa fa-times"></i> Eliminar Sub-Actividad</button>
+
+                      </div>  
+
+                      
+
+                    </div>
+
+                  </div>
+
+                </div>
+             
               </div>
               
             </div>
@@ -395,7 +420,6 @@
           <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Salir</button>
 
           <button type="submit" class="btn btn-primary pull-left">Guardar Sub-Actividad</button>
-
         </div>
 
         <?php 
@@ -413,12 +437,191 @@
 
 </div>
 
-<?php 
-  # ========================================
-  # = BORRAR CATEGORÍA           =
-  # ========================================
-  $eliminarActividad = new ControladorActividades();
 
-  $eliminarActividad -> ctrEliminarActividad();
+<!--=============================
+= VENTANA MODAL EDITAR SUB-ACTIVIDAD
+===============================-->
+<div id="modalEditarSubActividad" class="modal fade" role="dialog">
+  
+  <div class="modal-dialog">
+
+    <div class="modal-content">
+
+      <form role="form" method="POST" enctype="multipart/form-data">
+        
+        <!--======================================
+        =  Cabeza del Modal            =
+        =======================================-->
+        <div class="modal-header" style="background: #3e8dbc; color: #fff;">
+
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+          <h4 class="modal-title"><span> <i class="fa fa-user-plus"></i> </span> Editar Sub-Actividad</h4>
+
+        </div>
+
+
+        <!--======================================
+        =  Cuerpo del Modal            =
+        =======================================-->
+        <div class="modal-body">
+
+          <div class="box-body">
+
+            <!-- Entrada para Seleccion de Categoría Actividad-->
+            <div class="form-group">
+
+              <div class="input-group">
+                
+                <span class="input-group-addon"> <i class="fa fa-th"></i> </span>
+                   
+                <select name="editarActividad" style="width: 100%" required class="form-control input-lg select2">
+                  
+                  <option value="" id="editarActividad">Seleccionar Categoria</option>
+
+                  <?php 
+
+                    $item = null;
+
+                    $valor = null;
+
+                    $actividad = ControladorActividades::ctrMostrarActividades($item, $valor);
+
+                    foreach ($actividad as $key => $value) {
+                        
+                       echo '  
+                        
+                        <option value="'.$value["id"].'">'.$value["categoria"].'</option>
+                        
+                       '; 
+
+                    }
+
+                   ?>
+
+                </select> 
+
+              </div>
+
+            </div>
+            
+
+            <!-- Entrada para el Nombre -->
+            <div class="form-group">
+            
+              <div class="input-group">
+                
+                <span class="input-group-addon"> <i class="fa fa-tag"></i></span>
+                   
+                <input type="text" name="editarSubActividad" id="editarSubActividad" required class="form-control input-lg">   
+
+              </div>
+
+            </div> 
+              
+             <!-- Entrada para la Ruta -->
+            <div class="form-group">
+            
+              <div class="input-group">
+                  
+                  <span class="input-group-addon"> <i class="fa fa-code"></i></span>
+                     
+                  <input type="text" name="editarRuta" id="editarRuta" required class="form-control input-lg">   
+
+              </div>
+
+            </div> 
+                
+            <!-- Entrada para el Objetivo -->   
+            <div class="form-group">
+            
+              <label>Objetivo</label>
+            
+              <textarea class="form-control" rows="4" name="editarObjetivo" id="editarObjetivo"></textarea>
+            
+            </div>  
+
+
+            <!-- Entrada para el Texto Ayuda -->   
+            <div class="form-group">
+            
+              <label>Texto de Ayuda</label>
+            
+              <textarea class="form-control" rows="4" name="editarTextoAyuda" id="editarTextoAyuda"></textarea>
+            
+            </div>  
+
+            <!-- Entrada para la Imagen-->
+            <div class="form-group">
+
+              <div class="panel text-uppercase">Subir Imagen</div>
+
+              <input type="file" class="nuevaImagen" name="nuevaImagen">
+              
+              <p class="help-block">Peso máximo de la foto 2MB</p>
+                
+              <img src="vistas/img/productos/default/anonymous.png" class="img-thumbnail previsualizarImagen" id="previzualizarImagen" width="100px"> 
+
+            </div>
+
+
+            <!-- Entrada para las Actividades -->   
+            <div class="form-group">
+            
+              <label>Actividades</label>
+            
+              <textarea class="form-control" rows="4" name="editarActividades" id="editarActividades"></textarea>
+            
+            </div> 
+
+            <!-- Entrada para el archivo-->
+            <div class="form-group">
+
+              <div class="panel text-uppercase">Subir Archivo</div>
+
+              <input type="file" id="nuevoArchivo" class="nuevoArchivo" name="nuevoArchivo">
+              
+              <p class="help-block">Peso máximo del archivo 2MB, Formato PDF o DOCX</p>
+                
+            </div> 
+
+
+          </div>
+
+        </div>
+
+
+        <!--======================================
+        =  PIE DEL MODAL            =
+        =======================================-->
+        <div class="modal-footer">
+          
+          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Salir</button>
+
+          <button type="submit" class="btn btn-primary pull-left">Editar Sub-Actividad</button>
+        </div>
+
+        <?php 
+
+          // $crearSubActividad = new ControladorSubActividades();
+
+          // $crearSubActividad -> ctrCrearSubActividades();
+
+         ?> 
+      </form>
+    
+    </div>
+
+  </div>
+
+</div>
+
+<?php 
+  // # ========================================
+  // # = BORRAR CATEGORÍA           =
+  // # ========================================
+  // $eliminarActividad = new ControladorActividades();
+
+  // $eliminarActividad -> ctrEliminarActividad();
 
 ?>
