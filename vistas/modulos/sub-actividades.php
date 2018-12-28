@@ -71,20 +71,24 @@
        
       <div class="box-body">
 
+        
+
+        <?php 
+        
+            $item = null;
+
+            $valor = null;
+
+            $subactividades = ControladorSubActividades::ctrMostrarSubActividades($item, $valor);
+        
+          ?>
+
+          <?php foreach ($subactividades as $key => $value): ?>
+
+          <div class="row">
+
           <div class="col-xs-12">
-
-            <?php 
-          
-              $item = null;
-
-              $valor = null;
-
-              $subactividades = ControladorSubActividades::ctrMostrarSubActividades($item, $valor);
-          
-            ?>
-
-            <?php foreach ($subactividades as $key => $value): ?>
-            
+  
             <div class="nav-tabs-custom">
               
               <ul class="nav nav-tabs pull-right">
@@ -244,11 +248,13 @@
              
               </div>
               
-            </div>
-
-            <?php endforeach; ?>
-           
           </div>
+
+          </div>
+
+          <?php endforeach; ?>
+
+        
          
       </div>
 
