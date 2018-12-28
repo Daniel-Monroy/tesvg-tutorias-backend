@@ -394,19 +394,17 @@
           
           <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Salir</button>
 
-          <button type="submit" class="btn btn-primary pull-left">Guardar Producto</button>
+          <button type="submit" class="btn btn-primary pull-left">Guardar Sub-Actividad</button>
 
         </div>
 
-<!-- 
         <?php 
 
-          // $crearProducto = new ControladorProductos();
+          $crearSubActividad = new ControladorSubActividades();
 
-          // $crearProducto -> ctrCrearProducto();
+          $crearSubActividad -> ctrCrearSubActividades();
 
-         ?> -->
-      
+         ?> 
       </form>
     
     </div>
