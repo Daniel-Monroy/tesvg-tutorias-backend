@@ -160,6 +160,9 @@ $(document).on("click", ".btnEditarSubActividad", function(){
 			$("#editarObjetivo").val(respuesta["objetivo"]);
 			$("#editarTextoAyuda").val(respuesta["textoAyuda"]);
 			$("#editarActividades").val(respuesta["actividades"]);
+			$("#fotoActual").val(respuesta["imagen"]);
+			$("#id").val(respuesta["id"]);
+
 
 			if (respuesta["imagen"] != "") {
 	
@@ -170,6 +173,7 @@ $(document).on("click", ".btnEditarSubActividad", function(){
 			if (respuesta["ruta_archivo"] != "") {
 	
 				$(".editarArchivo").val(respuesta["ruta_archivo"]);
+				$("#descargarArchivo").attr("href", respuesta["ruta_archivo"]);
 
 			}
 	

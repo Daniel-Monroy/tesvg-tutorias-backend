@@ -103,7 +103,7 @@ class ModeloSubActividades
 		
 		$stmt -> bindParam(":actividades", $datos["actividades"], PDO::PARAM_STR);
 
-		$stmt -> bindParam(":id", $datos["id"], PDO::PARAM_STR);
+		$stmt -> bindParam(":id", $datos["id"], PDO::PARAM_INT);
 
 		if ($stmt->execute()) {
 			return "ok";

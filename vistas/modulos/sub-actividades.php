@@ -521,6 +521,8 @@
                    
                 <input type="text" name="editarSubActividad" id="editarSubActividad" required class="form-control input-lg">   
 
+                <input type="hidden" name="id" id="id">
+
               </div>
 
             </div> 
@@ -532,7 +534,7 @@
                   
                   <span class="input-group-addon"> <i class="fa fa-code"></i></span>
                      
-                  <input type="text" name="editarRuta" id="editarRuta" required class="form-control input-lg">   
+                  <input type="text" name="editarRuta" readonly id="editarRuta" required class="form-control input-lg">   
 
               </div>
 
@@ -568,6 +570,8 @@
                 
               <img src="vistas/img/productos/default/anonymous.png" class="img-thumbnail previzualizarImagen previsualizarImagen" width="100px"> 
 
+              <input type="hidden" name="fotoActual" id="fotoActual"> 
+
             </div>
 
 
@@ -589,7 +593,15 @@
               
               <p class="help-block">Peso máximo del archivo 2MB, Formato PDF o DOCX</p>
 
-              <input type="text" class="editarArchivo form-control" readonly name="editarArchivo">
+              <a href="" id="descargarArchivo" target="_black">
+                
+                <button type="button" class="btn btn-success">Descargar</button>
+
+              </a>
+
+              <br>
+
+              <input type="hidden" class="editarArchivo form-control" readonly name="editarArchivo">
                 
             </div> 
 
@@ -611,9 +623,9 @@
 
         <?php 
 
-          // $crearSubActividad = new ControladorSubActividades();
+          $editarSubActividad = new ControladorSubActividades();
 
-          // $crearSubActividad -> ctrCrearSubActividades();
+          $editarSubActividad -> ctrEditarSubActividades();
 
          ?> 
       </form>
