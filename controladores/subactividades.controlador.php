@@ -326,6 +326,60 @@ class ControladorSubActividades
 
 		}
 				
+	}
+
+	# ======================================
+	# =  ELIMINAR SUB-ACTIVIDAD           =
+	# ======================================
+	static public function ctrEliminarSubActividad(){
+
+		if (isset($_GET["idSubActividadEliminar"])) {
+		
+			$tabla = "sub_actividades";
+
+			$datos = $_GET["idSubActividadEliminar"];
+
+			#IMAGEN
+			if ($_GET["imagen"] != "") {
+				
+				unlink($_GET["imagen"]);
+
+				rmdir('vistas/actividades/imagenes/'.$_GET["nombre"]);
+
+			} 
+
+			#ARCHIVO
+			if ($_GET["archivo"] != "") {
+				
+				unlink($_GET["archivo"]);
+
+				rmdir('vistas/actividades/archivos/'.$_GET["nombre"]);
+
+			} 
+
+			$respuesta = ModeloSubActividades::mdlBorrarSubActividad($tabla, $datos);
+
+			if ($respuesta) {
+				echo ' 
+				<script> 
+					swal({
+						type: "success",
+						title: "!Correcto!",
+						text: "Sub-Actividad Eliminada con Exito",	
+						showConfirmButton: true,
+						confirmButtonText: "Cerrar",
+						closeConfirmButton: false
+					}).then((result)=>{
+						if(result.value){
+							window.location = "sub-actividades";
+						}
+					});
+				</script>
+			 	';
+
+			}
+
+		}
 
 	}
 

@@ -242,3 +242,35 @@ $(document).on("click", ".btnEditarSubActividad", function(){
 	})
 	
 })
+
+
+/*==================================
+= ELIMINAR SUB-USUARIO      =
+==================================*/
+$(document).on("click", ".btnEliminarSubActividad", function(){
+
+	var idSubActividad = $(this).attr("idSubActividad");
+	var nombre = $(this).attr("nombre");
+	var archivo = $(this).attr("archivo");
+	var imagen = $(this).attr("imagen");
+	
+	swal({
+		title: '¿Está seguro de borrar la Sub-Actividad?',
+		text: '¡Si no lo ésta puede dar click en cancelar!',
+		type: 'warning',
+		showCancelButton: true,
+		confirmButtonColor: '#3085b6',
+		cancelButtonColor: '#d33',
+		cancelButtonText: 'Cancelar',
+		confirmButtonText: 'Si, borrar Sub-Actividad'
+	}).then((result)=>{
+
+		if (result.value) {
+
+      		window.location = "index.php?ruta=sub-actividades&idSubActividadEliminar="+idSubActividad+"&nombre="+nombre+"&archivo="+archivo+"&imagen="+imagen;
+		
+		}
+
+	})
+
+});

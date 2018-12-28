@@ -257,7 +257,7 @@
 
                       <div class="col-xs-12 col-sm-2">
 
-                         <button class="btn btn-danger"><i class="fa fa-times"></i> Eliminar Sub-Actividad</button>
+                         <button class="btn btn-danger btnEliminarSubActividad" idSubActividad="<?php echo $value["id"]?>" imagen="<?php echo $value["imagen"]?>" nombre="<?php echo $value["ruta"]?>" archivo="<?php echo $value["ruta_archivo"]?>"><i class="fa fa-times"></i> Eliminar Sub-Actividad</button>
 
                       </div>  
 
@@ -660,11 +660,11 @@
 </div>
 
 <?php 
-  // # ========================================
-  // # = BORRAR CATEGORÍA           =
-  // # ========================================
-  // $eliminarActividad = new ControladorActividades();
+  # ========================================
+  # = BORRAR CATEGORÍA           =
+  #========================================
+  $eliminarSubActividad = new ControladorSubActividades();
 
-  // $eliminarActividad -> ctrEliminarActividad();
+  $eliminarSubActividad -> ctrEliminarSubActividad();
 
 ?>
