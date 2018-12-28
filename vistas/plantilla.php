@@ -147,6 +147,7 @@
 <script src="vistas/js/plantilla.js"></script>
 <script src="vistas/js/usuarios.js"></script>
 <script src="vistas/js/actividades.js"></script>
+<script src="vistas/js/sub-actividades.js"></script>
 
 </body>
 

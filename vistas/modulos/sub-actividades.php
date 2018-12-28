@@ -235,7 +235,7 @@
 
 
 <!--=============================
-= VENTANA MODAL NUEVA CATEGORÍA   =
+= VENTANA MODAL NUEVA SUB-ACTIVIDAD
 ===============================-->
 <div id="modalAgregarSubActividad" class="modal fade" role="dialog">
   
@@ -243,7 +243,8 @@
 
     <div class="modal-content">
 
-      <form role="form" method="POST">
+      <form role="form" method="POST" enctype="multipart/form-data">
+        
         <!--======================================
         =  Cabeza del Modal            =
         =======================================-->
@@ -251,7 +252,7 @@
 
           <button type="button" class="close" data-dismiss="modal">&times;</button>
 
-          <h4 class="modal-title"><span> <i class="fa fa-th"></i> </span> Agregar Actividad</h4>
+          <h4 class="modal-title"><span> <i class="fa fa-user-plus"></i> </span> Agregar Sub-Actividad</h4>
 
         </div>
 
@@ -262,32 +263,124 @@
         <div class="modal-body">
 
           <div class="box-body">
+
+            <!-- Entrada para Seleccion de Categoría Actividad-->
+            <div class="form-group">
+
+              <div class="input-group">
+                
+                <span class="input-group-addon"> <i class="fa fa-th"></i> </span>
+                   
+                <select name="nuevaActividad" style="width: 100%" required class="form-control input-lg select2" id="nuevaActividad">
+                  
+                  <option value="">Seleccionar Categoria</option>
+
+                  <?php 
+
+                    $item = null;
+
+                    $valor = null;
+
+                    $actividad = ControladorActividades::ctrMostrarActividades($item, $valor);
+
+                    foreach ($actividad as $key => $value) {
+                        
+                       echo '  
+                        
+                        <option value="'.$value["id"].'">'.$value["categoria"].'</option>
+                        
+                       '; 
+
+                    }
+
+                   ?>
+
+                </select> 
+
+              </div>
+
+            </div>
             
+
             <!-- Entrada para el Nombre -->
             <div class="form-group">
-              
+            
               <div class="input-group">
                 
-                <span class="input-group-addon"> <i class="fa fa-th"></i> </span>
+                <span class="input-group-addon"> <i class="fa fa-tag"></i></span>
                    
-                <input type="text" name="nuevaActividad" id="nuevaActividad" placeholder="Ingresar Actividad" required class="form-control input-lg">   
+                <input type="text" name="nuevaSubActividad" id="nuevaSubActividad" placeholder="Ingresar Nombre" required class="form-control input-lg">   
 
               </div>
-              
-            </div> 
 
-            <!-- Entrada para la Ruta -->
+            </div> 
+              
+             <!-- Entrada para la Ruta -->
             <div class="form-group">
-              
+            
               <div class="input-group">
-                
-                <span class="input-group-addon"> <i class="fa fa-th"></i> </span>
-                   
-                <input type="text" name="nuevaActividadRuta" id="nuevaActividadRuta" placeholder="Ingresar Ruta" required class="form-control input-lg">   
+                  
+                  <span class="input-group-addon"> <i class="fa fa-code"></i></span>
+                     
+                  <input type="text" name="nuevaRuta" placeholder="Ingresar Ruta" required class="form-control input-lg">   
 
               </div>
-              
+
             </div> 
+                
+            <!-- Entrada para el Objetivo -->   
+            <div class="form-group">
+            
+              <label>Objetivo</label>
+            
+              <textarea class="form-control" rows="4" name="nuevoObjetivo" placeholder="Escribe el Objetivo..."></textarea>
+            
+            </div>  
+
+
+            <!-- Entrada para el Texto Ayuda -->   
+            <div class="form-group">
+            
+              <label>Texto de Ayuda</label>
+            
+              <textarea class="form-control" rows="4" name="nuevoTextoAyuda" placeholder="Escribe un texto de ayuda para que el alumno comprenda la actividad"></textarea>
+            
+            </div>  
+
+            <!-- Entrada para la Imagen-->
+            <div class="form-group">
+
+              <div class="panel text-uppercase">Subir Imagen</div>
+
+              <input type="file" class="nuevaImagen" name="nuevaImagen">
+              
+              <p class="help-block">Peso máximo de la foto 2MB</p>
+                
+              <img src="vistas/img/productos/default/anonymous.png" class="img-thumbnail previsualizarImagen" width="100px" alt=""> 
+
+            </div>
+
+
+            <!-- Entrada para las Actividades -->   
+            <div class="form-group">
+            
+              <label>Actividades</label>
+            
+              <textarea class="form-control" rows="4" name="nuevasActividades" placeholder="Escribe las actividades a renglon seguido, marcando cada una de ellas con un 1.- ..."></textarea>
+            
+            </div> 
+
+            <!-- Entrada para el archivo-->
+            <div class="form-group">
+
+              <div class="panel text-uppercase">Subir Archivo</div>
+
+              <input type="file" class="nuevoArchivo" name="nuevoArchivo">
+              
+              <p class="help-block">Peso máximo del archivo 2MB, Formato PDF o DOCX</p>
+                
+            </div> 
+
 
           </div>
 
@@ -301,107 +394,18 @@
           
           <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Salir</button>
 
-          <button type="submit" class="btn btn-primary pull-left">Guardar Actividad</button>
+          <button type="submit" class="btn btn-primary pull-left">Guardar Producto</button>
 
         </div>
 
+<!-- 
         <?php 
 
-          $crearActividad = new ControladorActividades();
+          // $crearProducto = new ControladorProductos();
 
-          $crearActividad -> ctrCrearActividad();
+          // $crearProducto -> ctrCrearProducto();
 
-
-         ?>
-      
-      </form>
-    
-    </div>
-
-  </div>
-
-</div>
-
-<!--=============================
-= VENTANA MODAL EDITAR ACTIVIDAD=
-===============================-->
-<div id="modalEditarActividad" class="modal fade" role="dialog">
-  
-  <div class="modal-dialog">
-
-    <div class="modal-content">
-
-      <form role="form" method="POST">
-        <!--======================================
-        =  Cabeza del Modal            =
-        =======================================-->
-        <div class="modal-header" style="background: #3e8dbc; color: #fff;">
-
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-
-          <h4 class="modal-title"><span> <i class="fa fa-th"></i> </span> Editar Actividad</h4>
-
-        </div>
-
-
-        <!--======================================
-        =  Cuerpo del Modal            =
-        =======================================-->
-        <div class="modal-body">
-
-          <div class="box-body">
-            
-            <!-- Entrada para el Nombre -->
-            <div class="form-group">
-              
-              <div class="input-group">
-                
-                <span class="input-group-addon"> <i class="fa fa-th"></i> </span>
-                   
-                <input type="text" name="editarActividad" id="editarActividad" placeholder="Editar Actividad" required class="form-control input-lg">   
-
-                <input type="hidden" name="idActividad" id="idActividad">   
-
-              </div>
-              
-            </div> 
-
-            <!-- Entrada para la Ruta -->
-            <div class="form-group">
-              
-              <div class="input-group">
-                
-                <span class="input-group-addon"> <i class="fa fa-th"></i> </span>
-                   
-                <input type="text" name="editarActividadRuta" id="editarActividadRuta" readonly placeholder="Editar Ruta" required class="form-control input-lg">   
-
-              </div>
-              
-            </div> 
-
-          </div>
-
-        </div>
-
-
-        <!--======================================
-        =  PIE DEL MODAL            =
-        =======================================-->
-        <div class="modal-footer">
-          
-          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Salir</button>
-
-          <button type="submit" class="btn btn-primary pull-left">Editar Actividad</button>
-
-        </div>
-
-        <?php 
-
-          $editarActividad = new ControladorActividades();
-
-          $editarActividad -> ctrEditarActividad();
-
-         ?>
+         ?> -->
       
       </form>
     
