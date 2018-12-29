@@ -114,13 +114,13 @@
 
                         } 
 
-                        $estado = 1;
+                        $estado = $value["activo"];
 
                         if ($estado == 1 ) {
                         
                           echo '
 
-                           <td><button class="btn btn-success btn-sm btnActivar" estadoUsuario="0" idUsuario="'.$value["id"].'">Activo</button></td>
+                           <td><button class="btn btn-success btn-sm btnActivarAlumno" estadoAlumno="0" idAlumno="'.$value["id"].'">Activo</button></td>
                              
                           ';
 
@@ -128,7 +128,7 @@
 
                            echo '
 
-                           <td><button class="btn btn-danger btn-sm btnActivar" estadoUsuario="1" idUsuario="'.$value["id"].'">Inactivo</button></td>
+                           <td><button class="btn btn-danger btn-sm btnActivarAlumno" estadoAlumno="1" idAlumno="'.$value["id"].'">Inactivo</button></td>
                              
                           '; 
 
@@ -170,9 +170,9 @@
 
 
 <!--=============================
-= VENTANA MODAL NUEVO USUARIO   =
+= VENTANA MODAL NUEVO ALLUMNO   =
 ===============================-->
-<div id="modalAgregarUsuario" class="modal fade" role="dialog">
+<div id="modalAgregarAlumno" class="modal fade" role="dialog">
   
   <div class="modal-dialog">
 
@@ -186,7 +186,7 @@
 
           <button type="button" class="close" data-dismiss="modal">&times;</button>
 
-          <h4 class="modal-title"><span> <i class="fa fa-user-plus"></i> </span> Agregar usuario</h4>
+          <h4 class="modal-title"><span> <i class="fa fa-user-plus"></i> </span> Agregar Alumno</h4>
 
         </div>
 
@@ -211,50 +211,45 @@
               
             </div> 
 
-            <!-- Entrada para el Usuario -->
+            <!-- Entrada para los Apellidos -->
             <div class="form-group">
               
               <div class="input-group">
                 
-                <span class="input-group-addon"> <i class="fa fa-key"></i></span>
+                <span class="input-group-addon"> <i class="fa fa-user"></i> </span>
                    
-                <input type="text" id="nuevoUsuario" name="nuevoUsuario" placeholder="Ingresar Usuario" required class="form-control input-lg">   
+                <input type="text" name="nuevoApellidos" placeholder="Ingresar Apellidos" required class="form-control input-lg">   
 
               </div>
+              
+            </div> 
 
-             </div> 
-
-            <!-- Entrada para Contraseña-->
+            <!-- Entrada para Número de Control -->
             <div class="form-group">
-
+              
               <div class="input-group">
                 
-                <span class="input-group-addon"> <i class="fa fa-lock"></i> </span>
+                <span class="input-group-addon"> <i class="fa fa-user"></i> </span>
                    
-                <input type="password" name="nuevoPassword" placeholder="Ingresar Contraseña" required class="form-control input-lg">   
+                <input type="text" name="nuevoNumeroControl" id="nuevoNumeroControl" placeholder="Ingresar Número de Control" required class="form-control input-lg">   
 
               </div>
+              
+            </div> 
 
-            </div>
-
-
-            <!-- Entrada para Seleccion de Perfil-->
-
+            
+            <!-- Entrada para la Carrera-->
             <div class="form-group">
 
               <div class="input-group">
                 
                 <span class="input-group-addon"> <i class="fa fa-users"></i> </span>
                    
-                <select name="nuevoPerfil" class="form-control input-lg">
+                <select name="nuevaCarrera" class="form-control input-lg">
                   
-                  <option value="">Seleccionar Perfil</option>
+                  <option value="">Seleccionar Carrera</option>
 
-                  <option value="administrador">Administrador</option>
-
-                  <option value="especial">Especial</option>
-
-                  <option value="vendedor">Vendedor</option>
+                  <option value="ISC">I.S.C.</option>
 
                 </select> 
 
@@ -262,18 +257,51 @@
 
             </div>
 
-             <!-- Entrada para la foto-->
+            <!-- Entrada para Grupo-->
             <div class="form-group">
 
-              <div class="panel text-uppercase">Subir Foto</div>
-
-              <input type="file" class="nuevaFoto" name="nuevaFoto">
-              
-              <p class="help-block">Peso máximo de la foto 2MB</p>
+              <div class="input-group">
                 
-              <img src="vistas/img/usuarios/default/anonymous.png" class="img-thumbnail previsualizarImagen" width="100px" alt=""> 
+                <span class="input-group-addon"> <i class="fa fa-users"></i> </span>
+                   
+                <select name="nuevoGrupo" class="form-control input-lg">
+                  
+                  <option value="">Seleccionar Grupo</option>
+
+                  <option value="902">902</option>
+
+                </select> 
+
+              </div>
 
             </div>
+
+            <!-- Entrada para Email -->
+            <div class="form-group">
+              
+              <div class="input-group">
+                
+                <span class="input-group-addon"> <i class="fa fa-user"></i> </span>
+                   
+                <input type="text" name="nuevoEmail" id="nuevoEmail" placeholder="Ingresar email" required class="form-control input-lg">   
+
+              </div>
+              
+            </div> 
+
+
+            <!-- Entrada para Contraseña-->
+            <div class="form-group">
+              
+              <div class="input-group">
+                
+                <span class="input-group-addon"> <i class="fa fa-user"></i> </span>
+                   
+                <input type="text" name="nuevoPassword" placeholder="Ingresar password" required class="form-control input-lg">   
+
+              </div>
+              
+            </div> 
 
           </div>
 
@@ -287,16 +315,16 @@
           
           <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Salir</button>
 
-          <button type="submit" class="btn btn-primary pull-left">Guardar Usuario</button>
+          <button type="submit" class="btn btn-primary pull-left">Guardar Alumno</button>
 
         </div>
 
 
         <?php 
 
-          $crearUsuario = new ControladorUsuarios();
+          $crearAlumno = new ControladorAlumnos();
 
-          $crearUsuario -> ctrCrearUsuario();
+          $crearAlumno -> ctrCrearAlumno();
 
          ?>
       

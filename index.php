@@ -21,6 +21,11 @@ require_once "modelos/actividades.modelo.php";
 require_once "modelos/subactividades.modelo.php";
 require_once "modelos/alumnos.modelo.php";
 
+# ===============================
+# =           EXTENCIONES           =
+# ===============================
+require_once "extenciones/PHPMailer/PHPMailerAutoload.php";
+
 
 # =================================
 # =           PLANTILLA           =

@@ -152,6 +152,8 @@
 <script src="<?php echo $rutaServidor?>vistas/js/usuarios.js"></script>
 <script src="<?php echo $rutaServidor?>vistas/js/actividades.js"></script>
 <script src="<?php echo $rutaServidor?>vistas/js/sub-actividades.js"></script>
+<script src="<?php echo $rutaServidor?>vistas/js/alumnos.js"></script>
+
 
 </body>
 
