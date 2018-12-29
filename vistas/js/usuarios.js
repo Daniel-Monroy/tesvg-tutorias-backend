@@ -70,9 +70,13 @@ $(document).on("click", ".btnEditarUsuario", function(){
 		success: function(respuesta){
 
 			$("#editarNombre").val(respuesta["nombre"]);
-			$("#editarUsuario").val(respuesta["usuario"]);
-			$("#editarPerfil").html(respuesta["perfil"]);
+			
+			$("#editarApellidos").val(respuesta["apellidos"]);
+
+			$("#editarNumeroControl").html(respuesta["numeroControl"]);
+			
 			$("#editarPerfil").val(respuesta["perfil"]);
+			
 			$("#fotoActual").val(respuesta["foto"]);
 
 			if (respuesta["foto"] != "") {

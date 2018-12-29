@@ -138,7 +138,7 @@
                           
                           <div class="btn-group">
                             
-                            <button class="btn btn-warning btnEditarUsuario" data-toggle="modal" idUsuario="'.$value["id"].'" data-target="#modalEditarUsuario"><i class="fa fa-pencil"></i></button>
+                            <button class="btn btn-warning btnEditarAlumno" data-toggle="modal" idAlumno="'.$value["id"].'" data-target="#modalEditarAlumno"><i class="fa fa-pencil"></i></button>
                             
                             <button class="btn btn-danger btnEliminarUsuario" usuario="'.$value["numeroControl"].'" idUsuario = "'.$value["id"].'" fotoUsuario="'.$value["foto"].'"><i class="fa fa-times"></i></button>
 
@@ -337,9 +337,9 @@
 </div>
 
 <!--=============================
-= VENTANA MODAL EDITAR USUARIO   =
+= VENTANA MODAL EDITAR ALLUMNO   =
 ===============================-->
-<div id="modalEditarUsuario" class="modal fade" role="dialog">
+<div id="modalEditarAlumno" class="modal fade" role="dialog">
   
   <div class="modal-dialog">
 
@@ -353,7 +353,7 @@
 
           <button type="button" class="close" data-dismiss="modal">&times;</button>
 
-          <h4 class="modal-title"><span> <i class="fa fa-user-plus"></i> </span> Editar usuario</h4>
+          <h4 class="modal-title"><span> <i class="fa fa-user-plus"></i> </span> Editar Alumno</h4>
 
         </div>
 
@@ -372,60 +372,54 @@
                 
                 <span class="input-group-addon"> <i class="fa fa-user"></i> </span>
                    
-                <input type="text" id="editarNombre" name="editarNombre" placeholder="Ingresar Nombre" required class="form-control input-lg">  
-
-                <input type="hidden" id="nombreActual" name="nombreActual"> 
+                <input type="text" name="editarNombre" id="editarNombre" required class="form-control input-lg">   
 
               </div>
               
             </div> 
 
-            <!-- Entrada para el Usuario -->
+            
+            <!-- Entrada para el ESTADO ACTIVO/INACTIVO -->
+            <input type="hidden" id="activo" name="activo">
+
+            <!-- Entrada para los Apellidos -->
             <div class="form-group">
               
               <div class="input-group">
                 
-                <span class="input-group-addon"> <i class="fa fa-key"></i></span>
+                <span class="input-group-addon"> <i class="fa fa-user"></i> </span>
                    
-                <input type="text" id="editarUsuario" readonly name="editarUsuario" placeholder="Ingresar Usuario" required class="form-control input-lg">   
+                <input type="text" name="editarApellidos" id="editarApellidos" required class="form-control input-lg">   
 
               </div>
+              
+            </div> 
 
-             </div> 
-
-            <!-- Entrada para Contraseña-->
+            <!-- Entrada para Número de Control -->
             <div class="form-group">
-
+              
               <div class="input-group">
                 
-                <span class="input-group-addon"> <i class="fa fa-lock"></i> </span>
+                <span class="input-group-addon"> <i class="fa fa-user"></i> </span>
                    
-                <input type="password" name="editarPassword" placeholder="Escriba la Nueva Contraseña" class="form-control input-lg"> 
-
-                <input type="hidden" id="passwordActual" name="passwordActual">  
-
+                <input type="text" readonly name="editarNumeroControl" id="editarNumeroControl" required class="form-control input-lg">   
               </div>
+              
+            </div> 
 
-            </div>
-
-
-            <!-- Entrada para Seleccion de Perfil-->
-
+            
+            <!-- Entrada para la Carrera-->
             <div class="form-group">
 
               <div class="input-group">
                 
                 <span class="input-group-addon"> <i class="fa fa-users"></i> </span>
                    
-                <select name="editarPerfil" class="form-control input-lg">
+                <select name="editarCarrera" class="form-control input-lg">
                   
-                  <option value="" id="editarPerfil">Seleccionar Perfil</option>
+                  <option value="" id="editarCarrera"></option>
 
-                  <option value="Administrador">Administrador</option>
-
-                  <option value="Especial">Especial</option>
-
-                  <option value="Vendedor">Vendedor</option>
+                  <option value="ISC">I.S.C.</option>
 
                 </select> 
 
@@ -433,19 +427,53 @@
 
             </div>
 
-             <!-- Entrada para la foto-->
+            <!-- Entrada para Grupo-->
             <div class="form-group">
 
-              <div class="panel text-uppercase">Subir Foto</div>
-
-              <input type="file" class="nuevaFoto" name="editarFoto">
-              
-              <p class="help-block">Peso máximo de la foto 2MB</p>
+              <div class="input-group">
                 
-              <img src="vistas/img/usuarios/default/anonymous.png" class="img-thumbnail previsualizarImagen" width="100px">
-              <input type="hidden" name="fotoActual" id="fotoActual"> 
+                <span class="input-group-addon"> <i class="fa fa-users"></i> </span>
+                   
+                <select name="editarGrupo" class="form-control input-lg">
+                  
+                  <option value="" id="editarGrupo"></option>
+
+                  <option value="902">902</option>
+
+                </select> 
+
+              </div>
 
             </div>
+
+            <!-- Entrada para Email -->
+            <div class="form-group">
+              
+              <div class="input-group">
+                
+                <span class="input-group-addon"> <i class="fa fa-user"></i> </span>
+                   
+                <input type="text" name="editarEmail" id="editarEmail" required class="form-control input-lg nuevoEmail">   
+
+              </div>
+              
+            </div> 
+
+
+            <!-- Entrada para Contraseña-->
+            <div class="form-group">
+              
+              <div class="input-group">
+                
+                <span class="input-group-addon"> <i class="fa fa-user"></i> </span>
+                   
+                <input type="text" name="editarPassword" id="editarPassword" placeholder="Ingresar password" required class="form-control input-lg">   
+
+                <input type="hidden" name="passwordActual" id="passwordActual">
+
+              </div>
+              
+            </div> 
 
           </div>
 
@@ -459,16 +487,16 @@
           
           <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Salir</button>
 
-          <button type="submit" class="btn btn-primary pull-left">Editar Usuario</button>
+          <button type="submit" class="btn btn-primary pull-left">Editar Alumno</button>
 
         </div>
 
 
         <?php 
 
-          $editarUsuario = new ControladorUsuarios();
+          // $crearAlumno = new ControladorAlumnos();
 
-          $editarUsuario -> ctrEditarUsuario();
+          // $crearAlumno -> ctrCrearAlumno();
 
          ?>
       
@@ -480,10 +508,11 @@
 
 </div>
 
+
 <?php 
 
-  $borrarUsuario = new ControladorUsuarios();
+  // $borrarUsuario = new ControladorUsuarios();
 
-  $borrarUsuario -> ctrBorrarUsuario();
+  // $borrarUsuario -> ctrBorrarUsuario();
 
  ?>

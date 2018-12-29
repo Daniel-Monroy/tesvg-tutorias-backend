@@ -87,7 +87,7 @@ $(document).on("click", ".btnActivarAlumno", function(){
 		contentType: false,
 		processData: false,
 		success: function(respuesta){
-			
+
 			console.log("respuesta", respuesta);
 
 			if (window.matchMedia("(max-width:767px)").matches) {
@@ -127,3 +127,62 @@ $(document).on("click", ".btnActivarAlumno", function(){
 	}
 
 });
+
+
+/*==================================
+= EDITAR ALUMNO =
+==================================*/
+$(document).on("click", ".btnEditarAlumno", function(){
+
+	$(".alert").remove();
+
+	var idAlumno = $(this).attr("idAlumno");
+	
+	console.log("idAlumno", idAlumno);
+
+	var datos = new FormData();
+
+	datos.append("idAlumno", idAlumno);
+
+	$.ajax({
+		url: rutaOcultaServidor+"ajax/alumnos.ajax.php",
+		method: "POST",
+		data: datos,
+		cache: false,
+		contentType: false,
+		processData: false,
+		dataType: 'json',
+		success: function(respuesta){		
+			
+			$("#editarNombre").val(respuesta["nombre"]);
+			
+			$("#editarApellidos").val(respuesta["apellidos"]);
+			
+			$("#editarNumeroControl").val(respuesta["numeroControl"]);
+
+			$("#editarEmail").val(respuesta["email"]);
+
+			$("#activo").val(respuesta["activo"]);
+
+			$("#passwordActual").val(respuesta["password"]);
+
+
+			/*=========================================
+			=            INGRESAR CARRERAS            =
+			=========================================*/
+			$("#editarCarrera").val(1);
+			
+			$("#editarCarrera").html(respuesta["carrera"]);
+
+
+			/*=========================================editarEmail
+			=            INGRESAR GRUPO            =
+			=========================================*/
+			$("#editarGrupo").val(1);
+			
+			$("#editarGrupo").html(respuesta["grupo"]);
+
+
+		}
+	});
+})

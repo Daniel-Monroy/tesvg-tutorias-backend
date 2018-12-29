@@ -10,6 +10,23 @@ class AjaxAlumnos
 {
 
 	/*==================================
+	= EDITAR ALUMNO      =
+	==================================*/
+	public $idAlumnoEditar;
+
+	public function ajaxEditarAlumno(){
+
+		$item = "id";
+
+		$valor = $this->idAlumnoEditar;
+
+		$respuesta = ControladorAlumnos::ctrMostrarAlumnos($item, $valor);
+
+		echo json_encode($respuesta);
+
+	}
+
+	/*==================================
 	= EVITAR ALUMNO REPETIDO      =
 	==================================*/
 	public $validarNumeroControl;
@@ -110,4 +127,17 @@ if (isset($_POST["idAlumnoActivar"])) {
 	$activarAlumno -> estadoAlumnoActivar = $_POST["estadoAlumnoActivar"];
 
 	$activarAlumno -> ajaxActivarAlumno();
+}
+
+
+# ======================================
+# =           EDITAR ALUMNO           =
+# ======================================
+if (isset($_POST["idAlumno"])) {
+	
+	$idAlumnoEditar = new AjaxAlumnos();
+
+	$idAlumnoEditar -> idAlumnoEditar = $_POST["idAlumno"];
+
+	$idAlumnoEditar -> ajaxEditarAlumno();
 }
