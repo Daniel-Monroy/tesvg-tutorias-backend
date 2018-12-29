@@ -178,4 +178,88 @@ class ControladorAlumnos
 		}
 
 	}
+
+	# ======================
+	# = EDITAR ALUMNO     =
+	# ======================
+	static public function ctrEditarAlumno(){
+
+		if (isset($_POST["editarNombre"])) {
+			
+			if (preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["editarNombre"]) && 
+				preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["editarApellidos"]) &&
+				preg_match('/^[a-zA-Z ]+$/', $_POST["editarCarrera"]) &&
+				preg_match('/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/', $_POST['editarEmail']) &&
+				preg_match('/^[0-9]+$/', $_POST["editarNumeroControl"]) &&  
+				preg_match('/^[0-9]+$/', $_POST["editarGrupo"])) {
+				
+				$tabla = "alumnos";
+
+             	$encriptarEmail = md5($_POST['editarEmail']);
+
+				$datos = array('nombre' => $_POST["editarNombre"],
+							   'apellidos' => $_POST["editarApellidos"], 
+							   'numeroControl' => $_POST["editarNumeroControl"], 
+							   'carrera' => $_POST["editarCarrera"],
+							   'email' => $_POST["editarEmail"], 
+							   'grupo' => $_POST["editarGrupo"],
+							   'password' => $_POST["passwordActual"], 
+							   'verificacion' => 1, 
+							   'activo' => $_POST["activo"],    
+							   'foto' => $_POST["fotoActual"],
+							   'modo' => "directo",
+							   'emailEncriptado' => $encriptarEmail,
+							   'id' => $_POST["id"]
+							);
+
+					$respuesta = ModeloAlumnos::mdlEditarAlumno($tabla, $datos);
+
+					var_dump($respuesta);
+
+					if ($respuesta == "ok") {
+
+						echo ' 
+							<script> 
+								swal({
+									type: "success",
+									title: "!Genial!",
+									text: "Alumno Editado con exito",	
+									showConfirmButton: true,
+									confirmButtonText: "Cerrar",
+									closeConfirmButton: false
+								}).then((result)=>{
+									if(result.value){
+										window.location = "alumnos";
+									}
+								});
+							</script>
+						 ';
+
+		              } 
+
+			} else {
+
+				echo ' 
+					<script> 
+						swal({
+							type: "error",
+							title: "!Error!",
+							text: "Todos los campos son Obligatorios y no se permiten caracteres especiales",	
+							showConfirmButton: true,
+							confirmButtonText: "Cerrar",
+							closeConfirmButton: false
+						}).then((result)=>{
+							if(result.value){
+								window.location = "alumnos";
+							}
+						});
+					</script>
+				 ';
+
+			}
+
+		}
+
+	}
+
 }

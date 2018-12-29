@@ -382,6 +382,10 @@
             <!-- Entrada para el ESTADO ACTIVO/INACTIVO -->
             <input type="hidden" id="activo" name="activo">
 
+            <input type="hidden" id="fotoActual" name="fotoActual">
+
+            <input type="hidden" id="idAlumnoEditar" name="id">
+
             <!-- Entrada para los Apellidos -->
             <div class="form-group">
               
@@ -459,21 +463,7 @@
               
             </div> 
 
-
-            <!-- Entrada para Contraseña-->
-            <div class="form-group">
-              
-              <div class="input-group">
-                
-                <span class="input-group-addon"> <i class="fa fa-user"></i> </span>
-                   
-                <input type="text" name="editarPassword" id="editarPassword" placeholder="Ingresar password" required class="form-control input-lg">   
-
-                <input type="hidden" name="passwordActual" id="passwordActual">
-
-              </div>
-              
-            </div> 
+            <input type="hidden" name="passwordActual" id="passwordActual">
 
           </div>
 
@@ -494,9 +484,9 @@
 
         <?php 
 
-          // $crearAlumno = new ControladorAlumnos();
+          $editarAlumno = new ControladorAlumnos();
 
-          // $crearAlumno -> ctrCrearAlumno();
+          $editarAlumno -> ctrEditarAlumno();
 
          ?>
       

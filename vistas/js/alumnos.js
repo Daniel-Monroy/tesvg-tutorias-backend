@@ -166,11 +166,14 @@ $(document).on("click", ".btnEditarAlumno", function(){
 
 			$("#passwordActual").val(respuesta["password"]);
 
+			$("#fotoActual").val(respuesta["foto"]);
+
+			$("#idAlumnoEditar").val(respuesta["id"]);
 
 			/*=========================================
 			=            INGRESAR CARRERAS            =
 			=========================================*/
-			$("#editarCarrera").val(1);
+			$("#editarCarrera").val(respuesta["carrera"]);
 			
 			$("#editarCarrera").html(respuesta["carrera"]);
 
@@ -178,7 +181,7 @@ $(document).on("click", ".btnEditarAlumno", function(){
 			/*=========================================editarEmail
 			=            INGRESAR GRUPO            =
 			=========================================*/
-			$("#editarGrupo").val(1);
+			$("#editarGrupo").val(respuesta["grupo"]);
 			
 			$("#editarGrupo").html(respuesta["grupo"]);
 

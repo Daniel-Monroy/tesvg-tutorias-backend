@@ -85,6 +85,54 @@ class ModeloAlumnos
 
 	}
 
+	# ========================================
+	# =           EDITAR ALUMNO          =
+	# ========================================
+	static public function mdlEditarAlumno($tabla, $datos){
+		
+		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET nombre = :nombre, apellidos = :apellidos, numeroControl = :numeroControl, carrera = :carrera, grupo = :grupo, email = :email, password = :password, activo = :activo, foto = :foto, verificacion = :verificacion, modo = :modo, emailEncriptado = :emailEncriptado WHERE id = :id");
+
+		$stmt -> bindParam("nombre", $datos["nombre"], PDO::PARAM_STR);
+		
+		$stmt -> bindParam("apellidos", $datos["apellidos"], PDO::PARAM_STR);
+		
+		$stmt -> bindParam("numeroControl", $datos["numeroControl"], PDO::PARAM_STR);
+		
+		$stmt -> bindParam("carrera", $datos["carrera"], PDO::PARAM_STR);
+		
+		$stmt -> bindParam("grupo", $datos["grupo"], PDO::PARAM_STR);
+		
+		$stmt -> bindParam("email", $datos["email"], PDO::PARAM_STR);
+		
+		$stmt -> bindParam("password", $datos["password"], PDO::PARAM_STR);
+
+		$stmt -> bindParam("activo", $datos["activo"], PDO::PARAM_STR);
+		
+		$stmt -> bindParam("foto", $datos["foto"], PDO::PARAM_STR);
+		
+		$stmt -> bindParam("verificacion", $datos["verificacion"], PDO::PARAM_STR);
+		
+		$stmt -> bindParam("modo", $datos["modo"], PDO::PARAM_STR);
+		
+		$stmt -> bindParam("emailEncriptado", $datos["emailEncriptado"], PDO::PARAM_STR);
+
+		$stmt -> bindParam("id", $datos["id"], PDO::PARAM_INT);
+	
+		if ($stmt->execute()) {
+			
+			return "ok";
+
+		} else {
+			
+			return "error";
+		}
+
+		$stmt -> close();
+
+		$stmt = null;
+
+	}
+
 
 
 	# ======================================
