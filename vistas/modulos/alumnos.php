@@ -52,6 +52,7 @@
               <th style="width: 10px">#</th>
               <th>Nombre</th>
               <th>Apellidos</th>
+              <th style="width: 25px" class="text-center">Actividades</th>
               <th>N. de Control</th>
               <th>Carrera</th>
               <th>Grupo</th>
@@ -90,6 +91,8 @@
                         <td>'.$value["nombre"].'</td>
 
                         <td>'.$value["apellidos"].'</td>
+
+                        <td class="text-center"><button class="btn btn-primary btn-sm btnActividades" idAlumno="'.$value["id"].'"><i class="fa fa-eye"></i> Ver</button></td>
                         
                         <td>'.$value["numeroControl"].'</td>
 
