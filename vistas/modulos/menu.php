@@ -50,10 +50,10 @@
 
       <li class="">
 
-        <a href="tutorados">
+        <a href="alumnos">
 
           <i class="fa fa-users"></i>
-          <span>Tutorados</span>
+          <span>Alumnos</span>
 
         </a>
 

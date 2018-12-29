@@ -114,6 +114,7 @@
             $_GET["ruta"] == "usuarios" || 
             $_GET["ruta"] == "actividades" ||
             $_GET["ruta"] == "sub-actividades" ||
+            $_GET["ruta"] == "alumnos" ||
             $_GET["ruta"] == "salir") {
 
            include "modulos/".$_GET["ruta"].".php";
