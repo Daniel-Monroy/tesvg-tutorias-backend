@@ -64,7 +64,7 @@
         <a href="">
 
           <i class="fa fa-list-ul"></i>
-          <span>Ventas</span>
+          <span>Grupos</span>
 
           <span class="pull-right-container">
             <i class="fa fa-angle-left pull-right"></i>
@@ -81,9 +81,9 @@
               <span>Administrar Ventas</span>
             </a>
 
-            <a href="crear-venta">
+            <a href="grupos">
               <i class="fa fa-circle-o"></i>
-              <span>Crear Venta</span>
+              <span>Grupos</span>
             </a>
 
             <a href="reportes">
