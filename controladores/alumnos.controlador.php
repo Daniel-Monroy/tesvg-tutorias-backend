@@ -262,4 +262,18 @@ class ControladorAlumnos
 
 	}
 
+
+	# ==========================================
+	# = MOSTRAR ACTIVIDADES REALIZADAS         =
+	# ==========================================
+	static public function ctrMostrarActividadesRealizadas($item, $valor){
+
+		$tabla = "actividades_alumnos";
+
+		$respuesta = ModeloSubActividades::mdlMostrarSubActividadesCategoria($tabla, $item, $valor);
+
+		return $respuesta;
+	}
+
+
 }

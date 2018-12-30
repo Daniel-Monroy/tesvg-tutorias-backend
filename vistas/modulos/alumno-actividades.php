@@ -1,3 +1,20 @@
+<?php 
+
+$servidor = Ruta::ctrRutaServidor();
+$url = Ruta::ctrRuta();
+
+if (!isset($_GET["idAlumnoActividades"])) {
+
+  echo '  
+     <script> window.location = "alumnos"; </script>
+  ';
+
+  return;
+}
+
+?>
+
+
 <div class="content-wrapper">
   
   <section class="content-header">
@@ -27,17 +44,28 @@
     <div class="row">
       
       <div class="col-md-3">
+
+
+        <?php 
+
+          $item = "id";
+
+          $valor = $_GET["idAlumnoActividades"];
+
+          $alumno = ControladorAlumnos::ctrMostrarAlumnos($item, $valor);
+  
+         ?>
         
         <!-- Perfil -->
         <div class="box box-primary">
 
           <div class="box-body box-profile">
             
-            <img src="vistas/img/usuarios/default/anonymous.png" class="profile-user-img img-responsive img-circle">
+            <img src="<?php echo $url.$alumno["foto"];?> " class="profile-user-img img-responsive img-circle">
 
-            <h3 class="profile-username text-center"> Daniel Monroy Dominguez </h3>
+            <h3 class="profile-username text-center"> <?php echo $alumno["nombre"]." ".$alumno["apellidos"];?> </h3>
 
-            <p class="text-muted text-center">Ingenería en Sistemas Computacionales</p>
+            <p class="text-muted text-center"><?php echo $alumno["carrera"];?></p>
 
 
             <ul class="list-group list-group-unbordered">
@@ -124,28 +152,53 @@
           </ul>
 
           <div class="tab-content">
+
+            <?php 
+
+              $itemActividadRealizadas = "id_alumno";
+
+              $valorActividadRealizadas = $alumno["id"];
+
+              $actividadesRealizadas = ControladorAlumnos::ctrMostrarActividadesRealizadas($itemActividadRealizadas, $valorActividadRealizadas); 
+             ?>
             
             <div class="active tab-pane" id="actividadesRealizadas">
-              
+
+              <?php foreach ($actividadesRealizadas as $key => $value): 
+
+
+                # ==================================
+                # =OBTENIENDO DATOS DE LA ACTIVIDAD=
+                # ==================================
+                 $itemActividad = "id";
+
+                 $valorActividad = $value["id_actividad"];
+
+                 $actividad = ControladorSubActividades::ctrMostrarSubActividades($itemActividad, $valorActividad);  
+
+                ?>
+
               <div class="post">
                 
                 <div class="user-block">
                   
-                  <img class="img-circle img-bordered-sm" src="vistas/img/usuarios/default/anonymous.png" alt="">
+                  <img class="img-circle img-bordered-sm" src="<?php echo $servidor.$actividad["imagen"];?> ">
 
                   <span class="username">
                     
-                      <a href="#">Linea de la Vida.</a>
+                      <a href="#"><span><?php echo $actividad["nombre"];?></span></a>
                     
-                      <button class="btn btn-primary pull-right"><i class="fa fa-download"></i> Descargar</button>
+                      <a target="_black" href="<?php echo $url.$actividad["ruta_archivo"];?> ">
+                         <button class="btn btn-primary pull-right"><i class="fa fa-download"></i> Descargar</button>
+                      </a>
                   
                   </span>
                     
-                  <span class="description">Realizada - 24-11-2018 11:00:00</span>
+                  <span class="description">Realizada - <?php echo $actividad["fecha"];?></span>
 
                 </div>
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non minima vero quo voluptatem unde, officiis harum neque veritatis quas commodi necessitatibus architecto tempora, dolor facere repudiandae voluptatibus obcaecati distinctio laboriosam.</p>
+                <p><?php echo $actividad["actividades"];?></p>
 
                 <ul class="list-inline">
                   
@@ -182,6 +235,8 @@
                 </form>
 
               </div>
+
+              <?php endforeach ?>
 
             </div>
 

@@ -3,8 +3,10 @@
 <div class="login-box">
   
   <div class="login-logo">
+
+    <span style="color: #fff">TUTORIAS</span>
   
-    <img src="vistas/img/plantilla/logo-blanco-bloque.png" alt="" class="img-responsive" style="padding: 30px 100px 0px 100px;">
+    <img src="vistas/img/plantilla/logoTutorias.png" alt="" class="img-responsive" style="padding: 30px 100px 0px 100px;">
     
   </div>
   

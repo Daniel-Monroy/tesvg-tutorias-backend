@@ -195,7 +195,7 @@ $(document).on("click", ".btnActividades", function(){
 
 	var idAlumno = $(this).attr("idAlumno");
 
-	window.location = rutaOcultaServidor+"index.php?ruta=alumno-actividades&idAlumno="+idAlumno;
+	window.location = rutaOcultaServidor+"index.php?ruta=alumno-actividades&idAlumnoActividades="+idAlumno;
 		
 })
 
