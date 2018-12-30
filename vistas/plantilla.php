@@ -155,6 +155,7 @@
 <script src="<?php echo $rutaServidor?>vistas/js/actividades.js"></script>
 <script src="<?php echo $rutaServidor?>vistas/js/sub-actividades.js"></script>
 <script src="<?php echo $rutaServidor?>vistas/js/alumnos.js"></script>
+<script src="<?php echo $rutaServidor?>vistas/js/grupos.js"></script>
 
 
 </body>

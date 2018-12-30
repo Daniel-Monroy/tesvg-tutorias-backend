@@ -53,35 +53,33 @@
             
             <?php 
 
-              // $item = null;
+              $item = null;
 
-              // $valor = null;
+              $valor = null;
 
-              // $actividades = ControladorActividades::ctrMostrarActividades($item, $valor);
+              $grupos = ControladorGrupos::ctrMostrarGrupos($item, $valor);
 
-              // $contador = 1;
+              foreach ($grupos as $key => $value) {
 
-              // foreach ($actividades as $key => $value) {
-
-              //   echo '   <tr>
+                echo '   <tr>
   
-              //             <td>'.($key+1).'</td>
-              //             <td class="text-uppercase">'.$value["categoria"].'</td>
-              //             <td class="">'.$value["ruta"].'</td>
-              //             <td>
-              //               <div class="btn-group">
+                          <td>'.($key+1).'</td>
+                          <td class="text-uppercase">'.$value["nombre"].'</td>
+                          <td class="">'.$value["id_carrera"].'</td>
+                          <td>
+                            <div class="btn-group">
                               
-              //                 <button class="btn btn-warning btnEditarActividad" idActividad="'.$value["id"].'" data-toggle="modal" data-target="#modalEditarActividad"><i class="fa fa-pencil"></i></button>
-              //                 <button class="btn btn-danger btnEliminarActividad" idActividad="'.$value["id"].'"><i class="fa fa-times"></i></button>
+                              <button class="btn btn-warning btnEditarGrupo" idGrupo="'.$value["id"].'" data-toggle="modal" data-target="#modalEditarGrupo"><i class="fa fa-pencil"></i></button>
+                              <button class="btn btn-danger btnEliminarGrupo" idGrupo="'.$value["id"].'"><i class="fa fa-times"></i></button>
 
-              //               </div>
+                            </div>
 
-              //             </td>
+                          </td>
 
-              //           </tr>
-              //   ';
+                        </tr>
+                ';
                 
-              // }
+              }
 
             ?>
 
@@ -136,7 +134,7 @@
                 
                 <span class="input-group-addon"> <i class="fa fa-th"></i> </span>
                    
-                <input type="text" name="nuevoGrupo" id="nuevoGrupo" placeholder="Ingresar Grupo" required class="form-control input-lg">   
+                <input type="text" name="nuevoGrupo" maxlength="3" placeholder="Ingresar Grupo" required class="form-control input-lg nuevoGrupo">   
 
               </div>
               
@@ -145,15 +143,17 @@
             <!-- Entrada para la Carrera-->
             <div class="form-group">
 
-              <div class="input-group">
+              <div class="input-group hidden selectCarrera">
                 
                 <span class="input-group-addon"> <i class="fa fa-users"></i> </span>
                    
-                <select name="nuevaCarrera" class="form-control input-lg">
+                <select name="nuevaCarreraGrupo" required class="form-control input-lg nuevaCarreraGrupo">
                   
-                  <option value="">Seleccionar Carrera</option>
+                  <option value="" class="nuevaCarreraValue">Seleccionar Carrera</option>
 
-                  <option value="ISC">I.S.C.</option>
+                  <option value="1">I.S.C</option>
+
+                  <option value="2">I.E</option>
 
                 </select> 
 
@@ -179,10 +179,9 @@
 
         <?php 
 
-          // $crearGrupo = new ControladorGrupos();
+          $crearGrupo = new ControladorGrupos();
 
-          // $crearGrupo -> ctrCrearGrupo();
-
+          $crearGrupo -> ctrCrearGrupo();
 
          ?>
       
@@ -194,10 +193,11 @@
 
 </div>
 
+
 <!--=========================
 = VENTANA MODAL EDITAR GRUPO =
 ==========================-->
-<div id="modalAgregarGrupo" class="modal fade" role="dialog">
+<div id="modalEditarGrupo" class="modal fade" role="dialog">
   
   <div class="modal-dialog">
 
@@ -226,11 +226,15 @@
             <!-- Entrada para el Nombre -->
             <div class="form-group">
               
-              <div class="input-group">
+              <div class="input-group selectCarrera">
                 
                 <span class="input-group-addon"> <i class="fa fa-th"></i> </span>
                    
-                <input type="text" name="editarGrupo" id="editarGrupo" placeholder="Ingresar Grupo" required class="form-control input-lg">   
+                <input type="text" name="editarGrupo" required class="form-control input-lg editarGrupo"> 
+  
+                <input type="hidden" id="editarGrupoActual"> 
+
+                <input type="hidden" name="idGrupo" id="idGrupo"> 
 
               </div>
               
@@ -242,12 +246,16 @@
               <div class="input-group">
                 
                 <span class="input-group-addon"> <i class="fa fa-users"></i> </span>
-                   
-                <select name="editarCarrera" class="form-control input-lg">
-                  
-                  <option value="" id="editarCarrera">Seleccionar Carrera</option>
 
-                  <option value="ISC">I.S.C.</option>
+                <input type="hidden" id="valorCarreraActual">
+
+                <input type="hidden" id="htmlCarreraActual">
+                   
+                <select name="editarCarrera" class="form-control input-lg editarCarrera">
+                  
+                  <option value="" id="editarCarrera"></option>
+
+                  <option value="1">I.S.C.</option>
 
                 </select> 
 
@@ -273,10 +281,9 @@
 
         <?php 
 
-          // $editar = new ControladorGrupos();
+          $editar = new ControladorGrupos();
 
-          // $editar -> ctrEditarGrupo();
-
+          $editar -> ctrEditarGrupo();
 
          ?>
       
@@ -293,8 +300,8 @@
   # ========================================
   # = BORRAR GRUPO           =
   # ========================================
-  // $eliminarGrupo = new ControladorGrupos();
+  $eliminarGrupo = new ControladorGrupos();
 
-  // $eliminarGrupo -> ctrEliminarGrupos();
+  $eliminarGrupo -> ctrEliminarGrupo();
 
 ?>
