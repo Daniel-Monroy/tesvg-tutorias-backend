@@ -172,9 +172,9 @@ $(document).on("click", ".btnEditarGrupo", function(){
 
 
 
-/*==================================
+/*====================
 = ELIMINAR GRUPO     =
-==================================*/
+=====================*/
 $(document).on("click", ".btnEliminarGrupo", function(){
 
 	var idGrupo = $(this).attr("idGrupo");
@@ -197,5 +197,18 @@ $(document).on("click", ".btnEliminarGrupo", function(){
 		}
 
 	})
+
+})
+
+
+/*====================
+= ELIMINAR GRUPO     =
+=====================*/
+$(document).on("click", ".btnActividadesGrupo", function(){
+
+	var idGrupo = $(this).attr("idGrupo");
+	
+	window.location = rutaOcultaServidor+"index.php?ruta=sub-actividades&idGrupo="+idGrupo;
+		
 
 })

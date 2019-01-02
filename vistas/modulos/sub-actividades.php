@@ -354,7 +354,33 @@
               </div>
 
             </div>
+      
+
+            <!-- Entrada para el Grupo-->
+            <div class="form-group">
             
+              <div class="input-group">
+                
+                <span class="input-group-addon"> <i class="fa fa-users"></i></span>
+                   
+                <?php 
+
+                  $item = "id";
+
+                  $valor = $_GET["idGrupo"];
+
+                  $grupo = ControladorGrupos::ctrMostrarGrupos($item, $valor);
+        
+                  echo '  
+                    <input type="text" name="nombreGrupo" readonly value="'.$grupo["nombre"].'" required class="form-control input-lg">
+                    <input type="hidden" name="idGrupo" value="'.$grupo["id"].'"> 
+                  ';
+
+                 ?>  
+
+              </div>
+
+            </div> 
 
             <!-- Entrada para el Nombre -->
             <div class="form-group">
@@ -533,6 +559,32 @@
               </div>
 
             </div>
+
+            <!-- Entrada para el Grupo-->
+            <div class="form-group">
+            
+              <div class="input-group">
+                
+                <span class="input-group-addon"> <i class="fa fa-users"></i></span>
+                   
+                <?php 
+
+                  $item = "id";
+
+                  $valor = $_GET["idGrupo"];
+
+                  $grupo = ControladorGrupos::ctrMostrarGrupos($item, $valor);
+        
+                  echo '  
+                    <input type="text" readonly value="'.$grupo["nombre"].'" required class="form-control input-lg">
+                    <input type="hidden" name="idGrupo" value="'.$grupo["id"].'"> 
+                  ';
+
+                 ?>  
+
+              </div>
+
+            </div> 
             
 
             <!-- Entrada para el Nombre -->

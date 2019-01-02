@@ -38,10 +38,7 @@ class ControladorSubActividades
 
 		if (isset($_POST["nuevaSubActividad"])) {
 
-			if (preg_match('/^[,\\.\\a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ?¿! ]+$/', $_POST["nuevaSubActividad"]) &&
-				preg_match('/^[,\\.\\a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ?¿! ]+$/', $_POST["nuevoObjetivo"]) &&
-				preg_match('/^[,\\.\\a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ?¿! ]+$/', $_POST["nuevoTextoAyuda"]) &&
-				preg_match('/^[,\\.\\a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ?¿! ]+$/', $_POST["nuevasActividades"])
+			if (preg_match('/^[,\\.\\a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ?¿! ]+$/', $_POST["nuevaSubActividad"])
 				){
 
 						$ruta = "";
@@ -129,6 +126,7 @@ class ControladorSubActividades
 
 						$datos = array(
 						'id_actividad' => $_POST["nuevaActividad"],
+						'id_grupo' => $_POST["idGrupo"],
 						'ruta' => $_POST["nuevaRuta"],
 						'ruta_archivo' => $documento,
 						'nombre' => $_POST["nuevaSubActividad"],
@@ -293,6 +291,7 @@ class ControladorSubActividades
 
 		$datos = array(
 		'id_actividad' => $_POST["editarActividad"],
+		'id_grupo' => $_POST["idGrupo"],
 		'ruta' => $_POST["editarRuta"],
 		'ruta_archivo' => $documento,
 		'nombre' => $_POST["editarSubActividad"],
