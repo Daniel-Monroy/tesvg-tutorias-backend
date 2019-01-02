@@ -7,7 +7,7 @@ class ControladorGrupos
 {
 	
 	# ======================
-	# = GRUPOS ALUMNO    =
+	# = MOSTRAR GRUPOS    =
 	# ======================
 	static public function ctrMostrarGrupos($item, $valor){
 

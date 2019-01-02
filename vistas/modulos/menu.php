@@ -76,9 +76,9 @@
 
           <li>
 
-            <a href="administrar-ventas">
+            <a href="carreras">
               <i class="fa fa-circle-o"></i>
-              <span>Administrar Ventas</span>
+              <span>Carreras</span>
             </a>
 
             <a href="grupos">

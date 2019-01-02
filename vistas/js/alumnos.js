@@ -191,6 +191,10 @@ $(document).on("click", ".btnEditarAlumno", function(){
 })
 
 
+
+/*==================================
+= ACTIVIDADES DEL ALUMNO =
+==================================*/
 $(document).on("click", ".btnActividades", function(){
 
 	var idAlumno = $(this).attr("idAlumno");

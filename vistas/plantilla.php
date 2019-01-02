@@ -116,6 +116,7 @@
             $_GET["ruta"] == "sub-actividades" ||
             $_GET["ruta"] == "alumnos" || 
             $_GET["ruta"] == "alumno-actividades" || 
+            $_GET["ruta"] == "carreras" || 
             $_GET["ruta"] == "grupos" ||
             $_GET["ruta"] == "salir") {
 
@@ -155,6 +156,7 @@
 <script src="<?php echo $rutaServidor?>vistas/js/actividades.js"></script>
 <script src="<?php echo $rutaServidor?>vistas/js/sub-actividades.js"></script>
 <script src="<?php echo $rutaServidor?>vistas/js/alumnos.js"></script>
+<script src="<?php echo $rutaServidor?>vistas/js/carreras.js"></script>
 <script src="<?php echo $rutaServidor?>vistas/js/grupos.js"></script>
 
 

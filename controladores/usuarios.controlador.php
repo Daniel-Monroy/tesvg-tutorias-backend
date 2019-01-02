@@ -246,6 +246,20 @@ class ControladorUsuarios
 
 	}
 
+
+	# ======================
+	# = MOSTRAR USUARIOS    =
+	# ======================
+	static public function ctrMostrarVariosUsuarios($item, $valor){
+
+		$tabla = "usuarios";
+
+		$respuesta = ModeloUsuarios::mdlMostrarVariosUsuarios($tabla, $item, $valor);
+
+		return $respuesta;
+
+	}
+
 	# ======================================
 	# =  EDITAR USUARIO           =
 	# ======================================
