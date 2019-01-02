@@ -111,7 +111,7 @@
       if (isset($_GET["ruta"])) {
         
         if ($_GET["ruta"] == "inicio" || 
-            $_GET["ruta"] == "usuarios" || 
+            $_GET["ruta"] == "tutores" || 
             $_GET["ruta"] == "actividades" ||
             $_GET["ruta"] == "sub-actividades" ||
             $_GET["ruta"] == "alumnos" || 

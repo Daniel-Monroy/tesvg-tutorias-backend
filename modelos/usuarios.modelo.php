@@ -61,18 +61,25 @@ class ModeloUsuarios
 	# =           INGRESAR USUARIO          =
 	# ========================================
 	static public function mdlNuevoUsuario($tabla, $datos){
-		
-		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(nombre, usuario, password, perfil, foto) VALUES (:nombre, :usuario, :password, :perfil, :foto)");
 
-		$stmt -> bindParam("nombre", $datos["nombre"], PDO::PARAM_STR);
+		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla (nombre, apellidos, usuario, password, perfil, profesion, foto, estado) VALUES (:nombre, :apellidos, :usuario, :password, :perfil, :profesion, :foto, :estado)");
 
-		$stmt -> bindParam("usuario", $datos["usuario"], PDO::PARAM_STR);
-		
-		$stmt -> bindParam("password", $datos["password"], PDO::PARAM_STR);
-		
-		$stmt -> bindParam("perfil", $datos["perfil"], PDO::PARAM_STR);
+		$stmt -> bindParam(":nombre", $datos["nombre"], PDO::PARAM_STR);
 
-		$stmt -> bindParam("foto", $datos["foto"], PDO::PARAM_STR);
+		$stmt -> bindParam(":apellidos", $datos["apellidos"], PDO::PARAM_STR);
+		
+		$stmt -> bindParam(":usuario", $datos["usuario"], PDO::PARAM_STR);
+		
+		$stmt -> bindParam(":password", $datos["password"], PDO::PARAM_STR);
+		
+		$stmt -> bindParam(":perfil", $datos["perfil"], PDO::PARAM_STR);
+		
+		$stmt -> bindParam(":profesion", $datos["profesion"], PDO::PARAM_STR);
+		
+		$stmt -> bindParam(":foto", $datos["foto"], PDO::PARAM_STR);
+		
+		$stmt -> bindParam(":estado", $datos["estado"], PDO::PARAM_STR);
+
 	
 		if ($stmt->execute()) {
 			return "ok";
@@ -90,17 +97,25 @@ class ModeloUsuarios
 	# ======================================
 	static public function mdlEditarUsuario($tabla, $datos){
 
-		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET nombre = :nombre, password = :password, perfil = :perfil, foto = :foto WHERE usuario = :usuario");
+		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET nombre =:nombre,apellidos =:apellidos, usuario =:usuario, password =:password, perfil =:perfil, profesion =:profesion, foto =:foto, estado =:estado WHERE id =:id");
 
 		$stmt -> bindParam(":nombre", $datos["nombre"], PDO::PARAM_STR);
 
-		$stmt -> bindParam(":password", $datos["password"], PDO::PARAM_STR);
-
-		$stmt -> bindParam(":perfil", $datos["perfil"], PDO::PARAM_STR);
-
-		$stmt -> bindParam(":foto", $datos["foto"], PDO::PARAM_STR);
-
+		$stmt -> bindParam(":apellidos", $datos["apellidos"], PDO::PARAM_STR);
+		
 		$stmt -> bindParam(":usuario", $datos["usuario"], PDO::PARAM_STR);
+		
+		$stmt -> bindParam(":password", $datos["password"], PDO::PARAM_STR);
+		
+		$stmt -> bindParam(":perfil", $datos["perfil"], PDO::PARAM_STR);
+		
+		$stmt -> bindParam(":profesion", $datos["profesion"], PDO::PARAM_STR);
+		
+		$stmt -> bindParam(":foto", $datos["foto"], PDO::PARAM_STR);
+		
+		$stmt -> bindParam(":estado", $datos["estado"], PDO::PARAM_STR);
+
+		$stmt -> bindParam(":id", $datos["id"], PDO::PARAM_STR);
 
 		if ($stmt -> execute()) {	
 			return "ok";

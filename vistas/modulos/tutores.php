@@ -4,7 +4,7 @@
     
     <h1>
       
-      Usuarios
+      Tutores
     
       <small>Panel de Control</small>
     
@@ -16,7 +16,7 @@
 
       </a></li>
       
-      <li class="active">Tablero</li>
+      <li class="active">Tutores</li>
     
     </ol>
 
@@ -29,7 +29,7 @@
 
       <div class="box-header with-border">
 
-        <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarUsuario"> Agregar Usuario </button>
+        <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarTutor"> Agregar Tutor </button>
 
       </div>
       
@@ -43,13 +43,14 @@
               
               <th style="width: 10px">#</th>
               <th>Nombre</th>
+              <th>Apellidos</th>
+              <th>Perfil</th>
               <th>Usuario</th>
+              <th>Profesion</th>
               <th>Foto</th>
-              <th>Rol</th>
               <th>Estado</th>
               <th>Ultimo Login</th>
               <th>Acciones</th>
-
             </tr>
   
           </thead>
@@ -77,25 +78,20 @@
               
                         <td>'.($key+1).'</td>
                         <td>'.$value["nombre"].'</td>
-                        
-                        <td>'.$value["usuario"].'</td>';
+                        <td>'.$value["apellidos"].'</td>
+                        <td>'.$value["perfil"].'</td>
+                        <td>'.$value["usuario"].'</td>
+                        <td>'.$value["profesion"].'</td>';
 
                         if ($value["foto"] != "") {
-                          echo ' 
-                          
+                          echo '                           
                             <td><img src="'.$value["foto"].'" class="img-thumbnail" width="40px" alt=""></td>
                           ';
                         } else {
-
                           echo '
-                            
                            <td><img src="vistas/img/usuarios/default/anonymous.png" class="img-thumbnail" width="40px" alt=""></td>
-                         
                           ';
-
-                        } echo '
-
-                        <td>'.$value["perfil"].'</td>';
+                        } 
 
                         if ($value["estado"] == 1 ) {
                         
@@ -153,9 +149,9 @@
 
 
 <!--=============================
-= VENTANA MODAL NUEVO USUARIO   =
+= VENTANA MODAL NUEVO TUTOR   =
 ===============================-->
-<div id="modalAgregarUsuario" class="modal fade" role="dialog">
+<div id="modalAgregarTutor" class="modal fade" role="dialog">
   
   <div class="modal-dialog">
 
@@ -169,7 +165,7 @@
 
           <button type="button" class="close" data-dismiss="modal">&times;</button>
 
-          <h4 class="modal-title"><span> <i class="fa fa-user-plus"></i> </span> Agregar usuario</h4>
+          <h4 class="modal-title"><span> <i class="fa fa-user-plus"></i> </span> Agregar Tutor y/o Administrador</h4>
 
         </div>
 
@@ -194,6 +190,20 @@
               
             </div> 
 
+            <!-- Entrada para los Apellidos -->
+            <div class="form-group">
+              
+              <div class="input-group">
+                
+                <span class="input-group-addon"> <i class="fa fa-user"></i> </span>
+                   
+                <input type="text" name="nuevosApellidos" placeholder="Ingresar Apellidos" required class="form-control input-lg">   
+
+              </div>
+              
+            </div> 
+
+
             <!-- Entrada para el Usuario -->
             <div class="form-group">
               
@@ -206,6 +216,21 @@
               </div>
 
              </div> 
+
+
+            <!-- Entrada para la Profesión -->
+            <div class="form-group">
+              
+              <div class="input-group">
+                
+                <span class="input-group-addon"> <i class="fa fa-key"></i></span>
+                   
+                <input type="text" id="nuevaProfesion" name="nuevaProfesion" placeholder="Ingresar Profesión" required class="form-control input-lg">   
+
+              </div>
+
+             </div> 
+
 
             <!-- Entrada para Contraseña-->
             <div class="form-group">
@@ -222,7 +247,6 @@
 
 
             <!-- Entrada para Seleccion de Perfil-->
-
             <div class="form-group">
 
               <div class="input-group">
@@ -233,11 +257,11 @@
                   
                   <option value="">Seleccionar Perfil</option>
 
-                  <option value="administrador">Administrador</option>
+                  <option value="jefeDivicion">Jefe de División</option>
 
-                  <option value="especial">Especial</option>
+                  <option value="coordinador">Coordinador</option>
 
-                  <option value="vendedor">Vendedor</option>
+                  <option value="tutor">Tutor</option>
 
                 </select> 
 
@@ -329,7 +353,20 @@
                    
                 <input type="text" id="editarNombre" name="editarNombre" placeholder="Ingresar Nombre" required class="form-control input-lg">  
 
-                <input type="hidden" id="nombreActual" name="nombreActual"> 
+                <input type="hidden" id="idTutor" name="idTutor"> 
+
+              </div>
+              
+            </div> 
+
+            <!-- Entrada para los Apellidos -->
+            <div class="form-group">
+              
+              <div class="input-group">
+                
+                <span class="input-group-addon"> <i class="fa fa-user"></i> </span>
+                   
+                <input type="text" name="editarApellidos" id="editarApellidos" placeholder="Ingresar Apellidos" required class="form-control input-lg">   
 
               </div>
               
@@ -343,6 +380,19 @@
                 <span class="input-group-addon"> <i class="fa fa-key"></i></span>
                    
                 <input type="text" id="editarUsuario" readonly name="editarUsuario" placeholder="Ingresar Usuario" required class="form-control input-lg">   
+
+              </div>
+
+             </div> 
+
+            <!-- Entrada para la Profesión -->
+            <div class="form-group">
+              
+              <div class="input-group">
+                
+                <span class="input-group-addon"> <i class="fa fa-key"></i></span>
+                   
+                <input type="text" id="editarProfesion" name="editarProfesion" placeholder="Ingresar Profesión" required class="form-control input-lg">   
 
               </div>
 

@@ -69,14 +69,22 @@ $(document).on("click", ".btnEditarUsuario", function(){
 		dataType: "json",
 		success: function(respuesta){
 
+			$("#idTutor").val(respuesta["id"]);
+
 			$("#editarNombre").val(respuesta["nombre"]);
 			
 			$("#editarApellidos").val(respuesta["apellidos"]);
 
-			$("#editarNumeroControl").html(respuesta["numeroControl"]);
+			$("#editarUsuario").val(respuesta["usuario"]);
+
+			$("#passwordActual").val(respuesta["password"]);
+
+			$("#editarProfesion").val(respuesta["profesion"]);
 			
 			$("#editarPerfil").val(respuesta["perfil"]);
 			
+			$("#editarPerfil").html("Coordinador");
+
 			$("#fotoActual").val(respuesta["foto"]);
 
 			if (respuesta["foto"] != "") {
@@ -209,7 +217,7 @@ $(document).on("click", ".btnEliminarUsuario", function(){
 
 		if (result.value) {
 
-      		window.location = rutaOcultaServidor+"index.php?ruta=usuarios&idUsuario="+idUsuario+"&usuario="+usuario+"&fotoUsuario="+fotoUsuario;
+      		window.location = rutaOcultaServidor+"index.php?ruta=tutores&idUsuario="+idUsuario+"&usuario="+usuario+"&fotoUsuario="+fotoUsuario;
 		
 		}
 

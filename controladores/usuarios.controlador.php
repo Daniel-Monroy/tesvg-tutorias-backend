@@ -39,6 +39,8 @@ class ControladorUsuarios
 
 						$_SESSION["iniciarSesion"] = "ok";
 						$_SESSION["nombre"] = $respuesta["nombre"];
+						$_SESSION["apellidos"] = $respuesta["apellidos"];
+						$_SESSION["profesion"] = $respuesta["profesion"];
 						$_SESSION["id"] = $respuesta["id"];
 						$_SESSION["usuario"] = $respuesta["usuario"];
 						$_SESSION["foto"] = $respuesta["foto"];
@@ -103,12 +105,16 @@ class ControladorUsuarios
 
 		if (isset($_POST["nuevoUsuario"])) {
 			
-			if (preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nuevoNombre"]) && preg_match('/^[a-zA-Z0-9]+$/', $_POST["nuevoUsuario"]) && preg_match('/^[a-zA-Z0-9]+$/', $_POST["nuevoPassword"])) {
+			if (preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nuevoNombre"]) && 
+				preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nuevosApellidos"]) && 
+				preg_match('/^[a-zA-Z0-9]+$/', $_POST["nuevoUsuario"]) && 
+				preg_match('/^[a-zA-Z0-9]+$/', $_POST["nuevoPassword"]) &&
+				preg_match('/^[,\\.\\a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nuevaProfesion"])) {
 				
 				$ruta = "";
-				# =======================
-				# = VALIDAR IMAGEN      =
-				# =======================
+				#=======================
+				#= VALIDAR IMAGEN      =
+				#=======================
 				if (isset($_FILES["nuevaFoto"]["tmp_name"])) {
 					
 					list($ancho, $alto) = getimagesize($_FILES["nuevaFoto"]["tmp_name"]);
@@ -171,21 +177,25 @@ class ControladorUsuarios
 
 					}						
 					
-
 				}
 
 				$tabla = "usuarios";
 
 				$encriptar = crypt($_POST["nuevoPassword"], '$2a$07$asxy54ahjppf45sd87a5a4dDDGsystemdev$');
 
-				$datos = array('nombre' => $_POST["nuevoNombre"], 
+				$datos = array('nombre' => $_POST["nuevoNombre"],
+							   'apellidos' => $_POST["nuevosApellidos"],  
 							   'usuario' => $_POST["nuevoUsuario"], 
+							   'profesion' => $_POST["nuevaProfesion"], 
 							   'password' => $encriptar, 
+							   'estado' => 0, 
 							   'perfil' => $_POST["nuevoPerfil"], 
 							   'foto' => $ruta
 							);
 
 				$respuesta = ModeloUsuarios::mdlNuevoUsuario($tabla, $datos);
+
+				var_dump($respuesta);	
 
 				if ($respuesta == "ok") {
 					
@@ -194,13 +204,13 @@ class ControladorUsuarios
 							swal({
 								type: "success",
 								title: "!Genial!",
-								text: "Usuario Almacenado con exito",	
+								text: "Tutor Almacenado con exito",	
 								showConfirmButton: true,
 								confirmButtonText: "Cerrar",
 								closeConfirmButton: false
 							}).then((result)=>{
 								if(result.value){
-									window.location = "usuarios";
+									window.location = "tutores";
 								}
 							});
 						</script>
@@ -221,7 +231,7 @@ class ControladorUsuarios
 							closeConfirmButton: false
 						}).then((result)=>{
 							if(result.value){
-								window.location = "usuarios";
+								window.location = "tutores";
 							}
 						});
 					</script>
@@ -267,7 +277,9 @@ class ControladorUsuarios
 
 		if (isset($_POST["editarUsuario"])) {
 			
-			if (preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["editarNombre"])) {
+			if (preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["editarNombre"]) && 
+				preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["editarApellidos"]) && 
+				preg_match('/^[,\\.\\a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["editarProfesion"])) {
 			
 				$ruta = $_POST["fotoActual"];
 				# =======================
@@ -369,7 +381,7 @@ class ControladorUsuarios
 								closeConfirmButton: false
 							}).then((result)=>{
 								if(result.value){
-									window.location = "usuarios";
+									window.location = "tutores";
 								}
 							});
 						</script>
@@ -382,9 +394,14 @@ class ControladorUsuarios
 				
 				} 
 
-				$datos = array('nombre' => $_POST["editarNombre"], 
+				$datos = array(
+						   'id' => $_POST["idTutor"],
+						   'nombre' => $_POST["editarNombre"],
+						   'apellidos' => $_POST["editarApellidos"],  
 						   'usuario' => $_POST["editarUsuario"], 
+						   'profesion' => $_POST["editarProfesion"], 
 						   'password' => $encriptar, 
+						   'estado' => 0, 
 						   'perfil' => $_POST["editarPerfil"], 
 						   'foto' => $ruta
 						);
@@ -403,7 +420,7 @@ class ControladorUsuarios
 								closeConfirmButton: false
 							}).then((result)=>{
 								if(result.value){
-									window.location = "usuarios";
+									window.location = "tutores";
 								}
 							});
 						</script>
@@ -423,7 +440,7 @@ class ControladorUsuarios
 						closeConfirmButton: false
 					}).then((result)=>{
 						if(result.value){
-							window.location = "usuarios";
+							window.location = "tutores";
 						}
 					});
 				</script>
@@ -468,7 +485,7 @@ class ControladorUsuarios
 						closeConfirmButton: false
 					}).then((result)=>{
 						if(result.value){
-							window.location = "usuarios";
+							window.location = "tutores";
 						}
 					});
 				</script>
