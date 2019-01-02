@@ -132,16 +132,38 @@ $(document).on("click", ".btnEditarGrupo", function(){
 			$(".editarGrupo").val(respuesta["nombre"]);
 
 
-			/*SELECT*/	
-			$("#editarCarrera").val(respuesta["id_carrera"]);
+			/*==================
+			= CARRERA    =
+			===================*/
+			var datos1 = new FormData();
 
-			$("#editarCarrera").html("I.S.C.");
+			var idCarrera = respuesta["id_carrera"];
 
+			datos1.append("idEditarCarrera", idCarrera);
+
+			$.ajax({
+				
+				url: rutaOcultaServidor+"ajax/carreras.ajax.php",
+				data: datos1,
+				type: "POST",
+				cache: false,
+				contentType: false,
+				processData: false,
+				dataType: 'JSON',
+				success: function(respuesta1){
+					$("#editarCarrera").val(respuesta1["id"]);
+					$("#editarCarrera").html(respuesta1["descripcion"]);
+
+					//VALORES ACTUALES
+					$("#htmlCarreraActual").val(respuesta1["descripcion"]);
+					$("#valorCarreraActual").val(respuesta1["id"]);
+				
+
+				}
+
+			})
+			
 			//VALORES ACTUALES
-			$("#htmlCarreraActual").val("ISC");
-
-			$("#valorCarreraActual").val(respuesta["id_carrera"]);
-
 			$("#editarGrupoActual").val(respuesta["nombre"]);
 			
 		}

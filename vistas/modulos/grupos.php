@@ -64,8 +64,16 @@
                 echo '   <tr>
   
                           <td>'.($key+1).'</td>
-                          <td class="text-uppercase">'.$value["nombre"].'</td>
-                          <td class="">'.$value["id_carrera"].'</td>
+                          <td class="text-uppercase">'.$value["nombre"].'</td>';
+
+                          $item = "id";
+
+                          $valor = $value["id_carrera"];
+
+                          $carrera = ControladorCarreras::ctrMostrarCarreras($item, $valor);
+
+                          echo '
+                          <td class="">'.$carrera["descripcion"].'</td>
                           <td>
                             <div class="btn-group">
                               
@@ -151,10 +159,21 @@
                   
                   <option value="" class="nuevaCarreraValue">Seleccionar Carrera</option>
 
-                  <option value="1">I.S.C</option>
+                  <?php  
 
-                  <option value="2">I.E</option>
+                      $item = null;
 
+                      $valor = null;
+
+                      $carrera = ControladorCarreras::ctrMostrarCarreras($item, $valor);
+
+                      foreach ($carrera as $key => $value) {
+                          echo '  
+                           <option value="'.$value["id"].'">'.$value["descripcion"].'</option>
+                          ';
+                      }
+
+                  ?>
                 </select> 
 
               </div>
@@ -255,7 +274,21 @@
                   
                   <option value="" id="editarCarrera"></option>
 
-                  <option value="1">I.S.C.</option>
+                  <?php  
+
+                      $item = null;
+
+                      $valor = null;
+
+                      $carrera = ControladorCarreras::ctrMostrarCarreras($item, $valor);
+
+                      foreach ($carrera as $key => $value) {
+                          echo '  
+                           <option value="'.$value["id"].'">'.$value["descripcion"].'</option>
+                          ';
+                      }
+
+                  ?>
 
                 </select> 
 

@@ -77,9 +77,6 @@ $(document).on("change", "#nuevoCoordinadorCarrera", function(){
 });
 
 
-
-
-
 /*==================
 = EDITAR CARRERA   =
 ==================*/
