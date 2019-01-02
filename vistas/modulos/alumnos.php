@@ -94,11 +94,27 @@
 
                         <td class="text-center"><button class="btn btn-primary btn-sm btnActividades" idAlumno="'.$value["id"].'"><i class="fa fa-eye"></i> Ver</button></td>
                         
-                        <td>'.$value["numeroControl"].'</td>
+                        <td>'.$value["numeroControl"].'</td>';
 
-                        <td>'.$value["carrera"].'</td>
+                        $item = "id";
 
-                        <td>'.$value["grupo"].'</td>
+                        $valor = $value["id_carrera"];
+
+                        $carrera = ControladorCarreras::ctrMostrarCarreras($item, $valor);
+
+                        echo '
+
+                        <td>'.$carrera["descripcion"].'</td>';
+
+                        $item = "id";
+
+                        $valor = $value["id_grupo"];
+
+                        $grupo = ControladorGrupos::ctrMostrarGrupos($item, $valor);
+
+                        echo'
+
+                        <td>'.$grupo["nombre"].'</td>
 
                         <td>'.$value["email"].'</td>';
 
@@ -234,7 +250,7 @@
                 
                 <span class="input-group-addon"> <i class="fa fa-user"></i> </span>
                    
-                <input type="text" name="nuevoNumeroControl" id="nuevoNumeroControl" placeholder="Ingresar Número de Control" required class="form-control input-lg">   
+                <input type="text" maxlength="10s" name="nuevoNumeroControl" id="nuevoNumeroControl" placeholder="Ingresar Número de Control" required class="form-control input-lg">   
 
               </div>
               
@@ -247,12 +263,26 @@
               <div class="input-group">
                 
                 <span class="input-group-addon"> <i class="fa fa-users"></i> </span>
-                   
-                <select name="nuevaCarrera" class="form-control input-lg">
-                  
-                  <option value="">Seleccionar Carrera</option>
 
-                  <option value="ISC">I.S.C.</option>
+                <select name="nuevaCarrera" id="nuevaCarreraAlumno" class="form-control input-lg">
+                  
+                  <option value="0">Seleccionar Carrera</option>
+
+                  <?php 
+
+                    $item = null;
+
+                    $valor = null;
+
+                    $carrera = ControladorCarreras::ctrMostrarCarreras($item, $valor);
+        
+                    foreach ($carrera as $key => $value) {
+                         echo '  
+                            <option value="'.$value["id"].'">'.$value["descripcion"].'</option>
+                          ';
+                    }
+
+                   ?>
 
                 </select> 
 
@@ -263,15 +293,13 @@
             <!-- Entrada para Grupo-->
             <div class="form-group">
 
-              <div class="input-group">
+              <div class="input-group grupoAlumno hidden">
                 
                 <span class="input-group-addon"> <i class="fa fa-users"></i> </span>
                    
-                <select name="nuevoGrupo" class="form-control input-lg">
+                <select name="nuevoGrupo" id="nuevoGrupoAlumno" class="form-control input-lg">
                   
                   <option value="">Seleccionar Grupo</option>
-
-                  <option value="902">902</option>
 
                 </select> 
 
@@ -422,12 +450,25 @@
                 
                 <span class="input-group-addon"> <i class="fa fa-users"></i> </span>
                    
-                <select name="editarCarrera" class="form-control input-lg">
+                <select name="editarCarrera" id="editarCarreraAlumno" class="form-control input-lg">
                   
-                  <option value="" id="editarCarrera"></option>
+                  <option id="editarCarreraVal"></option>
 
-                  <option value="ISC">I.S.C.</option>
+                  <?php 
 
+                    $item = null;
+
+                    $valor = null;
+
+                    $carrera = ControladorCarreras::ctrMostrarCarreras($item, $valor);
+        
+                    foreach ($carrera as $key => $value) {
+                         echo '  
+                            <option value="'.$value["id"].'">'.$value["descripcion"].'</option>
+                          ';
+                    }
+
+                   ?>
                 </select> 
 
               </div>
@@ -441,11 +482,9 @@
                 
                 <span class="input-group-addon"> <i class="fa fa-users"></i> </span>
                    
-                <select name="editarGrupo" class="form-control input-lg">
-                  
-                  <option value="" id="editarGrupo"></option>
-
-                  <option value="902">902</option>
+                <select name="editarGrupo" id="editarGrupo" class="form-control input-lg">
+  
+                  <option id="editarGrupoVal"></option>
 
                 </select> 
 

@@ -26,11 +26,9 @@ class ControladorAlumnos
 			
 			if (preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nuevoNombre"]) && 
 				preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nuevoApellidos"]) &&
-				preg_match('/^[a-zA-Z ]+$/', $_POST["nuevaCarrera"]) &&
 				preg_match('/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/', $_POST['nuevoEmail']) &&
 				preg_match('/^[0-9]+$/', $_POST["nuevoNumeroControl"]) &&  
-				preg_match('/^[a-zA-Z0-9]*$/', $_POST['nuevoPassword']) &&
-				preg_match('/^[0-9]+$/', $_POST["nuevoGrupo"])) {
+				preg_match('/^[a-zA-Z0-9]*$/', $_POST['nuevoPassword'])) {
 				
 				$tabla = "alumnos";
 
@@ -41,9 +39,9 @@ class ControladorAlumnos
 				$datos = array('nombre' => $_POST["nuevoNombre"],
 							   'apellidos' => $_POST["nuevoApellidos"], 
 							   'numeroControl' => $_POST["nuevoNumeroControl"], 
-							   'carrera' => $_POST["nuevaCarrera"],
+							   'id_carrera' => $_POST["nuevaCarrera"],
 							   'email' => $_POST["nuevoEmail"], 
-							   'grupo' => $_POST["nuevoGrupo"],
+							   'id_grupo' => $_POST["nuevoGrupo"],
 							   'password' => $encriptar, 
 							   'verificacion' => 1, 
 							   'activo' => 0,    
@@ -167,7 +165,7 @@ class ControladorAlumnos
 							closeConfirmButton: false
 						}).then((result)=>{
 							if(result.value){
-								window.location = "usuarios";
+								window.location = "alumnos";
 							}
 						});
 					</script>
@@ -188,10 +186,8 @@ class ControladorAlumnos
 			
 			if (preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["editarNombre"]) && 
 				preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["editarApellidos"]) &&
-				preg_match('/^[a-zA-Z ]+$/', $_POST["editarCarrera"]) &&
 				preg_match('/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/', $_POST['editarEmail']) &&
-				preg_match('/^[0-9]+$/', $_POST["editarNumeroControl"]) &&  
-				preg_match('/^[0-9]+$/', $_POST["editarGrupo"])) {
+				preg_match('/^[0-9]+$/', $_POST["editarNumeroControl"])) {
 				
 				$tabla = "alumnos";
 
@@ -200,9 +196,9 @@ class ControladorAlumnos
 				$datos = array('nombre' => $_POST["editarNombre"],
 							   'apellidos' => $_POST["editarApellidos"], 
 							   'numeroControl' => $_POST["editarNumeroControl"], 
-							   'carrera' => $_POST["editarCarrera"],
+							   'id_carrera' => $_POST["editarCarrera"],
 							   'email' => $_POST["editarEmail"], 
-							   'grupo' => $_POST["editarGrupo"],
+							   'id_grupo' => $_POST["editarGrupo"],
 							   'password' => $_POST["passwordActual"], 
 							   'verificacion' => 1, 
 							   'activo' => $_POST["activo"],    

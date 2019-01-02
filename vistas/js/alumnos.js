@@ -125,13 +125,76 @@ $(document).on("click", ".btnActivarAlumno", function(){
 		$(this).attr("estadoUsuario", 0);
 
 	}
-
 });
 
 
-/*==================================
+
+
+/*===========================
+= MOSTRAR GRUPOS POR CARRERA=
+===========================*/
+function mostrarGruposCarrera(valor, item, input, inputOculto){
+
+	var datos = new FormData();
+
+	datos.append(item, valor);
+
+	$.ajax({
+		url: rutaOcultaServidor+"ajax/grupos.ajax.php",
+		data: datos,
+		type: "POST",
+		cache: false,
+		processData: false,
+		contentType: false,
+		dataType: 'json',
+		success: function(respuesta){
+			
+			respuesta.forEach(functionForEach);
+
+			function functionForEach(item, index){
+
+					$(inputOculto).removeClass("hidden");
+
+				 	if (item.id != 0) {
+				 		
+				      	$(input).append(
+
+				      		'<option value="'+item.id+'">'+item.nombre+'</option>' 
+				        );
+
+				 	} 
+			 }
+		}
+	})
+
+}
+
+
+/*===============================
+= GRUPOS POR CARRERA DE ALUMNOS =
+===============================*/
+$(document).on("change", "#nuevaCarreraAlumno", function(){
+
+	$("#nuevoGrupoAlumno").html("");
+	
+	$(".grupoAlumno").addClass("hidden");
+
+	var idCarrera = $(this).val();
+
+	var item = "idCarrera";
+
+	var input = "#nuevoGrupoAlumno";
+
+	var inputOculto = ".grupoAlumno";
+
+	mostrarGruposCarrera(idCarrera, item, input, inputOculto);
+
+})
+
+
+/*=====================
 = EDITAR ALUMNO =
-==================================*/
+=====================*/
 $(document).on("click", ".btnEditarAlumno", function(){
 
 	$(".alert").remove();
@@ -170,27 +233,68 @@ $(document).on("click", ".btnEditarAlumno", function(){
 
 			$("#idAlumnoEditar").val(respuesta["id"]);
 
-			/*=========================================
-			=            INGRESAR CARRERAS            =
-			=========================================*/
-			$("#editarCarrera").val(respuesta["carrera"]);
-			
-			$("#editarCarrera").html(respuesta["carrera"]);
+			/*======================
+			=  EDITAR CARRERA      =
+			======================*/
+			var datos1 = new FormData();
+
+			datos1.append("valor", respuesta["id_carrera"]);
+			datos1.append("item", "id");
+
+			$.ajax({
+				url: rutaOcultaServidor+"ajax/carreras.ajax.php",
+				type: "POST",
+				data: datos1, 
+				cache: false,
+				processData: false,
+				contentType: false,
+				dataType: 'json',
+				success: function(respuesta1){
+					$("#editarCarreraVal").val(respuesta1["id"]);
+					$("#editarCarreraVal").html(respuesta1["descripcion"]);
+				}
+			})
 
 
-			/*=========================================editarEmail
-			=            INGRESAR GRUPO            =
-			=========================================*/
-			$("#editarGrupo").val(respuesta["grupo"]);
-			
-			$("#editarGrupo").html(respuesta["grupo"]);
+			/*==================
+			= EDITAR GRUPO   =
+			===================*/
+			var datos2 = new FormData();
 
+			datos2.append("idGrupo", respuesta["id_grupo"]);
 
+			$.ajax({
+				url: rutaOcultaServidor+"ajax/grupos.ajax.php",
+				type: "POST",
+				data: datos2, 
+				cache: false,
+				processData: false,
+				contentType: false,
+				dataType: 'json',
+				success: function(respuesta2){
+					$("#editarGrupoVal").val(respuesta2["id"]);
+					$("#editarGrupoVal").html(respuesta2["nombre"]);
+				}
+			})
 		}
 	});
 })
 
+$(document).on("change", "#editarCarreraAlumno", function(){
 
+	$("#editarGrupo").html("");
+
+	var idCarrera = $(this).val();
+
+	var item = "idCarrera";
+
+	var input = "#editarGrupo";
+
+	var inputOculto = null;
+
+	mostrarGruposCarrera(idCarrera, item, input, inputOculto);
+
+})
 
 /*==================================
 = ACTIVIDADES DEL ALUMNO =

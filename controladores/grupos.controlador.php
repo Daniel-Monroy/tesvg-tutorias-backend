@@ -20,6 +20,21 @@ class ControladorGrupos
 	}
 
 	# ======================
+	# = GRUPOS POR CARRERA =
+	# ======================
+	static public function ctrMostrarGruposCarrera($item, $valor){
+
+		$tabla = "grupos";
+
+		$respuesta = ModeloGrupos::mdlMostrarGruposCarrera($tabla, $item, $valor);
+
+		return $respuesta;
+
+	}
+
+
+
+	# ======================
 	# = GRUPOS Y CARRERA    =
 	# ======================
 	static public function ctrMostrarGruposbyCarrera($item1, $valor1, $item2, $valor2){

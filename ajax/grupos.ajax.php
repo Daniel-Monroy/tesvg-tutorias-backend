@@ -51,6 +51,23 @@ class AjaxGrupos
 
 	}
 
+	# =========================================
+	# MOSTRAR GRUPOS POR CARRERAS
+	# =========================================
+	public $idCarreraGrupo;
+
+	public function ajaxMostrarGrupoCarrera(){
+
+		$item = "id_carrera";
+
+		$valor = $this->idCarreraGrupo;
+
+		$respuesta = ControladorGrupos::ctrMostrarGruposCarrera($item, $valor);
+
+		echo json_encode($respuesta);
+
+	}
+
 }
 
 
@@ -69,9 +86,9 @@ if (isset($_POST["nombreGrupo"])) {
 }
 
 
-# =========================================
+# ===============
 # MOSTRAR GRUPOS
-# =========================================
+# ===============
 if (isset($_POST["idGrupo"])) {
 	
 	$idGrupo = new AjaxGrupos();
@@ -81,3 +98,15 @@ if (isset($_POST["idGrupo"])) {
 	$idGrupo -> ajaxMostrarGrupo();
 }
 
+
+# ===============
+# MOSTRAR GRUPOS POR CARRERAS
+# ===============
+if (isset($_POST["idCarrera"])) {
+	
+	$idCarreraGrupo = new AjaxGrupos();
+
+	$idCarreraGrupo -> idCarreraGrupo = $_POST["idCarrera"];
+
+	$idCarreraGrupo -> ajaxMostrarGrupoCarrera();
+}

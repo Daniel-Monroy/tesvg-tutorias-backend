@@ -39,6 +39,25 @@ class ModeloGrupos
 	}
 
 	# ======================
+	# = GRUPOS POR CARRERA  =
+	# ======================
+	static public function mdlMostrarGruposCarrera($tabla, $item, $valor){
+
+		$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :$item");
+
+		$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
+		
+		$stmt -> execute();
+
+		return $stmt -> fetchAll();
+
+		$stmt -> close();
+
+		$stmt = null;
+
+	}
+
+	# ======================
 	# = GRUPOS Y CARRERA   =
 	# ======================
 	static public function mdlMostrarGruposbyCarrera($tabla, $item1, $valor1, $item2, $valor2){
