@@ -18,6 +18,19 @@ class ControladorAlumnos
 	}
 
 	# ======================
+	# = MOSTRAR BY GRUPO    =
+	# ======================
+	static public function mdlMostrarAlumnosbyGrupo($item, $valor){
+
+		$tabla = "alumnos";
+
+		$respuesta = ModeloAlumnos::mdlMostrarAlumnosbyGrupo($tabla, $item, $valor);
+
+		return $respuesta;
+
+	}
+
+	# ======================
 	# = CREAR ALUMNO     =
 	# ======================
 	static public function ctrCrearAlumno(){

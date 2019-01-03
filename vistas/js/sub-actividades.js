@@ -39,13 +39,25 @@ if (localStorage.getItem("filtroActividad") != null) {
 
 $(document).on("change", ".filtroActividad", function(){
 
+	var idGrupo = $(".btnVerAlumnos").attr("idGrupo");
+
     var idFiltroBusqueda = $(".filtroActividad").val();
 
     localStorage.setItem("filtroActividad", idFiltroBusqueda);
 
-    window.location = "index.php?ruta=sub-actividades&idActividad="+idFiltroBusqueda;
+    window.location = "index.php?ruta=sub-actividades&idActividad="+idFiltroBusqueda+"&idGrupo="+idGrupo;
 
 })
+
+// VER ALUMNO
+$(document).on("click", ".btnVerAlumnos", function(){
+
+    var idGrupo = $(this).attr("idGrupo");
+
+    window.location = "index.php?ruta=alumnos&idGrupo="+idGrupo;
+
+})
+
 
 
 $(document).on("click", ".cancelarBusqueda", function(){
@@ -54,7 +66,7 @@ $(document).on("click", ".cancelarBusqueda", function(){
 
 	localStorage.clear();
 
-	window.location = "sub-actividades";
+	window.location = "grupos";
 
 })
 

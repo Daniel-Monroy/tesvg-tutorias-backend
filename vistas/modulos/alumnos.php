@@ -70,11 +70,21 @@
 
             <?php 
 
-              $item = null;
+              if (isset($_GET["idGrupo"])) {
+                
+                $item = "id_grupo";
 
-              $valor = null;
+                $valor = $_GET["idGrupo"];
+              
+              } else{
 
-              $alumnos = ControladorAlumnos::ctrMostrarAlumnos($item, $valor);
+                $item = null;
+
+                $valor = null;
+
+              }
+
+              $alumnos = ControladorAlumnos::mdlMostrarAlumnosbyGrupo($item, $valor);
               
              ?>
 

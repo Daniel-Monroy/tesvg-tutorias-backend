@@ -1,7 +1,17 @@
 <?php 
 
   $servidor = Ruta::ctrRutaServidor();
+
   $url = Ruta::ctrRuta();
+
+  if (!isset($_GET["idGrupo"]) && !isset($_GET["idActividad"])) {
+    
+    echo '  
+       <script> window.location = "grupos"; </script>
+    ';
+
+    return;
+  }
 
  ?>
 
@@ -43,8 +53,12 @@
         <div class="col-md-6">
       
           <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarSubActividad"> Agregar Sub-Actividad</button>
-      
-        </div>      
+
+            
+          <button style="margin-top: 1px;" idGrupo="<?php echo $_GET["idGrupo"]; ?>" class="btn btn-primary btnVerAlumnos"><i class="fa fa-eye"></i> Ver Alumnos</button>
+
+        </div>       
+  
 
         <div class="col-md-6">
          
