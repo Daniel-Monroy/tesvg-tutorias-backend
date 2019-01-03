@@ -1,8 +1,12 @@
 <?php 
 
 $servidor = Ruta::ctrRutaServidor();
+
 $url = Ruta::ctrRuta();
 
+# ==================
+# = ACTIVIDADES    =
+# ==================
 if (!isset($_GET["idAlumnoActividades"])) {
 
   echo '  
@@ -65,7 +69,18 @@ if (!isset($_GET["idAlumnoActividades"])) {
 
             <h3 class="profile-username text-center"> <?php echo $alumno["nombre"]." ".$alumno["apellidos"];?> </h3>
 
-            <p class="text-muted text-center"><?php echo $alumno["carrera"];?></p>
+            
+            <?php 
+
+              $itemCarrera = "id";
+
+              $valorCarrera = $alumno["id_carrera"];
+
+              $respuestaCarrera = ControladorCarreras::ctrMostrarCarreras($itemCarrera, $valorCarrera);
+
+             ?>
+
+            <p class="text-muted text-center"><?php echo $respuestaCarrera ["descripcion"];?></p>
 
 
             <ul class="list-group list-group-unbordered">
@@ -160,12 +175,25 @@ if (!isset($_GET["idAlumnoActividades"])) {
               $valorActividadRealizadas = $alumno["id"];
 
               $actividadesRealizadas = ControladorAlumnos::ctrMostrarActividadesRealizadas($itemActividadRealizadas, $valorActividadRealizadas); 
+
+              $idActividadesRealizadas = array();
+
              ?>
             
             <div class="active tab-pane" id="actividadesRealizadas">
 
-              <?php foreach ($actividadesRealizadas as $key => $value): 
+              <?php 
 
+              if (count($actividadesRealizadas) == 0) {
+              
+              echo "<h1> No ha realizado ninguna Actividad </h1>";
+
+              } else {
+
+               foreach ($actividadesRealizadas as $key => $value): 
+
+
+                array_push($idActividadesRealizadas, $value["id"]);
 
                 # ==================================
                 # =OBTENIENDO DATOS DE LA ACTIVIDAD=
@@ -236,53 +264,155 @@ if (!isset($_GET["idAlumnoActividades"])) {
 
               </div>
 
-              <?php endforeach ?>
+              <?php endforeach; } ?>
 
             </div>
 
+
+
+            <?php 
+
+              $itemActividadesPendientes = "id_grupo"; 
+
+              $valorActividadesPendietes = $alumno["id_grupo"];
+
+              $actividadesPendientes = ControladorSubActividades::ctrMostrarSubActividadesCategoria($itemActividadesPendientes, $valorActividadesPendietes);
+            ?>
+
+
             <div class="tab-pane" id="actividadesPendientes">
-              
-              <div class="post">
+                    
+                <?php 
+
+                #Verificando la cantidad de actividades Pendientes
+                if (count($actividadesPendientes) == count($actividadesRealizadas) ) {
+                   echo "<h1>Sin Actividades Pendientes</h1>";
+                } 
+
+               if (count($actividadesRealizadas) != count($actividadesPendientes) && 
+                   count($actividadesRealizadas) != 0 && 
+                   count($actividadesPendientes) > 0) {
+
+                foreach ($actividadesPendientes as $key => $value) {
+
+                  foreach ($actividadesRealizadas as $key => $value1) { 
+
+                    if ($value1["id_actividad"] != $value["id_actividad"]) { ?>
+
+                    <div class="post">
+                      
+                      <div class="user-block">
+                        
+                        <img class="img-circle img-bordered-sm" src="<?php echo $servidor.$value["imagen"];?>" alt="">
+
+                        <span class="username">
+                          
+                            <a href="#"><?php echo $value["nombre"]; ?></a>
+                            
+                            <a target="_black" href="<?php echo $servidor.$value["ruta_archivo"];?>">
+
+                            <button class="btn btn-primary pull-right"><i class="fa fa-download"></i> Descargar</button>
+                            
+                            </a>
+
+                        </span>
+                          
+                        <span class="description">Cargada - <?php echo $value["fecha"]; ?></span>
+
+                      </div>
+
+                      <h3>Objetivo</h3>
+
+                      <p><?php echo $value["objetivo"]; ?></p>
+
+                      <form class="form-horizontal">
+                       
+                        <div class="form-group margin-bottom-none">
+                       
+                          <div class="col-sm-9">
+                       
+                            <input readonly class="form-control input-sm" placeholder="Escribe un mensaje">
+                       
+                          </div>
+                       
+                          <div class="col-sm-3">
+                       
+                            <button type="submit"  class="btn btn-danger pull-right btn-block btn-sm hidden"> Enviar Recordatorio</button>
+                       
+                          </div>
+                       
+                        </div>
+                     
+                      </form>
+
+                    </div>
                 
-                <div class="user-block">
-                  
-                  <img class="img-circle img-bordered-sm" src="vistas/img/usuarios/default/anonymous.png" alt="">
+                <?php 
+                      }
 
-                  <span class="username">
+                    }
+
+                  } 
+
+                } else {
+
+                  if (count($actividadesPendientes) != count($actividadesRealizadas) ) {
+                   
+                  foreach ($actividadesPendientes as $key => $value) { ?>
                     
-                      <a href="#">Linea de la Vida.</a>
-                    
-                      <button class="btn btn-primary pull-right"><i class="fa fa-download"></i> Recordar</button>
-                  
-                  </span>
-                    
-                  <span class="description">Cargada - 24-11-2018 11:00:00</span>
+                     <div class="post">
+                      
+                        <div class="user-block">
+                          
+                          <img class="img-circle img-bordered-sm" src="<?php echo $servidor.$value["imagen"];?>" alt="">
 
-                </div>
+                          <span class="username">
+                            
+                              <a href="#"><?php echo $value["nombre"]; ?></a>
+                              
+                              <a target="_black" href="<?php echo $servidor.$value["ruta_archivo"];?>">
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non minima vero quo voluptatem unde, officiis harum neque veritatis quas commodi necessitatibus architecto tempora, dolor facere repudiandae voluptatibus obcaecati distinctio laboriosam.</p>
+                              <button class="btn btn-primary pull-right"><i class="fa fa-download"></i> Descargar</button>
+                              
+                              </a>
 
-                <form class="form-horizontal">
-                 
-                  <div class="form-group margin-bottom-none">
-                 
-                    <div class="col-sm-9">
-                 
-                      <input class="form-control input-sm" placeholder="Escribe un mensaje">
-                 
-                    </div>
-                 
-                    <div class="col-sm-3">
-                 
-                      <button type="submit" class="btn btn-danger pull-right btn-block btn-sm"> Enviar Mensaje</button>
-                 
-                    </div>
-                 
-                  </div>
-               
-                </form>
+                          </span>
+                            
+                          <span class="description">Cargada - <?php echo $value["fecha"]; ?></span>
 
-              </div>
+                        </div>
+
+                        <h3>Objetivo</h3>
+
+                        <p><?php echo $value["objetivo"]; ?></p>
+
+                        <form class="form-horizontal">
+                         
+                          <div class="form-group margin-bottom-none">
+                         
+                            <div class="col-sm-9">
+                         
+                              <input readonly class="form-control input-sm" placeholder="Escribe un mensaje">
+                         
+                            </div>
+                         
+                            <div class="col-sm-3">
+                         
+                              <button type="submit"  class="btn btn-danger pull-right btn-block btn-sm hidden"> Enviar Recordatorio</button>
+                         
+                            </div>
+                         
+                          </div>
+                       
+                        </form>
+
+                     </div>
+
+                  <?php }
+
+                  } 
+
+                }?> 
 
             </div>
 
