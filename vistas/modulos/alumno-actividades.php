@@ -57,7 +57,7 @@ if (!isset($_GET["idAlumnoActividades"])) {
           $valor = $_GET["idAlumnoActividades"];
 
           $alumno = ControladorAlumnos::ctrMostrarAlumnos($item, $valor);
-  
+         
          ?>
         
         <!-- Perfil -->
@@ -105,7 +105,7 @@ if (!isset($_GET["idAlumnoActividades"])) {
                 
                 <b>Ultimo Login</b>
 
-                <a class="pull-right">12-12-2018 10:00:00</a>
+                <a class="pull-right"><?php echo $alumno["ultimo_login"];?></a>
 
               </li>
 
