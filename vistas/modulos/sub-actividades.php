@@ -103,11 +103,11 @@
 
         <?php 
 
-            if (isset($_GET["idActividad"])) {
+            if (isset($_GET["idGrupo"])) {
               
-              $item = "id_actividad";
+              $item = "id_grupo";
              
-              $valor = $_GET["idActividad"]; 
+              $valor = $_GET["idGrupo"]; 
 
             } else {
         
