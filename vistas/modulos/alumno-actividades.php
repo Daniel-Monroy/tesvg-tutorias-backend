@@ -215,9 +215,11 @@ if (!isset($_GET["idAlumnoActividades"])) {
                   <span class="username">
                     
                       <a href="#"><span><?php echo $actividad["nombre"];?></span></a>
-                    
-                      <a target="_black" href="<?php echo $url.$actividad["ruta_archivo"];?> ">
+               
+                      <a target="_black" href="<?php echo $url.$value["ruta "];?> ">
+               
                          <button class="btn btn-primary pull-right"><i class="fa fa-download"></i> Descargar</button>
+               
                       </a>
                   
                   </span>
