@@ -70,6 +70,24 @@ class AjaxUsuarios
 
 	}
 
+
+	# ======================================
+	# = MOSTRAR PERFIL           =
+	# ======================================
+	public $idPerfil;
+
+	public function ajaxMostrarPerfil(){
+
+		$item = "id";
+
+		$valor = $this->idPerfil;
+
+		$respuesta = ControladorUsuarios::ctrMostrarPerfiles($item, $valor);
+
+		echo json_encode($respuesta);
+
+	}
+
 }		
 	
 
@@ -113,5 +131,19 @@ if (isset($_POST["validarUsuario"])) {
 	$validar -> validarUsuario = $_POST["validarUsuario"];
 
 	$validar -> validarUsuario();
+
+}
+
+
+# ============================
+# =  MOSTRAR PERFIL          =
+# ============================
+if(isset($_POST["idPerfil"])){
+
+	$perfil = new AjaxUsuarios();
+
+	$perfil -> idPerfil = $_POST["idPerfil"];
+
+	$perfil -> ajaxMostrarPerfil();
 
 }

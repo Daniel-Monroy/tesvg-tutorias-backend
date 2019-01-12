@@ -270,6 +270,19 @@ class ControladorUsuarios
 
 	}
 
+	# ======================
+	# = MOSTRAR PERFILEs    =
+	# ======================
+	static public function ctrMostrarPerfiles($item, $valor){
+
+		$tabla = "perfiles";
+
+		$respuesta = ModeloUsuarios::mdlMostrarPerfiles($tabla, $item, $valor);
+
+		return $respuesta;
+
+	}
+
 	# ======================================
 	# =  EDITAR USUARIO           =
 	# ======================================

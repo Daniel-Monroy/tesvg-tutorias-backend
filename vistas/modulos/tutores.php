@@ -78,8 +78,16 @@
               
                         <td>'.($key+1).'</td>
                         <td>'.$value["nombre"].'</td>
-                        <td>'.$value["apellidos"].'</td>
-                        <td>'.$value["perfil"].'</td>
+                        <td>'.$value["apellidos"].'</td>';
+
+                        $item = "id";
+
+                        $valor = $value["perfil"];
+
+                        $perfil = ControladorUsuarios::ctrMostrarPerfiles($item, $valor);
+
+                        echo' 
+                        <td>'.$perfil["descripcion"].'</td>
                         <td>'.$value["usuario"].'</td>
                         <td>'.$value["profesion"].'</td>';
 
@@ -245,7 +253,7 @@
 
             </div>
 
-
+            
             <!-- Entrada para Seleccion de Perfil-->
             <div class="form-group">
 
@@ -257,11 +265,23 @@
                   
                   <option value="">Seleccionar Perfil</option>
 
-                  <option value="jefeDivicion">Jefe de División</option>
+                    <?php 
 
-                  <option value="coordinador">Coordinador</option>
+                      $item = null;
 
-                  <option value="tutor">Tutor</option>
+                      $valor = null;
+
+                      $perfil = ControladorUsuarios::ctrMostrarPerfiles($item, $valor);
+
+                      foreach ($perfil as $key => $value) {
+                      
+                      echo '  
+                      <option value="'.$value["id"].'">'.$value["descripcion"].'</option>
+                      ';
+
+                      } 
+
+                    ?>
 
                 </select> 
 
@@ -426,11 +446,23 @@
                   
                   <option value="" id="editarPerfil">Seleccionar Perfil</option>
 
-                  <option value="Administrador">Administrador</option>
+                    <?php 
 
-                  <option value="Especial">Especial</option>
+                      $item = null;
 
-                  <option value="Vendedor">Vendedor</option>
+                      $valor = null;
+
+                      $perfil = ControladorUsuarios::ctrMostrarPerfiles($item, $valor);
+
+                      foreach ($perfil as $key => $value) {
+                      
+                      echo '  
+                      <option value="'.$value["id"].'">'.$value["descripcion"].'</option>
+                      ';
+
+                      } 
+
+                    ?>
 
                 </select> 
 

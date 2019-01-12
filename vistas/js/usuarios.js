@@ -80,10 +80,29 @@ $(document).on("click", ".btnEditarUsuario", function(){
 			$("#passwordActual").val(respuesta["password"]);
 
 			$("#editarProfesion").val(respuesta["profesion"]);
-			
-			$("#editarPerfil").val(respuesta["perfil"]);
-			
-			$("#editarPerfil").html("Coordinador");
+
+
+			// PERFIL DEL USUARIO
+			var idPerfil = respuesta["perfil"];
+	
+			var datosPerfil = new FormData();
+
+			datosPerfil.append("idPerfil", idPerfil);
+
+			$.ajax({
+				url: "ajax/usuarios.ajax.php",
+				method: "POST",
+				data: datosPerfil,
+				cache: false,
+				contentType: false,
+				processData: false,
+				dataType: "json",
+				success: function(respuestaPerfil){
+					$("#editarPerfil").val(respuestaPerfil["id"]);
+					$("#editarPerfil").html(respuestaPerfil["descripcion"]);
+				}
+
+			});	
 
 			$("#fotoActual").val(respuesta["foto"]);
 
