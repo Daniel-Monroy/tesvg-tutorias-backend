@@ -44,6 +44,7 @@
               <th style="width: 10px">#</th>
               <th>Nombre</th>
               <th>Apellidos</th>
+              <th>Carrera</th>
               <th>Perfil</th>
               <th>Usuario</th>
               <th>Profesion</th>
@@ -79,6 +80,14 @@
                         <td>'.($key+1).'</td>
                         <td>'.$value["nombre"].'</td>
                         <td>'.$value["apellidos"].'</td>';
+                       
+                        $item = "id";
+
+                        $valor = $value["id_carrera"];
+
+                        $carrera = ControladorCarreras::ctrMostrarCarreras($item, $valor);
+
+                        echo '<td>'.$carrera["descripcion"].'</td>';
 
                         $item = "id";
 
@@ -210,6 +219,43 @@
               </div>
               
             </div> 
+
+
+            <!-- Entrada para la CARRERA -->
+            <div class="form-group">
+
+              <div class="input-group">
+                
+                <span class="input-group-addon"> <i class="fa fa-users"></i> </span>
+                   
+                <select name="nuevaCarrera" class="form-control input-lg">
+                  
+                  <option value="" id="nuevaCarrera">Seleccionar Carrera</option>
+
+                    <?php 
+                              
+                      $item = null;
+
+                      $valor = null;
+
+                      $carrera = ControladorCarreras::ctrMostrarCarreras($item, $valor);
+
+                      foreach ($carrera as $key => $value) {
+                      
+                      echo '  
+                      <option value="'.$value["id"].'">'.$value["descripcion"].'</option>
+                      ';
+
+                      } 
+
+                    ?>
+
+                </select> 
+
+              </div>
+
+            </div>
+
 
 
             <!-- Entrada para el Usuario -->
@@ -389,8 +435,45 @@
                 <input type="text" name="editarApellidos" id="editarApellidos" placeholder="Ingresar Apellidos" required class="form-control input-lg">   
 
               </div>
-              
+                      
             </div> 
+
+
+            <!-- Entrada para la CARRERA -->
+            <div class="form-group">
+
+              <div class="input-group">
+                
+                <span class="input-group-addon"> <i class="fa fa-users"></i> </span>
+                   
+                <select name="editarCarrera" class="form-control input-lg">
+                  
+                  <option value="" id="editarCarrera">Seleccionar Carrera</option>
+
+                    <?php 
+                              
+                      $item = null;
+
+                      $valor = null;
+
+                      $carrera = ControladorCarreras::ctrMostrarCarreras($item, $valor);
+
+                      foreach ($carrera as $key => $value) {
+                      
+                      echo '  
+                      <option value="'.$value["id"].'">'.$value["descripcion"].'</option>
+                      ';
+
+                      } 
+
+                    ?>
+
+                </select> 
+
+              </div>
+
+            </div>
+
 
             <!-- Entrada para el Usuario -->
             <div class="form-group">

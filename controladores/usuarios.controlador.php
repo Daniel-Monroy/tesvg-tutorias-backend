@@ -40,6 +40,7 @@ class ControladorUsuarios
 						$_SESSION["iniciarSesion"] = "ok";
 						$_SESSION["nombre"] = $respuesta["nombre"];
 						$_SESSION["apellidos"] = $respuesta["apellidos"];
+						$_SESSION["carrera"] = $respuesta["id_carrera"];
 						$_SESSION["profesion"] = $respuesta["profesion"];
 						$_SESSION["id"] = $respuesta["id"];
 						$_SESSION["usuario"] = $respuesta["usuario"];
@@ -184,7 +185,8 @@ class ControladorUsuarios
 				$encriptar = crypt($_POST["nuevoPassword"], '$2a$07$asxy54ahjppf45sd87a5a4dDDGsystemdev$');
 
 				$datos = array('nombre' => $_POST["nuevoNombre"],
-							   'apellidos' => $_POST["nuevosApellidos"],  
+							   'apellidos' => $_POST["nuevosApellidos"], 
+							   'id_carrera' => $_POST["nuevaCarrera"],   
 							   'usuario' => $_POST["nuevoUsuario"], 
 							   'profesion' => $_POST["nuevaProfesion"], 
 							   'password' => $encriptar, 
@@ -410,7 +412,8 @@ class ControladorUsuarios
 				$datos = array(
 						   'id' => $_POST["idTutor"],
 						   'nombre' => $_POST["editarNombre"],
-						   'apellidos' => $_POST["editarApellidos"],  
+						   'apellidos' => $_POST["editarApellidos"],
+						   'id_carrera' => $_POST["editarCarrera"],     
 						   'usuario' => $_POST["editarUsuario"], 
 						   'profesion' => $_POST["editarProfesion"], 
 						   'password' => $encriptar, 

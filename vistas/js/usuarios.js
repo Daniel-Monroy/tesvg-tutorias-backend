@@ -75,6 +75,31 @@ $(document).on("click", ".btnEditarUsuario", function(){
 			
 			$("#editarApellidos").val(respuesta["apellidos"]);
 
+			// CARRERA DEL USUARIO
+			var idCarrera = respuesta["id_carrera"];
+
+			var datosCarrera = new FormData();
+
+			datosCarrera.append("item", "id");
+
+			datosCarrera.append("valor", idCarrera);
+
+			$.ajax({
+				url: "ajax/carreras.ajax.php",
+				method: "POST",
+				data: datosCarrera,
+				cache: false,
+				contentType: false,
+				processData: false,
+				dataType: "json",
+				success: function(respuestaCarrera){
+					$("#editarCarrera").val(respuestaCarrera["id"]);
+					$("#editarCarrera").html(respuestaCarrera["descripcion"]);
+				}
+
+			});	
+
+
 			$("#editarUsuario").val(respuesta["usuario"]);
 
 			$("#passwordActual").val(respuesta["password"]);
