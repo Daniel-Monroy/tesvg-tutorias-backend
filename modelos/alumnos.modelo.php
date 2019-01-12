@@ -42,7 +42,7 @@ class ModeloAlumnos
 	# ========================
 	# = MOSTRAR ALUMNOS      =
 	# ========================
-	static public function mdlMostrarAlumnosbyGrupo($tabla, $item, $valor){
+	static public function mdlMostrarAlumnosbyPerfil($tabla, $item, $valor){
 
 		if ($item != null){ 
 
@@ -75,15 +75,17 @@ class ModeloAlumnos
 	# ========================================
 	static public function mdlNuevoAlumno($tabla, $datos){
 		
-		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(nombre, apellidos, numeroControl, id_carrera, id_grupo, email, password, activo, foto, verificacion, modo, emailEncriptado) VALUES (:nombre, :apellidos, :numeroControl, :id_carrera, :id_grupo, :email, :password, :activo, :foto, :verificacion, :modo, :emailEncriptado)");
+		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(nombre, apellidos, numeroControl, id_tutor, id_carrera, id_grupo, email, password, activo, foto, verificacion, modo, emailEncriptado) VALUES (:nombre, :apellidos, :numeroControl, :id_tutor, :id_carrera, :id_grupo, :email, :password, :activo, :foto, :verificacion, :modo, :emailEncriptado)");
 
 		$stmt -> bindParam("nombre", $datos["nombre"], PDO::PARAM_STR);
 		
 		$stmt -> bindParam("apellidos", $datos["apellidos"], PDO::PARAM_STR);
 		
 		$stmt -> bindParam("numeroControl", $datos["numeroControl"], PDO::PARAM_STR);
-		
+
 		$stmt -> bindParam("id_carrera", $datos["id_carrera"], PDO::PARAM_STR);
+
+		$stmt -> bindParam("id_tutor", $datos["id_tutor"], PDO::PARAM_STR);
 		
 		$stmt -> bindParam("id_grupo", $datos["id_grupo"], PDO::PARAM_STR);
 		
@@ -121,13 +123,15 @@ class ModeloAlumnos
 	# ========================================
 	static public function mdlEditarAlumno($tabla, $datos){
 		
-		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET nombre = :nombre, apellidos = :apellidos, numeroControl = :numeroControl, id_carrera = :id_carrera, id_grupo = :id_grupo, email = :email, password = :password, activo = :activo, foto = :foto, verificacion = :verificacion, modo = :modo, emailEncriptado = :emailEncriptado WHERE id = :id");
+		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET nombre = :nombre, apellidos = :apellidos, numeroControl = :numeroControl, id_tutor = :id_tutor, id_carrera = :id_carrera, id_grupo = :id_grupo, email = :email, password = :password, activo = :activo, foto = :foto, verificacion = :verificacion, modo = :modo, emailEncriptado = :emailEncriptado WHERE id = :id");
 
 		$stmt -> bindParam("nombre", $datos["nombre"], PDO::PARAM_STR);
 		
 		$stmt -> bindParam("apellidos", $datos["apellidos"], PDO::PARAM_STR);
 		
 		$stmt -> bindParam("numeroControl", $datos["numeroControl"], PDO::PARAM_STR);
+
+		$stmt -> bindParam("id_tutor", $datos["id_tutor"], PDO::PARAM_STR);
 		
 		$stmt -> bindParam("id_carrera", $datos["id_carrera"], PDO::PARAM_STR);
 		

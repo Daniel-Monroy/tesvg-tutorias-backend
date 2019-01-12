@@ -71,25 +71,28 @@
 
             <?php 
 
-              if (isset($_GET["idGrupo"])) {
-                
-                $item = "id_grupo";
+               
+            # ======================================
+            # = DE ACUERDO AL TIPO DE PERFIL       =
+            # ======================================
+            $perfil = $_SESSION["perfil"];
 
-                $valor = $_GET["idGrupo"];
+            if ($perfil == 1 || $perfil == 2) {
               
-              } else{
+              $item = "id_carrera";
 
-                $item = null;
+              $valor = $_SESSION["carrera"];
 
-                $valor = null;
+            } else {
 
-              }
+              $item = "id_tutor";
 
-              $alumnos = ControladorAlumnos::mdlMostrarAlumnosbyGrupo($item, $valor);
-              
-             ?>
+              $valor = $_SESSION["id"];
 
-            <?php 
+            }
+
+            $alumnos = ControladorAlumnos::ctrMostrarAlumnosbyPerfil($item, $valor);
+            
 
               foreach ($alumnos as $key => $value) {
 
@@ -271,7 +274,7 @@
                 
                 <span class="input-group-addon"> <i class="fa fa-user"></i> </span>
                    
-                <input type="text" maxlength="10s" name="nuevoNumeroControl" id="nuevoNumeroControl" placeholder="Ingresar Número de Control" required class="form-control input-lg">   
+                <input type="text" maxlength="10" name="nuevoNumeroControl" id="nuevoNumeroControl" placeholder="Ingresar Número de Control" required class="form-control input-lg">   
 
               </div>
               
@@ -315,13 +318,34 @@
             <!-- Entrada para el TUTOR-->
             <div class="form-group">
 
-              <div class="input-group tutorAlumno hidden">
+              <div class="input-group">
                 
                 <span class="input-group-addon"> <i class="fa fa-users"></i> </span>
                    
-                <select name="nuevoTutorAlumno" id="nuevoTutorAlumno" class="form-control input-lg">
+                <select name="nuevoTutor" class="form-control input-lg">
                   
                   <option value="">Seleccionar Tutor</option>
+
+                  <?php 
+
+                    $item1 = "perfil";
+
+                    $valor1 = "3";
+
+                    $item2 = "id_carrera";
+
+                    $valor2 = $_SESSION["carrera"];
+
+                    $tutores = ControladorUsuarios::ctrMostrarTutores($item1, $valor1, $item2, $valor2);
+
+                    foreach ($tutores as $key => $value) {
+
+                      echo '<option value="'.$value["id"].'">'.$value["nombre"]." ".$value["apellidos"].'</option>';
+                    
+                    }
+
+
+                   ?>
 
                 </select> 
 
@@ -480,6 +504,46 @@
               </div>
               
             </div> 
+
+
+            <!-- Entrada para el TUTOR-->
+            <div class="form-group">
+
+              <div class="input-group">
+                
+                <span class="input-group-addon"> <i class="fa fa-users"></i> </span>
+                   
+                <select name="editarTutor" class="form-control input-lg">
+                  
+                  <option id="editarTutorAlumno" value="">Seleccionar Tutor</option>
+
+                  <?php 
+
+                    $item1 = "perfil";
+
+                    $valor1 = "3";
+
+                    $item2 = "id_carrera";
+
+                    $valor2 = $_SESSION["carrera"];
+
+                    $tutores = ControladorUsuarios::ctrMostrarTutores($item1, $valor1, $item2, $valor2);
+
+                    foreach ($tutores as $key => $value) {
+
+                      echo '<option value="'.$value["id"].'">'.$value["nombre"]." ".$value["apellidos"].'</option>';
+                    
+                    }
+
+
+                   ?>
+
+                </select> 
+
+              </div>
+
+            </div>
+
 
             
             <!-- Entrada para la Carrera-->

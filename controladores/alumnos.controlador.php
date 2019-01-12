@@ -20,11 +20,11 @@ class ControladorAlumnos
 	# ======================
 	# = MOSTRAR BY GRUPO    =
 	# ======================
-	static public function mdlMostrarAlumnosbyGrupo($item, $valor){
+	static public function ctrMostrarAlumnosbyPerfil($item, $valor){
 
 		$tabla = "alumnos";
 
-		$respuesta = ModeloAlumnos::mdlMostrarAlumnosbyGrupo($tabla, $item, $valor);
+		$respuesta = ModeloAlumnos::mdlMostrarAlumnosbyPerfil($tabla, $item, $valor);
 
 		return $respuesta;
 
@@ -51,7 +51,8 @@ class ControladorAlumnos
 
 				$datos = array('nombre' => $_POST["nuevoNombre"],
 							   'apellidos' => $_POST["nuevoApellidos"], 
-							   'numeroControl' => $_POST["nuevoNumeroControl"], 
+							   'numeroControl' => $_POST["nuevoNumeroControl"],
+							   'id_tutor' => $_POST["nuevoTutor"], 
 							   'id_carrera' => $_POST["nuevaCarrera"],
 							   'email' => $_POST["nuevoEmail"], 
 							   'id_grupo' => $_POST["nuevoGrupo"],
@@ -209,11 +210,12 @@ class ControladorAlumnos
 				$datos = array('nombre' => $_POST["editarNombre"],
 							   'apellidos' => $_POST["editarApellidos"], 
 							   'numeroControl' => $_POST["editarNumeroControl"], 
+							   'id_tutor' => $_POST["editarTutor"],
 							   'id_carrera' => $_POST["editarCarrera"],
 							   'email' => $_POST["editarEmail"], 
 							   'id_grupo' => $_POST["editarGrupo"],
 							   'password' => $_POST["passwordActual"], 
-							   'verificacion' => 1, 
+							   'verificacion' => 0, 
 							   'activo' => $_POST["activo"],    
 							   'foto' => $_POST["fotoActual"],
 							   'modo' => "directo",

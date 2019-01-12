@@ -272,6 +272,21 @@ class ControladorUsuarios
 
 	}
 
+
+	# ======================
+	# = MOSTRAR TUTORES    =
+	# ======================
+	static public function ctrMostrarTutores($item1, $valor1, $item2, $valor2){
+
+		$tabla = "usuarios";
+
+		$respuesta = ModeloUsuarios::mdlMostrarTutores($tabla, $item1, $valor1, $item2, $valor2);
+
+		return $respuesta;
+
+	}
+
+
 	# ======================
 	# = MOSTRAR PERFILEs    =
 	# ======================

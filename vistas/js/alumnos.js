@@ -200,8 +200,6 @@ $(document).on("click", ".btnEditarAlumno", function(){
 	$(".alert").remove();
 
 	var idAlumno = $(this).attr("idAlumno");
-	
-	console.log("idAlumno", idAlumno);
 
 	var datos = new FormData();
 
@@ -221,6 +219,30 @@ $(document).on("click", ".btnEditarAlumno", function(){
 			
 			$("#editarApellidos").val(respuesta["apellidos"]);
 			
+			/*======================
+			=  EDITAR TUTOR      =
+			======================*/
+			var idTutor = respuesta["id_tutor"];
+
+			var datosTutor = new FormData();
+
+			datosTutor.append("idUsuario", idTutor);
+
+			$.ajax({
+				url: rutaOcultaServidor+"ajax/usuarios.ajax.php",
+				type: "POST",
+				data: datosTutor, 
+				cache: false,
+				processData: false,
+				contentType: false,
+				dataType: 'json',
+				success: function(respuestaTutor){
+					$("#editarTutorAlumno").val(respuestaTutor["id"]);
+					$("#editarTutorAlumno").html(respuestaTutor["nombre"]+" "+respuestaTutor["apellidos"]);
+				}
+			})
+
+
 			$("#editarNumeroControl").val(respuesta["numeroControl"]);
 
 			$("#editarEmail").val(respuesta["email"]);
@@ -232,6 +254,7 @@ $(document).on("click", ".btnEditarAlumno", function(){
 			$("#fotoActual").val(respuesta["foto"]);
 
 			$("#idAlumnoEditar").val(respuesta["id"]);
+
 
 			/*======================
 			=  EDITAR CARRERA      =
