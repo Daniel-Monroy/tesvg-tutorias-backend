@@ -4,15 +4,6 @@
 
   $url = Ruta::ctrRuta();
 
-  if (!isset($_GET["idGrupo"]) && !isset($_GET["idActividad"])) {
-    
-    echo '  
-       <script> window.location = "grupos"; </script>
-    ';
-
-    return;
-  }
-
  ?>
 
 <div class="content-wrapper">
@@ -102,20 +93,10 @@
         
 
         <?php 
-
-            if (isset($_GET["idGrupo"])) {
               
-              $item = "id_grupo";
-             
-              $valor = $_GET["idGrupo"]; 
-
-            } else {
-        
-              $item = null;
-             
-              $valor = null;
-
-            }
+            $item = "id_tutor";
+           
+            $valor = $_SESSION["id"];
 
             $subactividades = ControladorSubActividades::ctrMostrarSubActividadesCategoria($item, $valor); 
         
@@ -370,32 +351,10 @@
             </div>
       
 
-            <!-- Entrada para el Grupo-->
-            <div class="form-group">
-            
-              <div class="input-group">
-                
-                <span class="input-group-addon"> <i class="fa fa-users"></i></span>
-                   
-                <?php 
+            <!-- Entrada para el ID DEL TUTOR-->
+            <input type="hidden" value="<?php echo $_SESSION["id"];?>" name="idTutor">
 
-                  $item = "id";
-
-                  $valor = $_GET["idGrupo"];
-
-                  $grupo = ControladorGrupos::ctrMostrarGrupos($item, $valor);
         
-                  echo '  
-                    <input type="text" name="nombreGrupo" readonly value="'.$grupo["nombre"].'" required class="form-control input-lg">
-                    <input type="hidden" name="idGrupo" value="'.$grupo["id"].'"> 
-                  ';
-
-                 ?>  
-
-              </div>
-
-            </div> 
-
             <!-- Entrada para el Nombre -->
             <div class="form-group">
             
@@ -574,31 +533,9 @@
 
             </div>
 
-            <!-- Entrada para el Grupo-->
-            <div class="form-group">
             
-              <div class="input-group">
-                
-                <span class="input-group-addon"> <i class="fa fa-users"></i></span>
-                   
-                <?php 
-
-                  $item = "id";
-
-                  $valor = $_GET["idGrupo"];
-
-                  $grupo = ControladorGrupos::ctrMostrarGrupos($item, $valor);
-        
-                  echo '  
-                    <input type="text" readonly value="'.$grupo["nombre"].'" required class="form-control input-lg">
-                    <input type="hidden" name="idGrupo" value="'.$grupo["id"].'"> 
-                  ';
-
-                 ?>  
-
-              </div>
-
-            </div> 
+            <!-- Entrada para el ID DEL TUTOR-->
+            <input type="hidden" value="<?php echo $_SESSION["id"];?>" name="idTutor">
             
 
             <!-- Entrada para el Nombre -->

@@ -126,7 +126,7 @@ class ControladorSubActividades
 
 						$datos = array(
 						'id_actividad' => $_POST["nuevaActividad"],
-						'id_grupo' => $_POST["idGrupo"],
+						'id_tutor' => $_POST["idTutor"],
 						'ruta' => $_POST["nuevaRuta"],
 						'ruta_archivo' => $documento,
 						'nombre' => $_POST["nuevaSubActividad"],
@@ -183,7 +183,7 @@ class ControladorSubActividades
 	}
 
 	# ============================
-	# = INGRESAR SUB-ACTIVIDADES =
+	# = EDITAR SUB-ACTIVIDADES =
 	# ============================
 	static public function ctrEditarSubActividades(){
 
@@ -291,7 +291,7 @@ class ControladorSubActividades
 
 		$datos = array(
 		'id_actividad' => $_POST["editarActividad"],
-		'id_grupo' => $_POST["idGrupo"],
+		'id_tutor' => $_POST["idTutor"],
 		'ruta' => $_POST["editarRuta"],
 		'ruta_archivo' => $documento,
 		'nombre' => $_POST["editarSubActividad"],

@@ -43,7 +43,6 @@
               <th style="width: 10px">#</th>
               <th>Nombre</th>
               <th>Carrera</th>  
-              <th width="10px">Actividades</th>
               <th>Acciones</th>
 
             </tr>
@@ -76,8 +75,6 @@
 
                           echo '
                           <td class="">'.$carrera["descripcion"].'</td>
-                         
-                          <td class="text-center"><button class="btn btn-primary btn-sm btnActividadesGrupo" idGrupo="'.$value["id"].'"><i class="fa fa-eye"></i> Ver</button></td>
 
                           <td>
                             <div class="btn-group">

@@ -47,11 +47,11 @@ class ModeloSubActividades
 
 		$stmt = Conexion::conectar()->prepare(
 
-		"INSERT INTO $tabla(id_actividad, id_grupo, ruta, ruta_archivo, nombre, objetivo, imagen, textoAyuda, actividades) VALUES (:id_actividad, :id_grupo, :ruta, :ruta_archivo, :nombre, :objetivo, :imagen, :textoAyuda, :actividades)");
+		"INSERT INTO $tabla(id_actividad, id_tutor, ruta, ruta_archivo, nombre, objetivo, imagen, textoAyuda, actividades) VALUES (:id_actividad, :id_tutor, :ruta, :ruta_archivo, :nombre, :objetivo, :imagen, :textoAyuda, :actividades)");
 
 		$stmt -> bindParam(":id_actividad", $datos["id_actividad"], PDO::PARAM_INT);
 
-		$stmt -> bindParam(":id_grupo", $datos["id_grupo"], PDO::PARAM_INT);
+		$stmt -> bindParam(":id_tutor", $datos["id_tutor"], PDO::PARAM_INT);
 
 		$stmt -> bindParam(":ruta", $datos["ruta"], PDO::PARAM_STR);
 
@@ -87,11 +87,11 @@ class ModeloSubActividades
 
 		$stmt = Conexion::conectar()->prepare(
 
-		"UPDATE $tabla SET id_actividad = :id_actividad, id_grupo = :id_grupo, ruta = :ruta, ruta_archivo = :ruta_archivo, nombre = :nombre, objetivo = :objetivo, imagen = :imagen, textoAyuda = :textoAyuda, actividades = :actividades WHERE id = :id");
+		"UPDATE $tabla SET id_actividad = :id_actividad, id_tutor = :id_tutor, ruta = :ruta, ruta_archivo = :ruta_archivo, nombre = :nombre, objetivo = :objetivo, imagen = :imagen, textoAyuda = :textoAyuda, actividades = :actividades WHERE id = :id");
 
 		$stmt -> bindParam(":id_actividad", $datos["id_actividad"], PDO::PARAM_INT);
 
-		$stmt -> bindParam(":id_grupo", $datos["id_grupo"], PDO::PARAM_INT);
+		$stmt -> bindParam(":id_tutor", $datos["id_tutor"], PDO::PARAM_INT);
 
 		$stmt -> bindParam(":ruta", $datos["ruta"], PDO::PARAM_STR);
 

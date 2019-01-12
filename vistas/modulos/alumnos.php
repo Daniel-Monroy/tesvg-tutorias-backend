@@ -55,6 +55,7 @@
               <th style="width: 25px" class="text-center">Actividades</th>
               <th>N. de Control</th>
               <th>Carrera</th>
+              <th>Tutor</th>
               <th>Grupo</th>
               <th>Email</th>
               <th>Imagen</th>
@@ -115,6 +116,16 @@
                         echo '
 
                         <td>'.$carrera["descripcion"].'</td>';
+
+                        $item = "id";
+
+                        $valor = $value["id_tutor"];
+
+                        $tutor = ControladorUsuarios::ctrMostrarUsuarios($item, $valor);
+
+                        echo '
+
+                        <td>'.$tutor["nombre"]." ".$tutor["apellidos"].'</td>';
 
                         $item = "id";
 
@@ -199,7 +210,7 @@
 
 
 <!--=============================
-= VENTANA MODAL NUEVO ALLUMNO   =
+= VENTANA MODAL NUEVO ALUMNO   =
 ===============================-->
 <div id="modalAgregarAlumno" class="modal fade" role="dialog">
   
@@ -293,6 +304,24 @@
                     }
 
                    ?>
+
+                </select> 
+
+              </div>
+
+            </div>
+
+
+            <!-- Entrada para el TUTOR-->
+            <div class="form-group">
+
+              <div class="input-group tutorAlumno hidden">
+                
+                <span class="input-group-addon"> <i class="fa fa-users"></i> </span>
+                   
+                <select name="nuevoTutorAlumno" id="nuevoTutorAlumno" class="form-control input-lg">
+                  
+                  <option value="">Seleccionar Tutor</option>
 
                 </select> 
 

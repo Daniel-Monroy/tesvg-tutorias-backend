@@ -40,7 +40,7 @@
         </a>
 
         <ul class="treeview-menu">
-
+          
           <li>
       
             <a href="carreras">
@@ -57,6 +57,13 @@
 
               <i class="fa fa-th"></i>
               <span>Actividades</span>
+
+            </a>
+
+             <a href="sub-actividades">
+
+              <i class="fa fa-th"></i>
+              <span>Sub-Actividades</span>
 
             </a>
 
