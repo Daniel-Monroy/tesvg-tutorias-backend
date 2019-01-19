@@ -88,8 +88,6 @@ $(document).on("click", ".btnActivarAlumno", function(){
 		processData: false,
 		success: function(respuesta){
 
-			console.log("respuesta", respuesta);
-
 			if (window.matchMedia("(max-width:767px)").matches) {
 
 				 swal({
@@ -330,3 +328,64 @@ $(document).on("click", ".btnActividades", function(){
 		
 })
 
+
+/*==================================
+= REVISIÓN DE ACTIVIDADES AL ALUMNO
+==================================*/
+$(document).on("click", ".actividadRevisada", function(){
+
+	var actividadRevisada = $('.actividadRevisada');
+
+	var id = $(this).attr("id");
+
+	var estadoActividad = $(this).attr("estadoActividad");
+	
+	// CAMBIANDO EL ESTADO DE LA ACTIVIDAD
+	if(estadoActividad == 0){
+	
+		estadoActividad = 1;
+	
+	} else {
+	
+		estadoActividad = 0;
+	
+	}
+
+	//VARIABLES DEL AJAX
+	var datos = new FormData();
+
+	datos.append("idComentario", id);
+
+	datos.append("estadoActividad", estadoActividad);
+
+	$.ajax({
+		url: rutaOcultaServidor+"ajax/alumnos.ajax.php",
+		type: "POST",
+		data: datos, 
+		cache: false,
+		processData: false,
+		contentType: false,
+		success: function(respuesta){
+				
+			 swal({
+		      	title: "Ha usted revisado la actividad correspondiente del alumno, en breve sera informado",
+		      	type: "success",
+		      	confirmButtonText: "¡Cerrar!"
+		    	}).then(function(result) {
+	
+			        if (result.value) {
+			        	location.reload(true);
+			        }
+
+		     });
+				
+		}
+	})
+
+})
+
+$(document).on("click", ".btnEditarMensaje", function(){
+
+	$(this).addClass('hidden');
+
+})

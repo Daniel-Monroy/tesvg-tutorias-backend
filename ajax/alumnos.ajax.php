@@ -2,6 +2,7 @@
 
 require_once "../controladores/alumnos.controlador.php";
 require_once "../modelos/alumnos.modelo.php";
+require_once "../modelos/subactividades.modelo.php";
 
 /**
  * AjaxAlumnos
@@ -85,6 +86,31 @@ class AjaxAlumnos
 
 	}
 
+	# ========================================
+	# COMENTARIOS A LAS ACTIVIDADES REALIZADAS
+	# ========================================
+	public $idComentario;
+
+	public $estadoActividad;
+
+	public function ajaxComentarioSubActividad(){
+
+		$tabla = "comentarios_actividad";
+
+		$item1 = "estadoActividad";
+
+		$valor1 = $this->estadoActividad;
+
+		$item2 = "id";
+		
+		$valor2 = $this->idComentario;
+
+		$respuesta = ModeloSubActividades::mdlActualizarComentarioSubActividad($tabla, $item1, $valor1, $item2, $valor2);
+
+		echo json_encode($respuesta);
+
+	}
+
 
 }		
 	
@@ -141,3 +167,18 @@ if (isset($_POST["idAlumno"])) {
 
 	$idAlumnoEditar -> ajaxEditarAlumno();
 }
+
+
+# ========================================
+# COMENTARIOS A LAS ACTIVIDADES REALIZADAS
+# ========================================
+if (isset($_POST["idComentario"])) {
+	
+	$actividadRevisada = new AjaxAlumnos();
+
+	$actividadRevisada -> idComentario = $_POST["idComentario"];
+
+	$actividadRevisada -> estadoActividad = $_POST["estadoActividad"];
+
+	$actividadRevisada -> ajaxComentarioSubActividad();
+}	

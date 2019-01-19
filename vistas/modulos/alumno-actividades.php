@@ -233,34 +233,105 @@ if (!isset($_GET["idAlumnoActividades"])) {
                 <ul class="list-inline">
                   
                   <li>
-                  
-                    <a href="" class="link-black text-sm">
+
+                    <?php
+
+                      $itemComentario = "id_subactividad";
+
+                      $valorComentario = $value["id"];
+
+                      $comentario = ControladorAlumnos::ctrMostrarComentariosSubActividades($itemComentario, $valorComentario);
+
+                      $clase = "";
+
+                      if ($comentario["estadoActividad"] == 0) {
+                        $clase = "btn-warning";
+                        $icono = '<i class="fa fa-thumbs-o-down"></i> Sin Revisar';
+                      } else {
+                        $clase = "btn-success";
+                        $icono = '<i class="fa fa-thumbs-o-up"></i> Revisada';
+                      }
                       
-                      <i class="fa fa-thumbs-o-up"></i>
-                      Revisada
-                    </a>
-                  
+                      echo '
+                        
+                        <a class="link-black text-sm">
+                       
+                          <button type="button" style="color:#fff" class="btn btn-default btn-xs '.$clase.' actividadRevisada" id="'.$comentario["id"].'" estadoActividad="'.$comentario["estadoActividad"].'">';
+
+                            echo $icono;
+                           
+                          echo '  
+                          
+                          </button>
+                        
+                        </a>
+
+                      ';
+
+                     ?>
+              
                   </li>
 
                 </ul>
 
-                <form class="form-horizontal">
+                <form class="form-horizontal" method="POST">
                  
                   <div class="form-group margin-bottom-none">
                  
                     <div class="col-sm-9">
-                 
-                      <input class="form-control input-sm" placeholder="Escribe un mensaje">
+  
+                      <input style="font-size: 15px" name="mensaje" class="form-control input-sm" placeholder="Escribe un mensaje" value="<?php echo $comentario["mensaje"] ?>">
+
+                      <input type="hidden" name="idComentario" value="<?php echo $comentario["id"]?>">
                  
                     </div>
                  
                     <div class="col-sm-3">
-                 
-                      <button type="submit" class="btn btn-danger pull-right btn-block btn-sm">Responder</button>
+
+
+                      <?php 
+
+                        if ($comentario["mensaje"] == "") {
+                         
+                          echo '  
+                            
+                              <button type="submit" class="btn btn-danger pull-right btn-block btn-sm editarMensaje">
+
+                                 <i class="fa fa-send" aria-hidden="true"></i> ENVIAR 
+
+                              </button>
+
+                          '; }
+
+                        else {
+
+                            echo '  
+                            
+                              <button type="submit" class="btn btn-success pull-right btn-block btn-sm editarMensaje">
+
+                                 <i class="fa fa-pencil-square-o" aria-hidden="true"></i> EDITAR 
+
+                                </button>
+
+                            ';
+
+                        }
+
+                      ?>
+
+
                  
                     </div>
                  
                   </div>
+
+                  <?php 
+
+                    $comentario = new ControladorAlumnos();
+
+                    $comentario -> ctrActualizarComentarioSubActividad();
+
+                  ?>
                
                 </form>
 

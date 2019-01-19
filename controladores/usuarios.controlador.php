@@ -46,6 +46,7 @@ class ControladorUsuarios
 						$_SESSION["usuario"] = $respuesta["usuario"];
 						$_SESSION["foto"] = $respuesta["foto"];
 						$_SESSION["perfil"] = $respuesta["perfil"];
+						$_SESSION["password"] = $respuesta["password"];
 
 						# ===============================================================
 						# =           REGISTRAR FECHA Y HORA DEL ULTIMO LOGIN           =
@@ -440,6 +441,45 @@ class ControladorUsuarios
 				$respuesta = ModeloUsuarios::mdlEditarUsuario($tabla, $datos);
 
 				if ($respuesta == "ok") {
+
+					if (isset($_POST["usuarioActual"])) {
+							
+						if ($_POST["usuarioActual"] == 1) {
+							
+							echo ' 
+							<script> 
+								swal({
+									type: "success",
+									title: "!Exelente!",
+									text: "Tus datos han sido actualizados correctamente",	
+									showConfirmButton: true,
+									confirmButtonText: "Cerrar",
+									closeConfirmButton: false
+								}).then((result)=>{
+									if(result.value){
+										window.location = "inicio";
+									}
+								});
+							</script>
+						
+						 	';
+
+
+						 	$_SESSION["iniciarSesion"] = "ok";
+							$_SESSION["nombre"] = $_POST["editarNombre"];
+							$_SESSION["apellidos"] = $_POST["editarApellidos"];
+							$_SESSION["carrera"] = $_POST["editarCarrera"];
+							$_SESSION["profesion"] = $_POST["editarProfesion"];
+							$_SESSION["id"] = $_POST["id"];
+							$_SESSION["usuario"] = $_POST["editarUsuario"];
+							$_SESSION["foto"] = $ruta;
+							$_SESSION["perfil"] = $_POST["editarPerfil"];
+							$_SESSION["password"] = $encriptar;
+
+						}
+
+					} else {
+
 					echo ' 
 						<script> 
 							swal({
@@ -455,7 +495,10 @@ class ControladorUsuarios
 								}
 							});
 						</script>
+					
 					 	';
+					} 	
+					
 				}
 
 			} else {

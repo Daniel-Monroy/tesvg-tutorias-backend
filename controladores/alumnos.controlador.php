@@ -287,4 +287,81 @@ class ControladorAlumnos
 	}
 
 
+	# ==========================================
+	# MOSTRAR COMENTARIOS ACTIVIDADES REALIZADAS
+	# ==========================================
+	static public function ctrMostrarComentariosSubActividades($item, $valor){
+
+		$tabla = "comentarios_actividad";
+
+		$respuesta = ModeloSubActividades::mdlMostrarComentariosSubActividades($tabla, $item, $valor);
+
+		return $respuesta;
+	}
+
+
+	# ==========================================
+	# ACTUALIZAR COMENTARIO ACTIVIDADES REALIZADAS
+	# ==========================================
+	static public function ctrActualizarComentarioSubActividad(){
+
+		if (isset($_POST["mensaje"])) {
+		
+			$tabla = "comentarios_actividad";
+
+			$item1 = "mensaje";
+
+			$valor1 = $_POST["mensaje"];
+
+			$item2 = "id";
+
+			$valor2 = $_POST["idComentario"];
+
+			$respuesta = ModeloSubActividades::mdlActualizarComentarioSubActividad($tabla, $item1, $valor1, $item2, $valor2);
+
+			if ($respuesta == "ok") {
+		
+				echo ' 
+					<script> 
+						swal({
+							type: "success",
+							title: "!Genial!",
+							text: "Se le ha enviado el mensaje al Alumno",	
+							showConfirmButton: true,
+							confirmButtonText: "Cerrar",
+							closeConfirmButton: false
+						}).then((result)=>{
+							if(result.value){
+								window.location = "alumnos";
+							}
+						});
+					</script>
+				';
+			
+			} else {
+
+				echo ' 
+					<script> 
+						swal({
+							type: "error",
+							title: "!Error!",
+							text: "No se le ha entregado el mensaje al Alumno",	
+							showConfirmButton: true,
+							confirmButtonText: "Cerrar",
+							closeConfirmButton: false
+						}).then((result)=>{
+							if(result.value){
+								location.reload();
+							}
+						});
+					</script>
+				';
+
+			}
+		
+		}	
+	
+	}
+
+
 }
