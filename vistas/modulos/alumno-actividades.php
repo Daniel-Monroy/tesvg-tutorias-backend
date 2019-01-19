@@ -50,24 +50,33 @@ if (!isset($_GET["idAlumnoActividades"])) {
       <div class="col-md-3">
 
 
-        <?php 
+      <?php 
 
-          $item = "id";
+        $item = "id";
 
-          $valor = $_GET["idAlumnoActividades"];
+        $valor = $_GET["idAlumnoActividades"];
 
-          $alumno = ControladorAlumnos::ctrMostrarAlumnos($item, $valor);
-         
-         ?>
-        
-        <!-- Perfil -->
+        $alumno = ControladorAlumnos::ctrMostrarAlumnos($item, $valor);
+       
+
+        echo'        
+
         <div class="box box-primary">
 
-          <div class="box-body box-profile">
-            
-            <img src="<?php echo $url.$alumno["foto"];?> " class="profile-user-img img-responsive img-circle">
+          <div class="box-body box-profile">';
 
-            <h3 class="profile-username text-center"> <?php echo $alumno["nombre"]." ".$alumno["apellidos"];?> </h3>
+            if ($alumno["foto"] != null) {
+            
+                echo '<img src="'.$url.$alumno["foto"].'" class="profile-user-img img-responsive img-circle">';
+        
+            } else {
+
+                echo '<img src="'.$servidor.'vistas/img/usuarios/default/anonymous.png" class="profile-user-img img-responsive img-circle">';
+            }
+            
+            echo'
+           
+            <h3 class="profile-username text-center"> <?php echo $alumno["nombre"]." ".$alumno["apellidos"];?> </h3>';?>
 
             
             <?php 
@@ -78,43 +87,73 @@ if (!isset($_GET["idAlumnoActividades"])) {
 
               $respuestaCarrera = ControladorCarreras::ctrMostrarCarreras($itemCarrera, $valorCarrera);
 
-             ?>
-
-            <p class="text-muted text-center"><?php echo $respuestaCarrera ["descripcion"];?></p>
+              echo'<p class="text-muted text-center">'.$respuestaCarrera ["descripcion"].'</p>';
 
 
-            <ul class="list-group list-group-unbordered">
+              # ============================
+              # = TODAS LAS ACTIVIDADES    =
+              # ============================
+              $itemSubActividad = "id_tutor";
+
+              $valorSubActiviad = $_SESSION["id"];
               
-              <li class="list-group-item">
+              $subActividades = ControladorSubActividades::ctrMostrarTodasSubActividades($itemSubActividad, $valorSubActiviad);
+             
+             # ============================
+             # = ACTIVIDADES REALIZADAS   =
+             # ============================
+              $item = "id_alumno";
+
+              $valor = $alumno["id"];
+
+              $ordenar = "id";
+
+              $modo = "DESC";
+
+              $base = 0;
+
+              $tope = count($subActividades);
+
+              //ENVIANDO SOLO POR ALUMNO Y CATEGORIA
+              $actividadesRealizadas = ControladorSubActividades::ctrMostrarSubActividadesRealizadas($item, $valor, $ordenar, $modo, $base, $tope);
+
+              $actividadesPendientes = count($subActividades) - count($actividadesRealizadas);
+              
+              
+              echo'    
+
+              <ul class="list-group list-group-unbordered">
                 
-                <b>Actividades Realizadas</b>
+                <li class="list-group-item">
+                  
+                  <b>Actividades Realizadas</b>
 
-                <a class="pull-right">12</a>
+                  <a class="pull-right">'.count($actividadesRealizadas).'</a>
 
-              </li>
+                </li>
 
-              <li class="list-group-item">
-                
-                <b>Actividades Pendientes</b>
+                <li class="list-group-item">
+                  
+                  <b>Actividades Pendientes</b>
 
-                <a class="pull-right">12</a>
+                  <a class="pull-right">'.$actividadesPendientes.'</a>
 
-              </li>
+                </li>
 
-              <li class="list-group-item">
-                
-                <b>Ultimo Login</b>
+                <li class="list-group-item">
+                  
+                  <b>Ultimo Login</b>
 
-                <a class="pull-right"><?php echo $alumno["ultimo_login"];?></a>
+                  <a class="pull-right">'.$alumno["ultimo_login"].'</a>
 
-              </li>
+                </li>
 
-            </ul>
-            
+              </ul>
+              
           </div>
 
-        </div>
-        <!-- Perfil -->
+        </div> ';?>
+
 
         <!-- Acerca de Él -->
         <div class="box box-primary">
@@ -133,7 +172,7 @@ if (!isset($_GET["idAlumnoActividades"])) {
 
             <hr>
 
-            <strong><i class="fa fa-book margin-r-5"></i>Educación</strong>
+            <strong><i class="fa fa-book margin-r-5"></i>Sobre Él (Ella)</strong>
               
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis asperiores nihil dolore, maiores officiis a, esse nesciunt impedit praesentium ratione voluptatem fugit laborum aliquam, tempore facilis perspiciatis eius ut obcaecati. </p>    
 
@@ -193,7 +232,7 @@ if (!isset($_GET["idAlumnoActividades"])) {
 
               $base = 0;
 
-              $tope = 3;
+              $tope = count($subActividades);
 
               //ENVIANDO SOLO POR ALUMNO Y CATEGORIA
               $actividadesRealizadas = ControladorSubActividades::ctrMostrarSubActividadesRealizadas($item, $valor, $ordenar, $modo, $base, $tope);
@@ -386,7 +425,7 @@ if (!isset($_GET["idAlumnoActividades"])) {
 
                   $base = 0;
 
-                  $tope = 3;
+                  $tope = count($subActividades);
 
                   //ENVIANDO SOLO POR ALUMNO Y CATEGORIA
                   $actividadesRealizadas = ControladorSubActividades::ctrMostrarSubActividadesRealizadas($item, $valor, $ordenar, $modo, $base, $tope);
