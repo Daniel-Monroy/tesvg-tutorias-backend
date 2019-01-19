@@ -383,4 +383,47 @@ class ControladorSubActividades
 	}
 
 
+	# ===================================
+	# =MOSTRAR TODAS SUB-ACTIVIDADES
+	# ===================================
+	static public function ctrMostrarTodasSubActividades($item, $valor){
+
+	    $tabla = "sub_actividades";
+
+	    $respuesta = ModeloSubActividades::mdlMostrarTodasSubActividades($tabla, $item, $valor);
+
+	    return $respuesta;
+
+	}
+
+
+	# ===================================
+	# =MOSTRAR SUB-ACTIVIDADES REALIZADAS POR ALUMNO
+	# ===================================
+    static public function ctrMostrarSubActividadesRealizadas($item, $valor, $ordenar, $modo, $base, $tope){
+
+	    $tabla = "actividades_alumnos";
+
+	    $respuesta = ModeloSubActividades::mdlMostrarSubActividadesRealizadas($tabla, $item, $valor, $ordenar, $modo, $base, $tope);
+
+	    return $respuesta;
+
+    }
+
+
+     # ===================================
+	 # =MOSTRAR SUB-ACTIVIDADES PENDIENTES
+	 # ===================================
+	 static public function ctrMostrarSubActividadesPendientes($item, $valor){
+
+	    $tabla = "sub_actividades";
+
+	    $respuesta = ModeloSubActividades::mdlMostrarSubActividadesPendientes($tabla, $item, $valor);
+
+	    return $respuesta;
+
+	  }
+
+
+
 }

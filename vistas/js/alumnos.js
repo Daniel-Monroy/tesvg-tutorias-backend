@@ -374,18 +374,12 @@ $(document).on("click", ".actividadRevisada", function(){
 		    	}).then(function(result) {
 	
 			        if (result.value) {
-			        	location.reload(true);
+			        	window.location = "alumnos";
 			        }
 
 		     });
 				
 		}
 	})
-
-})
-
-$(document).on("click", ".btnEditarMensaje", function(){
-
-	$(this).addClass('hidden');
 
 })

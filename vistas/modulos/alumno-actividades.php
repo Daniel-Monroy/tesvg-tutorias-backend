@@ -170,14 +170,34 @@ if (!isset($_GET["idAlumnoActividades"])) {
 
             <?php 
 
-              $itemActividadRealizadas = "id_alumno";
+              # ============================
+              # = TODAS LAS ACTIVIDADES    =
+              # ============================
+              $itemSubActividad = "id_tutor";
 
-              $valorActividadRealizadas = $alumno["id"];
+              $valorSubActiviad = $_SESSION["id"];
+              
+              $subActividades = ControladorSubActividades::ctrMostrarTodasSubActividades($itemSubActividad, $valorSubActiviad);
+             
 
-              $actividadesRealizadas = ControladorAlumnos::ctrMostrarActividadesRealizadas($itemActividadRealizadas, $valorActividadRealizadas); 
+             # ============================
+             # = ACTIVIDADES REALIZADAS   =
+             # ============================
+              $item = "id_alumno";
 
-              $idActividadesRealizadas = array();
+              $valor = $alumno["id"];
 
+              $ordenar = "id";
+
+              $modo = "DESC";
+
+              $base = 0;
+
+              $tope = 3;
+
+              //ENVIANDO SOLO POR ALUMNO Y CATEGORIA
+              $actividadesRealizadas = ControladorSubActividades::ctrMostrarSubActividadesRealizadas($item, $valor, $ordenar, $modo, $base, $tope);
+              
              ?>
             
             <div class="active tab-pane" id="actividadesRealizadas">
@@ -185,38 +205,38 @@ if (!isset($_GET["idAlumnoActividades"])) {
               <?php 
 
               if (count($actividadesRealizadas) == 0) {
-              
-              echo "<h1> No ha realizado ninguna Actividad </h1>";
+                
+                echo'
+                  <h1 class="text-center text-muted">Sin Actividades Realizadas</h1>
+                  <h3 class="text-muted text-center"> <strong>TUTORIAS</strong> <small> TESVG </small></h3>
+                ';
 
               } else {
 
-               foreach ($actividadesRealizadas as $key => $value): 
+            foreach ($actividadesRealizadas as $key => $value){
 
+             # ==================================
+             # =OBTENIENDO DATOS DE LA ACTIVIDAD=
+             # ==================================
+             $itemActividad = "id";
 
-                array_push($idActividadesRealizadas, $value["id"]);
+             $valorActividad = $value["id_actividad"];
 
-                # ==================================
-                # =OBTENIENDO DATOS DE LA ACTIVIDAD=
-                # ==================================
-                 $itemActividad = "id";
-
-                 $valorActividad = $value["id_actividad"];
-
-                 $actividad = ControladorSubActividades::ctrMostrarSubActividades($itemActividad, $valorActividad);  
-
-                ?>
-
+             $actividad = ControladorSubActividades::ctrMostrarSubActividades($itemActividad, $valorActividad);  
+             
+              echo '
+             
               <div class="post">
                 
                 <div class="user-block">
                   
-                  <img class="img-circle img-bordered-sm" src="<?php echo $servidor.$actividad["imagen"];?> ">
+                  <img class="img-circle img-bordered-sm" src="'.$servidor.$actividad["imagen"].'">
 
                   <span class="username">
                     
-                      <a href="#"><span><?php echo $actividad["nombre"];?></span></a>
+                      <a href="#"><span>'.$actividad["nombre"].'</span></a>
                
-                      <a target="_black" href="<?php echo $url.$value["ruta "];?> ">
+                      <a target="_black" href="'.$url.$value["ruta"].'">
                
                          <button class="btn btn-primary pull-right"><i class="fa fa-download"></i> Descargar</button>
                
@@ -224,51 +244,49 @@ if (!isset($_GET["idAlumnoActividades"])) {
                   
                   </span>
                     
-                  <span class="description">Realizada - <?php echo $actividad["fecha"];?></span>
+                  <span class="description">Realizada - '.$actividad["fecha"].'</span>
 
                 </div>
 
-                <p><?php echo $actividad["actividades"];?></p>
+                <p>'.$actividad["actividades"].'</p>
 
                 <ul class="list-inline">
                   
-                  <li>
+                  <li>';
 
-                    <?php
+                  $itemComentario = "id_subactividad";
 
-                      $itemComentario = "id_subactividad";
+                  $valorComentario = $actividad["id"];
+                  
+                  $comentario = ControladorAlumnos::ctrMostrarComentariosSubActividades($itemComentario, $valorComentario);
+                  
+                  $clase = "";
 
-                      $valorComentario = $value["id"];
+                  if ($comentario["estadoActividad"] == 0) {
 
-                      $comentario = ControladorAlumnos::ctrMostrarComentariosSubActividades($itemComentario, $valorComentario);
-
-                      $clase = "";
-
-                      if ($comentario["estadoActividad"] == 0) {
-                        $clase = "btn-warning";
-                        $icono = '<i class="fa fa-thumbs-o-down"></i> Sin Revisar';
-                      } else {
-                        $clase = "btn-success";
-                        $icono = '<i class="fa fa-thumbs-o-up"></i> Revisada';
-                      }
+                     $clase = "btn-warning";
+                     
+                     $icono = '<i class="fa fa-thumbs-o-down"></i> Sin Revisar';
+                                        
+                  } else {
+                    
+                    $clase = "btn-success";
+                    
+                    $icono = '<i class="fa fa-thumbs-o-up"></i> Revisada';
+                  
+                  }
                       
-                      echo '
-                        
-                        <a class="link-black text-sm">
-                       
-                          <button type="button" style="color:#fff" class="btn btn-default btn-xs '.$clase.' actividadRevisada" id="'.$comentario["id"].'" estadoActividad="'.$comentario["estadoActividad"].'">';
+                    echo '
+                    
+                    <a class="link-black text-sm">
+                   
+                      <button type="button" style="color:#fff" class="btn btn-default btn-xs '.$clase.' actividadRevisada" id="'.$comentario["id"].'" estadoActividad="'.$comentario["estadoActividad"].'">
 
-                            echo $icono;
-                           
-                          echo '  
-                          
-                          </button>
-                        
-                        </a>
-
-                      ';
-
-                     ?>
+                        '.$icono.'
+                    
+                      </button>
+                    
+                    </a>
               
                   </li>
 
@@ -280,16 +298,13 @@ if (!isset($_GET["idAlumnoActividades"])) {
                  
                     <div class="col-sm-9">
   
-                      <input style="font-size: 15px" name="mensaje" class="form-control input-sm" placeholder="Escribe un mensaje" value="<?php echo $comentario["mensaje"] ?>">
+                      <input style="font-size: 15px" name="mensaje" class="form-control input-sm" placeholder="Escribe un mensaje" value="'.$comentario["mensaje"].'">
 
-                      <input type="hidden" name="idComentario" value="<?php echo $comentario["id"]?>">
+                      <input type="hidden" name="idComentario" value="'.$comentario["id"].'">
                  
                     </div>
                  
-                    <div class="col-sm-3">
-
-
-                      <?php 
+                    <div class="col-sm-3">';
 
                         if ($comentario["mensaje"] == "") {
                          
@@ -319,8 +334,6 @@ if (!isset($_GET["idAlumnoActividades"])) {
 
                       ?>
 
-
-                 
                     </div>
                  
                   </div>
@@ -337,52 +350,158 @@ if (!isset($_GET["idAlumnoActividades"])) {
 
               </div>
 
-              <?php endforeach; } ?>
+              <?php }
+
+              } 
+
+            ?>
 
             </div>
 
 
-
-            <?php 
-
-              $itemActividadesPendientes = "id_grupo"; 
-
-              $valorActividadesPendietes = $alumno["id_grupo"];
-
-              $actividadesPendientes = ControladorSubActividades::ctrMostrarSubActividadesCategoria($itemActividadesPendientes, $valorActividadesPendietes);
-            ?>
-
-
             <div class="tab-pane" id="actividadesPendientes">
-                    
+
                 <?php 
 
-                #Verificando la cantidad de actividades Pendientes
-                if (count($actividadesPendientes) == count($actividadesRealizadas) ) {
-                   echo "<h1>Sin Actividades Pendientes</h1>";
-                } 
+                  # ============================
+                  # = TODAS LAS ACTIVIDADES    =
+                  # ============================
+                  $itemSubActividad = "id_tutor";
 
-               if (count($actividadesRealizadas) != count($actividadesPendientes) && 
-                   count($actividadesRealizadas) != 0 && 
-                   count($actividadesPendientes) > 0) {
+                  $valorSubActiviad = $_SESSION["id"];
+                  
+                  $subActividades = ControladorSubActividades::ctrMostrarTodasSubActividades($itemSubActividad, $valorSubActiviad);
+                 
 
-                foreach ($actividadesPendientes as $key => $value) {
+                 # ============================
+                 # = ACTIVIDADES REALIZADAS   =
+                 # ============================
+                  $item = "id_alumno";
 
-                  foreach ($actividadesRealizadas as $key => $value1) { 
+                  $valor = $alumno["id"];
 
-                    if ($value1["id_actividad"] != $value["id_actividad"]) { ?>
+                  $ordenar = "id";
 
-                    <div class="post">
+                  $modo = "DESC";
+
+                  $base = 0;
+
+                  $tope = 3;
+
+                  //ENVIANDO SOLO POR ALUMNO Y CATEGORIA
+                  $actividadesRealizadas = ControladorSubActividades::ctrMostrarSubActividadesRealizadas($item, $valor, $ordenar, $modo, $base, $tope);
+                
+
+                  if (count($actividadesRealizadas) == count($subActividades)) {
+                  
+                    echo '  
+
+                       <h1 class="text-center text-muted">Sin Actividades Pendientes</h1>
+                       <h3 class="text-muted text-center"> <strong>TUTORIAS</strong> <small> TESVG </small></h3>
+
+                    ';
+                  
+                  } else {
+
+                    $realizadas = array();
+
+                    $sinRealizar = array();
+
+                    # ============================
+                    # = ACTIVIDADES REALIZADAS   =
+                    # ============================
+                    foreach ($subActividades as $key => $value) {
+
+                      array_push($sinRealizar, $value["id"]);
+
+                      foreach ($actividadesRealizadas as $key => $value1){
+
+                        if ($value["id"] == $value1["id_actividad"]) {
+
+                          array_push($realizadas, $value["id"]);
+                          
+                         }
+
+                       }
+                      
+                    }
+
+                    $pendientes = array_diff($sinRealizar, $realizadas);
+                    
+
+                    # ===============================
+                    # TOMA EL PRIMER INDICE DEL ARRAY
+                    # ===============================
+                    if (!function_exists('array_key_first')) {
+                        
+                        function array_key_first($pendientes)
+                        {
+                            if (count($pendientes)) {
+                                reset($pendientes);
+                                return key($pendientes);
+                            }
+
+                            return null;
+                        }
+                    }
+
+                    $firstKey = array_key_first($pendientes);
+
+
+                    # ===============================
+                    # TOMA EL ULTIMO INDICE DEL ARRAY
+                    # ===============================
+                    if (!function_exists('array_key_last')) {
+      
+                        function array_key_last($array) {
+                            $key = NULL;
+
+                            if(is_array($array)) {
+
+                                end($array);
+                                
+                                $key = key( $array );
+                            }
+
+                            return $key;
+                        }
+                    }
+                    
+                    $lastKey = array_key_last($pendientes);
+                    
+                    $actividadesPendientes = array();
+                    
+                    $item = "id";
+                
+                    for ($i=$firstKey; $i <=$lastKey; $i++) { 
+                      
+                      $valor = $pendientes[$i];
+
+                      $subActividades = ControladorSubActividades::ctrMostrarSubActividadesPendientes($item, $valor);
+                      
+                      foreach ($subActividades as $key => $value) {
+                        
+                         array_push($actividadesPendientes, $value);
+                      
+                      }
+                    
+                    }
+
+                    foreach ($actividadesPendientes as $key => $value) {
+
+                      echo'
+                      
+                      <div class="post">
                       
                       <div class="user-block">
                         
-                        <img class="img-circle img-bordered-sm" src="<?php echo $servidor.$value["imagen"];?>" alt="">
+                        <img class="img-circle img-bordered-sm" src="'.$servidor.$value["imagen"].'" alt="">
 
                         <span class="username">
                           
-                            <a href="#"><?php echo $value["nombre"]; ?></a>
+                            <a href="#">'.$value["nombre"].'</a>
                             
-                            <a target="_black" href="<?php echo $servidor.$value["ruta_archivo"];?>">
+                            <a target="_black" href="'.$servidor.$value["ruta_archivo"].'">
 
                             <button class="btn btn-primary pull-right"><i class="fa fa-download"></i> Descargar</button>
                             
@@ -390,13 +509,13 @@ if (!isset($_GET["idAlumnoActividades"])) {
 
                         </span>
                           
-                        <span class="description">Cargada - <?php echo $value["fecha"]; ?></span>
+                        <span class="description">Cargada - '.$value["fecha"].'</span>
 
                       </div>
 
                       <h3>Objetivo</h3>
 
-                      <p><?php echo $value["objetivo"]; ?></p>
+                      <p>'.$value["objetivo"].'</p>
 
                       <form class="form-horizontal">
                        
@@ -418,74 +537,12 @@ if (!isset($_GET["idAlumnoActividades"])) {
                      
                       </form>
 
-                    </div>
-                
-                <?php 
-                      }
+                    </div>';
 
-                    }
+                  }
 
-                  } 
-
-                } else {
-
-                  if (count($actividadesPendientes) != count($actividadesRealizadas) ) {
-                   
-                  foreach ($actividadesPendientes as $key => $value) { ?>
-                    
-                     <div class="post">
-                      
-                        <div class="user-block">
-                          
-                          <img class="img-circle img-bordered-sm" src="<?php echo $servidor.$value["imagen"];?>" alt="">
-
-                          <span class="username">
-                            
-                              <a href="#"><?php echo $value["nombre"]; ?></a>
-                              
-                              <a target="_black" href="<?php echo $servidor.$value["ruta_archivo"];?>">
-
-                              <button class="btn btn-primary pull-right"><i class="fa fa-download"></i> Descargar</button>
-                              
-                              </a>
-
-                          </span>
-                            
-                          <span class="description">Cargada - <?php echo $value["fecha"]; ?></span>
-
-                        </div>
-
-                        <h3>Objetivo</h3>
-
-                        <p><?php echo $value["objetivo"]; ?></p>
-
-                        <form class="form-horizontal">
-                         
-                          <div class="form-group margin-bottom-none">
-                         
-                            <div class="col-sm-9">
-                         
-                              <input readonly class="form-control input-sm" placeholder="Escribe un mensaje">
-                         
-                            </div>
-                         
-                            <div class="col-sm-3">
-                         
-                              <button type="submit"  class="btn btn-danger pull-right btn-block btn-sm hidden"> Enviar Recordatorio</button>
-                         
-                            </div>
-                         
-                          </div>
-                       
-                        </form>
-
-                     </div>
-
-                  <?php }
-
-                  } 
-
-                }?> 
+                 } ?>
+              
 
             </div>
 

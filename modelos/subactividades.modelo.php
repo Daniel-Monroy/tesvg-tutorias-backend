@@ -234,4 +234,101 @@ class ModeloSubActividades
 
 	}
 
+	# ==================================
+    # =MOSTRAR MOSTRAR SUB-ACTIVIDADES 
+    # ==================================
+    static public function mdlMostrarSubActividadesRealizadas($tabla, $item, $valor, $ordenar, $modo, $base, $tope){
+
+       if ($item != null) {
+
+        $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :$item ORDER BY $ordenar $modo LIMIT $base, $tope");
+
+        $stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
+
+        $stmt -> execute();
+
+        return $stmt -> fetchAll();
+
+      } else {
+
+          $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla ");
+
+          $stmt -> execute();
+
+          return $stmt -> fetchAll();
+
+        }
+
+         $stmt -> close();
+
+         $stmt = null;
+
+    }
+
+
+    # ===========================
+    # =MOSTRAR SUB-ACTIVIDADES  =
+    # ===========================
+    static public function mdlMostrarTodasSubActividades($tabla, $item, $valor){
+
+      if ($item != null) {
+              
+          $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :$item ORDER BY id DESC");
+
+          $stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
+
+          $stmt -> execute();
+
+          return $stmt -> fetchAll(); 
+
+        } else {
+
+          $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla ORDER BY id DESC");
+
+          $stmt -> execute();
+
+          return $stmt -> fetchAll(); 
+
+        }
+
+        $stmt -> close();
+
+        $stmt = null;
+
+    }
+
+
+    # ===================================
+	# =MOSTRAR SUB-ACTIVIDADES PENDIENTES
+	# ===================================
+    static public function mdlMostrarSubActividadesPendientes($tabla, $item, $valor){
+
+      if ($item != null) {
+              
+          $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :$item ORDER BY id DESC");
+
+          $stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
+
+          $stmt -> execute();
+
+          return $stmt -> fetchAll(); 
+
+        } else {
+
+          $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla ORDER BY id DESC");
+
+          $stmt -> execute();
+
+          return $stmt -> fetchAll(); 
+
+        }
+
+        $stmt -> close();
+
+        $stmt = null;
+
+    }
+
+
+
 }
