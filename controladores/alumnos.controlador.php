@@ -317,6 +317,8 @@ class ControladorAlumnos
 
 			$valor2 = $_POST["idComentario"];
 
+			$servidor = Ruta::ctrRutaServidor();
+
 			$respuesta = ModeloSubActividades::mdlActualizarComentarioSubActividad($tabla, $item1, $valor1, $item2, $valor2);
 
 			if ($respuesta == "ok") {
@@ -332,7 +334,7 @@ class ControladorAlumnos
 							closeConfirmButton: false
 						}).then((result)=>{
 							if(result.value){
-								window.location = "alumnos";
+								window.location = "'.$servidor.'index.php?ruta=alumno-actividades&idAlumnoActividades='.$_POST["idAlumno"].'";
 							}
 						});
 					</script>

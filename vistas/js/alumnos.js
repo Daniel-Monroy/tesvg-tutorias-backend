@@ -339,6 +339,8 @@ $(document).on("click", ".actividadRevisada", function(){
 	var id = $(this).attr("id");
 
 	var estadoActividad = $(this).attr("estadoActividad");
+
+	var idAlumno = $("#idAlumno").val();
 	
 	// CAMBIANDO EL ESTADO DE LA ACTIVIDAD
 	if(estadoActividad == 0){
@@ -374,7 +376,9 @@ $(document).on("click", ".actividadRevisada", function(){
 		    	}).then(function(result) {
 	
 			        if (result.value) {
-			        	window.location = "alumnos";
+			        	
+			        	window.location = rutaOcultaServidor+"index.php?ruta=alumno-actividades&idAlumnoActividades="+idAlumno;
+			       
 			        }
 
 		     });

@@ -76,7 +76,9 @@ if (!isset($_GET["idAlumnoActividades"])) {
             
             echo'
            
-            <h3 class="profile-username text-center"> <?php echo $alumno["nombre"]." ".$alumno["apellidos"];?> </h3>';?>
+            <h3 class="profile-username text-center">'.$alumno["nombre"]." ".$alumno["apellidos"].'</h3>
+
+            <input type="hidden" id="idAlumno" value="'.$alumno["id"].'">';?>
 
             
             <?php 
@@ -340,6 +342,8 @@ if (!isset($_GET["idAlumnoActividades"])) {
                       <input style="font-size: 15px" name="mensaje" class="form-control input-sm" placeholder="Escribe un mensaje" value="'.$comentario["mensaje"].'">
 
                       <input type="hidden" name="idComentario" value="'.$comentario["id"].'">
+
+                      <input type="hidden" name="idAlumno" value="'.$alumno["id"].'">
                  
                     </div>
                  
